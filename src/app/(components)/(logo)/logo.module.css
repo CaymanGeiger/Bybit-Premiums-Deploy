@@ -1,0 +1,18 @@
+.logoVideoDiv {
+    position: relative;
+    width: 340px;
+    height: 51px;
+    overflow: hidden;
+    z-index: 1000;
+    border-radius: 10px;
+
+}
+.logoVideo {
+    width: 340px;
+    height: 200px;
+    position: relative;
+    z-index: -1;
+    left:  -20px;
+    top: -70px;
+    background-color: none;
+}

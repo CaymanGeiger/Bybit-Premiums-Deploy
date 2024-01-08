@@ -1,0 +1,195 @@
+/* FUNDING CSS MAIN DIV */
+.fundingMainDiv {
+    padding: 0;
+    height: fit-content;
+
+}
+
+.fundingMainHeader {
+    text-align: start;
+    padding: 12px 12px 12px 0;
+    color: #424242;
+}
+
+
+
+/* BORROW TABLE */
+
+.fundingMainDiv th {
+    background: #f5f7f7;
+    text-align: start;
+    padding: 6px;
+    color: #7b7d7d;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.fundingMainDiv thead tr th {
+    position: sticky;
+    top: 0px;
+    height: 30px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    z-index: 12;
+}
+
+
+.fundingMainDiv th:nth-child(7)::after {
+    background: none;
+}
+
+.fundingMainDiv th::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 25%;
+    bottom: 25%;
+    width: 1px;
+    background: #dcdcdc;
+}
+
+.fundingMainDiv th::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    border: 1px solid #dcdcdc;
+}
+
+.fundingMainDiv table {
+    border-collapse: collapse;
+    font: normal 12px arial;
+    width: calc(100vw / 1.1);
+    min-width: 100px;
+    max-width: 1400px;
+    position: relative;
+    table-layout: auto;
+}
+
+.fundingMainDiv td:nth-child(7)::after {
+    background: none;
+}
+
+.fundingMainDiv td {
+    border-bottom: 1px solid #cdcdcd;
+    padding: 3px 6px;
+    white-space: nowrap;
+    font-size: 13px;
+    position: relative;
+
+}
+
+.fundingMainDiv td::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: #f4f3f3;
+}
+
+
+.tdSymbolAndName:hover {
+
+}
+
+.tdSymbolAndName span {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: blue;
+    position: relative;
+    transition: color 0.2s ease;
+    z-index: 10;
+}
+
+.tdSymbolAndName span::before,
+.tdSymbolAndName span::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    width: 50%;
+    height: 1px;
+    background-color: blue;
+    transition: width 0.2s ease;
+}
+
+.tdSymbolAndName span::before {
+    left: 0;
+}
+
+.tdSymbolAndName span::after {
+    right: 0;
+}
+
+.tdSymbolAndName span:hover::before,
+.tdSymbolAndName span:hover::after,
+.tdSymbolAndName img:hover + span::before,
+.tdSymbolAndName img:hover + span::after {
+    width: 0;
+    background-color: black;
+}
+
+.tdSymbolAndName span:hover {
+    color: black;
+    cursor: pointer;
+
+}
+.tdSymbolAndName img:hover {
+    cursor: pointer;
+}
+
+.fundingMainDiv td,
+.fundingMainDiv td * {
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+.fundingMainDiv tr:nth-child(odd) {
+    background-color: #ffffff;
+}
+
+.fundingMainDiv tr:nth-child(even) {
+    background-color: #fcfcfc;
+}
+
+
+/* TABLE BORDER*/
+.scrollDiv {
+    border: 1px solid rgb(195, 195, 195);
+    width: calc(100vw / 1.1);
+    min-width: 100px;
+    max-width: 1400px;
+}
+
+
+.arrows {
+    font-size: 11px;
+}
+
+.rowTransition {
+    transition: all 2s ease;
+}
+
+.row-enter {
+    opacity: 0.01;
+    transform: translateY(-20px);
+}
+
+.row-enter-active {
+    opacity: 1;
+    transform: translateY(0px);
+    transition: opacity 500ms, transform 500ms;
+}
+
+.row-exit {
+    opacity: 1;
+}
+
+.row-exit-active {
+    opacity: 0.01;
+    transition: opacity 500ms;
+}
