@@ -7,7 +7,14 @@ const morgan = require('morgan');
 const prisma = require('./lib/prisma');
 // const util = require('util');
 
+let PQueue;
 
+async function loadPQueue() {
+    PQueue = (await import('p-queue')).default;
+    // You can now use PQueue here or call other functions that depend on PQueue
+}
+
+loadPQueue();
 
 // const { default: test } = require('node:test');
 
@@ -72,129 +79,94 @@ cron.schedule('*/20 * * * * *', () => {
 // SYMBOL ID IS THE JSON FOR FUNDING COIN ID IS THE JSON FOR BORROW
 // CREATE OR UPDATE FOR FUNDING
 const createOrUpdateFundingData = async (fundingData) => {
-    console.log("createHit")
-    // console.log(fundingData);
-    // console.log(prisma.coinFundingRate)
-    // let promises = [];
+    console.log("createHit");
+
+    const queue = new PQueue({ concurrency: 5 }); // Adjust concurrency as needed
+
+    const coinIds = [...new Set(Object.values(fundingData).flat().map(item => item['symbol id']).filter(id => id !== undefined))];
+    const existingRecords = await prisma.coinFundingRate.findMany({
+        where: { coinId: { in: coinIds } }
+    });
+    const recordsMap = new Map(existingRecords.map(record => [record.coinId, record]));
 
     for (const key in fundingData) {
         if (fundingData.hasOwnProperty(key)) {
             let itemsArray = fundingData[key];
-            const coinIds = [...new Set(Object.values(fundingData).flat().map(item => item['symbol id']).filter(id => id !== undefined))];
-            const existingRecords = await prisma.coinFundingRate.findMany({
-                where: { coinId: { in: coinIds } }
-            });
-            const recordsMap = new Map(existingRecords.map(record => [record.coinId, record]));
 
-            for (const item of itemsArray) {
-                // promises.push(updateOrCreateItem(item, recordsMap));
-
-                const existingRecord = recordsMap.get(item['symbol id']);
-
-                const itemResponse = await fetch(`https://api.bybit.com/v2/public/tickers?symbol=${item.symbol}`);
-                const itemData = await itemResponse.json();
-                const nestedItemData = itemData.result[0];
-                console.log("existingRecordBelow")
-                if (existingRecord) {
-                    console.log("existingRecordYes")
-                    // Update if any field has changed
-                    await prisma.coinFundingRate.update({
-                        where: { coinId: item['symbol id'] },
-                        data: {
-                            coinId: item && item['symbol id'] || null,
-                            name: item && item.symbol || null,
-                            oneDayAverage: item && item['one day'] || null,
-                            threeDayAverage: item && item['three days'] || null,
-                            sevenDayAverage: item && item.week || null,
-                            thirtyDayAverage: item && item.month || null,
-                            ninetyDayAverage: item && item['three months'] || null,
-                        }
-                    });
-                    console.log(nestedItemData)
-                    await prisma.coinFundingRate.update({
-                        where: { coinId: item['symbol id'] },
-                        data: {
-                            twentyFourHourVolume: nestedItemData && parseFloat(nestedItemData['turnover_24h']) || null,
-                            lastTickDirection: nestedItemData && nestedItemData['last_tick_direction'] || null,
-                        }
-                    });
-                } else {
-                    await prisma.coinFundingRate.create({
-                        data: {
-                            coinId: item && item['symbol id'] || null,
-                            name: item && item.symbol || null,
-                            oneDayAverage: item && item['one day'] || null,
-                            threeDayAverage: item && item['three days'] || null,
-                            sevenDayAverage: item && item.week || null,
-                            thirtyDayAverage: item && item.month || null,
-                            ninetyDayAverage: item && item['three months'] || null,
-                        }
-                    });
-                    await prisma.coinFundingRate.update({
-                        where: { coinId: item['symbol id'] },
-                        data: {
-                            twentyFourHourVolume: nestedItemData && parseFloat(nestedItemData['turnover_24h']) || null,
-                            lastTickDirection: nestedItemData && nestedItemData['last_tick_direction'] || null,
-                        }
-                    });
-                    console.log("existingRecordAfter")
+            if (Array.isArray(itemsArray)) {
+                for (const item of itemsArray) {
+                    queue.add(() => processItem(item, recordsMap));
                 }
-            };
+            } else {
+                console.error(`Expected an array for key ${key}, but received:`, itemsArray);
+            }
+
         }
     }
-    // await Promise.all(promises);
+
+    await queue.onIdle();
 }
 
-const updateOrCreateItem = async (item, recordsMap) => {
+
+
+
+function delay(time) {
+    return new Promise(resolve => setTimeout(resolve, time));
+}
+
+let completed = 0;
+const processItem = async (item, recordsMap) => {
+    await delay(1200);
     const existingRecord = recordsMap.get(item['symbol id']);
-    console.log("existingRecordBelow");
-
-    if (existingRecord) {
-        console.log("existingRecordYes");
-        await prisma.coinFundingRate.update({
-            where: { coinId: item['symbol id'] },
-            data: {
-                coinId: item['symbol id'],
-                name: item.symbol,
-                oneDayAverage: item['one day'],
-                threeDayAverage: item['three days'],
-                sevenDayAverage: item.week,
-                thirtyDayAverage: item.month,
-                ninetyDayAverage: item['three months'],
-            }
-        });
-        await fetchAndUpdateRates(item);
-    } else {
-        await prisma.coinFundingRate.create({
-            data: {
-                coinId: item['symbol id'],
-                name: item.symbol,
-                oneDayAverage: item['one day'],
-                threeDayAverage: item['three days'],
-                sevenDayAverage: item.week,
-                thirtyDayAverage: item.month,
-                ninetyDayAverage: item['three months'],
-            }
-        });
-        await fetchAndUpdateRates(item);
-        console.log("existingRecordAfter");
-    }
-};
-
-const fetchAndUpdateRates = async (item) => {
     const itemResponse = await fetch(`https://api.bybit.com/v2/public/tickers?symbol=${item.symbol}`);
     const itemData = await itemResponse.json();
     const nestedItemData = itemData.result[0];
 
     // Update database with the fetched data
-    await prisma.coinFundingRate.update({
-        where: { coinId: item['symbol id'] },
-        data: {
-            twentyFourHourVolume: nestedItemData['turnover_24h'],
-            lastTickDirection: nestedItemData['last_tick_direction'],
-        }
-    });
-};
+    if (existingRecord) {
+        await prisma.coinFundingRate.update({
+            where: { coinId: item['symbol id'] },
+            data: {
+                coinId: item && item['symbol id'] || null,
+                name: item && item.symbol || null,
+                oneDayAverage: item && item['one day'] || null,
+                threeDayAverage: item && item['three days'] || null,
+                sevenDayAverage: item && item.week || null,
+                thirtyDayAverage: item && item.month || null,
+                ninetyDayAverage: item && item['three months'] || null,
+            }
+        });
+        // console.log(nestedItemData)
+        await prisma.coinFundingRate.update({
+            where: { coinId: item['symbol id'] },
+            data: {
+                twentyFourHourVolume: nestedItemData && parseFloat(nestedItemData['turnover_24h']) || null,
+                lastTickDirection: nestedItemData && nestedItemData['last_tick_direction'] || null,
+            }
+        });
+    } else {
+        await prisma.coinFundingRate.create({
+            data: {
+                coinId: item && item['symbol id'] || null,
+                name: item && item.symbol || null,
+                oneDayAverage: item && item['one day'] || null,
+                threeDayAverage: item && item['three days'] || null,
+                sevenDayAverage: item && item.week || null,
+                thirtyDayAverage: item && item.month || null,
+                ninetyDayAverage: item && item['three months'] || null,
+            }
+        });
+        await prisma.coinFundingRate.update({
+            where: { coinId: item['symbol id'] },
+            data: {
+                twentyFourHourVolume: nestedItemData && parseFloat(nestedItemData['turnover_24h']) || null,
+                lastTickDirection: nestedItemData && nestedItemData['last_tick_direction'] || null,
+            }
+        });
+    };
+    completed += 1
+    console.log("WRITE WAS COMPLETED", completed)
+}
 
 
 

@@ -1,6 +1,6 @@
 "use client"
 import { motion, AnimatePresence } from 'framer-motion';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './coinfundingrates.module.css'
 import * as ScrollArea from '@radix-ui/react-scroll-area';
 import "../(reusable)/radixscroll.css";
@@ -10,7 +10,28 @@ import Image from 'next/image'
 
 const CoinFundingRates = ({ coinFundingRates }) => {
     const [sortConfig, setSortConfig] = useState({ key: null, direction: 'none' });
+    const [data, setData] = useState(coinFundingRates);
+    const [cachedData, setCachedData] = useState(null); // Initialize with null
+    const [visibleItemsCount, setVisibleItemsCount] = useState(50); // Start with 10 items
+    const incrementalLoadCount = 50;
 
+
+    useEffect(() => {
+        const cacheKey = 'coinFundingRates';
+        const storedData = localStorage.getItem(cacheKey);
+        if (storedData) {
+            const { data: cachedRates, timestamp } = JSON.parse(storedData);
+            const isExpired = Date.now() - timestamp > 3600000; // 1 hour expiration
+            if (!isExpired) {
+                setCachedData(cachedRates); // Update cached data state
+            }
+        }
+    }, []);
+
+    const updateCache = (key, newData) => {
+        localStorage.setItem(key, JSON.stringify({ data: newData, timestamp: Date.now() }));
+        setCachedData(newData); // Also update cached data state
+    };
 
     const getSortIndicator = (columnName) => {
         if (sortConfig.key === columnName) {
@@ -30,29 +51,49 @@ const CoinFundingRates = ({ coinFundingRates }) => {
 
 
     const sortedItems = React.useMemo(() => {
-        let sortableItems = [...coinFundingRates];
+        let dataToSort = cachedData || data;
+
+        let sortableItems = [...dataToSort];
         if (sortConfig.key !== null && sortConfig.direction !== 'none') {
             sortableItems.sort((a, b) => {
                 if (sortConfig.key === 'name') {
+                    const valueA = a[sortConfig.key] || ''; // Treat null/undefined as empty string
+                    const valueB = b[sortConfig.key] || ''; // Treat null/undefined as empty string
+
                     if (sortConfig.direction === 'descending') {
-                        return a[sortConfig.key].localeCompare(b[sortConfig.key]);
+                        return valueB.localeCompare(valueA); // Switched to handle descending
                     } else {
-                        return b[sortConfig.key].localeCompare(a[sortConfig.key]);
+                        return valueA.localeCompare(valueB);
                     }
                 } else {
-                    const valueA = parseFloat(a[sortConfig.key]) || 0;
-                    const valueB = parseFloat(b[sortConfig.key]) || 0;
+                    const valueA = parseFloat(a[sortConfig.key]) || 0; // Treat null/undefined as 0
+                    const valueB = parseFloat(b[sortConfig.key]) || 0; // Treat null/undefined as 0
+
                     if (sortConfig.direction === 'descending') {
-                        return valueA - valueB;
+                        return valueB - valueA; // Switched to handle descending
                     } else {
-                        return valueB - valueA;
+                        return valueA - valueB;
                     }
                 }
             });
         }
+        updateCache('coinFundingRates', sortableItems);
         return sortableItems;
     }, [coinFundingRates, sortConfig]);
 
+
+
+    useEffect(() => {
+        // If there are more items to show, set a timeout to load more
+        if (visibleItemsCount < sortedItems.length) {
+            const timer = setTimeout(() => {
+                setVisibleItemsCount(visibleItemsCount + incrementalLoadCount);
+            }, 500); // Load more items every 500ms
+
+            return () => clearTimeout(timer); // Clear timeout if component unmounts
+        }
+    }, [visibleItemsCount, sortedItems]);
+    
     return (
         <div className={styles.fundingMainDiv}>
             <h1 className={styles.fundingMainHeader}>
@@ -84,7 +125,16 @@ const CoinFundingRates = ({ coinFundingRates }) => {
                             </thead>
                             <tbody>
                                 <AnimatePresence>
-                                {sortedItems.map((coinFundingRate) => {
+                                    {sortedItems.slice(0, visibleItemsCount).filter((coinFundingRate) => {
+                                        // Add the conditions for the properties you want to check
+                                        return coinFundingRate.name ||
+                                            coinFundingRate.twentyFourHourVolume ||
+                                            coinFundingRate.oneDayAverage ||
+                                            coinFundingRate.threeDayAverage ||
+                                            coinFundingRate.sevenDayAverage ||
+                                            coinFundingRate.thirtyDayAverage ||
+                                            coinFundingRate.ninetyDayAverage;
+                                    }).map((coinFundingRate) => {
                                     const volume = coinFundingRate.twentyFourHourVolume;
                                     const formattedVolume = volume >= 1000 ? Math.floor(volume)?.toLocaleString() : volume?.toString();
                                     return (

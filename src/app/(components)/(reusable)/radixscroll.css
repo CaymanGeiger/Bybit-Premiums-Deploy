@@ -24,6 +24,7 @@
     padding: 2px;
     background: var(--black-a4);
     transition: background 160ms ease-out;
+    z-index: 1000;
 }
 
 .ScrollAreaScrollbar:hover {

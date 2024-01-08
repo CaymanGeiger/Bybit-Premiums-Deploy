@@ -21,9 +21,6 @@ export default async function Home() {
   return (
     <main className={styles.main}>
       <div className={styles.mainDivOne}>
-        <h1 className={styles.title}>
-          Bybit Premiums
-        </h1>
         <Logo />
       </div>
       <div className={styles.mainDivTwo}>
