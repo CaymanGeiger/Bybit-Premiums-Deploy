@@ -72,6 +72,7 @@ cron.schedule('*/20 * * * * *', () => {
     // }
     // testFetch();
     // fetchFundingRateData();
+    fetchFundingRateData();
 });
 
 
@@ -226,7 +227,7 @@ const fetchFundingRateData = async () => {
         console.error('Error fetching data:', error);
     }
 };
-fetchFundingRateData();
+
 
 // THIS FETCHES THE DATA FOR BORROW API AT BOTTOM OF PAGE AND UPDATES IT AND CALLS TO THE FUNCTIONS ABOVE TO UPDATE THE DATA
 const fetchBorrowRateData = async () => {
