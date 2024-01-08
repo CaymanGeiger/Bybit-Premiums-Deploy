@@ -60,7 +60,7 @@ const getSymbolImages = async () => {
 
 // EVERY 10-15 MINUTE SCHEDULER*
 // REMOVE ONE * TO MAKE IT RUN ON MINUTES AGAIN 3 * * * * * MEANS EVERY 3 SECONDS
-cron.schedule('*/20 * * * * *', () => {
+cron.schedule('0 0 0,8,16 * * *', () => {
     console.log('Fetching and updating data every 10 minutes');
 
     // const testFetch = async () => {
