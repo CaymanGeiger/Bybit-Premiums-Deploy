@@ -23,7 +23,9 @@ const CoinFundingRates = ({ coinFundingRates }) => {
             const { data: cachedRates, timestamp } = JSON.parse(storedData);
             const isExpired = Date.now() - timestamp > 3600000; // 1 hour expiration
             if (!isExpired) {
-                setCachedData(cachedRates); // Update cached data state
+                setCachedData(cachedRates);
+            } else {
+                updateCache(cacheKey, data);
             }
         }
     }, []);
@@ -77,7 +79,6 @@ const CoinFundingRates = ({ coinFundingRates }) => {
                 }
             });
         }
-        updateCache('coinFundingRates', sortableItems);
         return sortableItems;
     }, [coinFundingRates, sortConfig]);
 
@@ -93,7 +94,7 @@ const CoinFundingRates = ({ coinFundingRates }) => {
             return () => clearTimeout(timer); // Clear timeout if component unmounts
         }
     }, [visibleItemsCount, sortedItems]);
-    
+
     return (
         <div className={styles.fundingMainDiv}>
             <h1 className={styles.fundingMainHeader}>
