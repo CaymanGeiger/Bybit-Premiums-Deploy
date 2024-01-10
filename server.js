@@ -36,6 +36,14 @@ app.use(cors());
 
 
 
+app.get('/api/test', async (req, res) => {
+    console.log('Function is running');
+    res.status(200).json({ message: 'Hello!' });
+    res.json({ message: 'Hello!' });
+});
+
+
+
 // ------------------------------------------------------------------------------------------------------------
 
 // EVERY 10-15 MINUTE SCHEDULER*

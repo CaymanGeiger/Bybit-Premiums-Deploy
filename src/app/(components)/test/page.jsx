@@ -6,9 +6,11 @@ const Test = () => {
     const [tickerData, setTickerData] = React.useState(null);
     const [fundingData, setFundingData] = React.useState(null);
     const [borrowData, setBorrowData] = React.useState(null);
-    console.log(tickerData)
+    const [testData, setTestData] = React.useState(null);
+    // console.log(tickerData)
     // console.log(fundingData)
     // console.log(borrowData)
+    console.log(testData)
 
     React.useEffect(() => {
         const fetchTickersData = async () => {
@@ -23,6 +25,21 @@ const Test = () => {
                 console.error('Error fetching data:', error);
             }
         };
+
+        const testNodeJs = async () => {
+            try {
+                const response = await fetch('https://bybit-premiums-deployment.vercel.app/api/test');
+                console.log(response)
+                if (!response.ok) {
+                    throw new Error(`Error: ${response.status}`);
+                }
+                const data = await response.json();
+                setTestData(data);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+
 
         const fetchFundingData = async () => {
             try {
@@ -55,6 +72,7 @@ const Test = () => {
         // fetchBorrowData();
         // fetchFundingData();
         // fetchTickersData();
+        testNodeJs();
     }, []);
 
     return (
