@@ -2,7 +2,8 @@ import styles from './page.module.css'
 import prisma from '../../lib/prisma'
 import CoinFundingRates from './(components)/(funding)/CoinFundingRates'
 import CoinBorrowRates from './(components)/(borrow)/CoinBorrowRates'
-import Logo from './(components)/(logo)/Logo'
+import LoginButton from './(components)/(account)/LoginButton'
+import Nav from './(components)/(nav)/Nav'
 
 async function getCoinFundingRates() {
   const response = await prisma.coinFundingRate.findMany()
@@ -20,9 +21,8 @@ export default async function Home() {
   // console.log(coinFundingRates);
   return (
     <main className={styles.main}>
-      <div className={styles.mainDivOne}>
-        <Logo />
-      </div>
+      <Nav/>
+      <LoginButton />
       <div className={styles.mainDivTwo}>
             <CoinFundingRates
               coinFundingRates={coinFundingRates}

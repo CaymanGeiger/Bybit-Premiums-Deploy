@@ -7,8 +7,12 @@
 
 .fundingMainHeader {
     text-align: start;
-    padding: 12px 12px 12px 0;
+    margin: 12px 12px 12px 0;
+    padding: 0;
     color: #424242;
+    border-bottom: 3px solid rgb(255, 209, 57);
+    width: fit-content;
+    border-radius: 2px;
 }
 
 
@@ -104,6 +108,7 @@
     position: relative;
     transition: color 0.2s ease;
     z-index: 10;
+    margin-left: 5px;
 }
 
 .tdSymbolAndName span::before,
@@ -168,28 +173,4 @@
 
 .arrows {
     font-size: 11px;
-}
-
-.rowTransition {
-    transition: all 2s ease;
-}
-
-.row-enter {
-    opacity: 0.01;
-    transform: translateY(-20px);
-}
-
-.row-enter-active {
-    opacity: 1;
-    transform: translateY(0px);
-    transition: opacity 500ms, transform 500ms;
-}
-
-.row-exit {
-    opacity: 1;
-}
-
-.row-exit-active {
-    opacity: 0.01;
-    transition: opacity 500ms;
 }

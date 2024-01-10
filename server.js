@@ -34,29 +34,8 @@ app.use(morgan('combined'));
 
 
 
-// **EVERY 10-15 MINUTE FETCHES FOR DATA AND 1-2 A WEEK FOR IMAGES**
-// ------------------------------------------------------------------------------------------------------------
-// **LINE ABOVE MEANS THE START OF THE 10-15 MINUTE FETCHES AND IMAGE CODE**
 
-// EVERY 1-2 A WEEK FOR IMAGES
-const getSymbolImages = async () => {
-    // I NEED TO CALL THIS EITHER EVERYTIME A NEW TABLE IS ADDED FOR
-    // A COIN OR ONCE OR TWICE A WEEK AND PULL ALL COINS WITHOUT URLS AND
-    // LOOK THEM UP BY ID IN COIN GECK
-    try {
-        const response = await fetch('');
-        const data = await response.json();
-        const images = data.result.map((symbol) => {
-            return {
-                symbol: symbol.name,
-                image: symbol.image
-            };
-        });
-        return images;
-    } catch (error) {
-        console.error('Error fetching data:', error);
-    }
-}
+// ------------------------------------------------------------------------------------------------------------
 
 // EVERY 10-15 MINUTE SCHEDULER*
 // REMOVE ONE * TO MAKE IT RUN ON MINUTES AGAIN 3 * * * * * MEANS EVERY 3 SECONDS
@@ -72,17 +51,23 @@ cron.schedule('0 0 0,8,16 * * *', () => {
     // }
     // testFetch();
     // fetchFundingRateData();
-    fetchFundingRateData();
+    // fetchFundingRateData();
 });
 
 
-
+cron.schedule('*/15 * * * * *', () => {
+    // fetchFundingRateData();
+})
 // SYMBOL ID IS THE JSON FOR FUNDING COIN ID IS THE JSON FOR BORROW
 // CREATE OR UPDATE FOR FUNDING
+
+
 const createOrUpdateFundingData = async (fundingData) => {
     console.log("createHit");
 
-    const queue = new PQueue({ concurrency: 5 }); // Adjust concurrency as needed
+    const queue = new PQueue({ concurrency: 5 });
+    let fundingCurrentItemIndex = 0;
+    let stopFundingProcessing = false;
 
     const coinIds = [...new Set(Object.values(fundingData).flat().map(item => item['symbol id']).filter(id => id !== undefined))];
     const existingRecords = await prisma.coinFundingRate.findMany({
@@ -96,16 +81,25 @@ const createOrUpdateFundingData = async (fundingData) => {
 
             if (Array.isArray(itemsArray)) {
                 for (const item of itemsArray) {
-                    queue.add(() => processItem(item, recordsMap));
+                    queue.add(() => processFundingItem(item, recordsMap));
+                    fundingCurrentItemIndex++;
+                    if (fundingCurrentItemIndex === fundingData.length - 1) {
+                        stopFundingProcessing = true;
+                        break;
+                    }
+                }
+                if (stopFundingProcessing) {
+                    break;
                 }
             } else {
-                console.error(`Expected an array for key ${key}, but received:`, itemsArray);
+                console.error(`Expected an array for key ${key}, but received:`, fundingData);
             }
-
         }
     }
-
     await queue.onIdle();
+    fundingCurrentItemIndex = 0;
+    stopFundingProcessing = false;
+    console.log("Processing complete");
 }
 
 
@@ -115,13 +109,17 @@ function delay(time) {
     return new Promise(resolve => setTimeout(resolve, time));
 }
 
-let completed = 0;
-const processItem = async (item, recordsMap) => {
+let fundingCompleted = 0;
+const processFundingItem = async (item, recordsMap) => {
     await delay(1200);
+
+    const coinTrimmed = item.symbol.trim()
+    // console.log(coin)
     const existingRecord = recordsMap.get(item['symbol id']);
-    const itemResponse = await fetch(`https://api.bybit.com/v2/public/tickers?symbol=${item.symbol}`);
+    const itemResponse = await fetch(`https://api.bybit.com/v5/market/tickers?category=linear&symbol=${coinTrimmed}`);
     const itemData = await itemResponse.json();
-    const nestedItemData = itemData.result[0];
+    const nestedItemData = itemData.result.list;
+    // console.log(nestedItemData, "NESTED DATA")
 
     // Update database with the fetched data
     if (existingRecord) {
@@ -129,7 +127,7 @@ const processItem = async (item, recordsMap) => {
             where: { coinId: item['symbol id'] },
             data: {
                 coinId: item && item['symbol id'] || null,
-                name: item && item.symbol || null,
+                name: item && coinTrimmed || null,
                 oneDayAverage: item && item['one day'] || null,
                 threeDayAverage: item && item['three days'] || null,
                 sevenDayAverage: item && item.week || null,
@@ -141,70 +139,37 @@ const processItem = async (item, recordsMap) => {
         await prisma.coinFundingRate.update({
             where: { coinId: item['symbol id'] },
             data: {
-                twentyFourHourVolume: nestedItemData && parseFloat(nestedItemData['turnover_24h']) || null,
-                lastTickDirection: nestedItemData && nestedItemData['last_tick_direction'] || null,
+                twentyFourHourVolume: nestedItemData && parseFloat(nestedItemData['turnover24h']) || null,
             }
         });
     } else {
-        await prisma.coinFundingRate.create({
-            data: {
-                coinId: item && item['symbol id'] || null,
-                name: item && item.symbol || null,
-                oneDayAverage: item && item['one day'] || null,
-                threeDayAverage: item && item['three days'] || null,
-                sevenDayAverage: item && item.week || null,
-                thirtyDayAverage: item && item.month || null,
-                ninetyDayAverage: item && item['three months'] || null,
-            }
-        });
-        await prisma.coinFundingRate.update({
-            where: { coinId: item['symbol id'] },
-            data: {
-                twentyFourHourVolume: nestedItemData && parseFloat(nestedItemData['turnover_24h']) || null,
-                lastTickDirection: nestedItemData && nestedItemData['last_tick_direction'] || null,
-            }
-        });
-    };
-    completed += 1
-    console.log("WRITE WAS COMPLETED", completed)
-}
-
-
-
-// CREATE OR UPDATE FOR BORROW
-const createOrUpdateBorrowData = async (borrowData) => {
-    for (const item in borrowData) {
-        const existingRecord = await prisma.coinBorrowRate.findUnique({
-            where: { coinId: item['coin id'] }
-        });
-
-        if (existingRecord) {
-            // Compare relevant fields belown (Add as many as you want <3)
-            const needsUpdate =
-                (existingRecord.coinId !== item['coin id']) ||
-                (existingRecord.coinId !== item['coin id']) ||
-                (existingRecord.coinId !== item['coin id']);
-
-            // Update if any field has changed
-            if (needsUpdate) {
-                await prisma.coinBorrowRate.update({
-                    where: { coinId: item['coin id'] },
-                    data: {
-                        // ...fields to update
-                    }
-                });
-            }
-            // This will create it if it doesn't exist
-        } else {
-
-            await prisma.yourModel.create({
+        try {
+            await prisma.coinFundingRate.create({
                 data: {
-
+                    coinId: item && item['symbol id'] || null,
+                    name: item && coinTrimmed || null,
+                    oneDayAverage: item && item['one day'] || null,
+                    threeDayAverage: item && item['three days'] || null,
+                    sevenDayAverage: item && item.week || null,
+                    thirtyDayAverage: item && item.month || null,
+                    ninetyDayAverage: item && item['three months'] || null,
                 }
             });
+
+            await prisma.coinFundingRate.update({
+                where: { coinId: item['symbol id'] },
+                data: {
+                    twentyFourHourVolume: nestedItemData && parseFloat(nestedItemData['turnover24h']) || null,
+                }
+            });
+        } catch (error) {
+            console.error("An error occurred while creating a record:", error);
         }
-    }
+    };
+    fundingCompleted += 1
+    console.log("FUNDING WRITE WAS COMPLETED", fundingCompleted)
 }
+
 
 
 // THIS FETCHES THE DATA FOR FUNDING API AT BOTTOM OF PAGE AND UPDATES IT AND CALLS TO THE FUNCTIONS ABOVE TO UPDATE THE DATA
@@ -213,83 +178,29 @@ const fetchFundingRateData = async () => {
     try {
         const fundingResponse = await fetch('http://localhost:3001/api/bybitfunding');
         console.log(fundingResponse)
-        // const borrowResponse = await fetch('http://localhost:3001/api/bybitborrow');
-        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!   ADD THIS BACK BELOEW || !borrowResponse.ok    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
         if (!fundingResponse.ok) {
             throw new Error('Failed to fetch data');
         } else {
             const fundingData = await fundingResponse.json();
             createOrUpdateFundingData(fundingData);
-            // console.log(fundingData)
-            // console.log(util.inspect(fundingData, { showHidden: false, depth: null }));
+
         }
     } catch (error) {
         console.error('Error fetching data:', error);
     }
 };
+fetchFundingRateData();
 
-
-// THIS FETCHES THE DATA FOR BORROW API AT BOTTOM OF PAGE AND UPDATES IT AND CALLS TO THE FUNCTIONS ABOVE TO UPDATE THE DATA
-const fetchBorrowRateData = async () => {
-    try {
-        const borrowResponse = await fetch('http://localhost:3001/api/bybitborrow');
-        // const borrowResponse = await fetch('http://localhost:3001/api/bybitborrow');
-        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!   ADD THIS BACK BELOEW || !borrowResponse.ok    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        if (!borrowResponse.ok) {
-            throw new Error('Failed to fetch data');
-        } else {
-            const borrowData = await borrowResponse.json();
-            createOrUpdateBorrowData(borrowData);
+const lookForNullNames = async () => {
+    const noNames = await prisma.coinFundingRate.findMany({
+        where: {
+            coinId: null
         }
-    } catch (error) {
-        console.error('Error fetching data:', error);
-    }
-};
-
-
-// THIS FETCHES THE DATA FOR TICKERS API AT BOTTOM OF PAGE AND UPDATES IT AND CALLS TO THE FUNCTIONS ABOVE TO UPDATE THE DATA
-// const fetchTickersRateData = async () => {
-//     try {
-//         const tickersResponse = await fetch('http://localhost:3001/api/tickers');
-//         // const borrowResponse = await fetch('http://localhost:3001/api/bybitborrow');
-//         // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!   ADD THIS BACK BELOEW || !borrowResponse.ok    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-//         if (!tickersResponse.ok) {
-//             throw new Error('Failed to fetch data');
-//         } else {
-//             const tickersData = await tickersResponse.json();
-//             return tickersData;
-//         }
-//     } catch (error) {
-//         console.error('Error fetching data:', error);
-//     }
-// };
-// **END LINE BELOW IS THE ENDING OF 10-15 FETCHES**
-// ------------------------------------------------------------------------------------------------------------
-
-
-
-
-
-
-
-
-// **API FETCHES**
-// ----------------------------------------------------------------------------------------------------------------------
-// **LINE ABOVE MEANS THE START OF THE API FETCHES**
-
-// TICKER FETCHS ONE FOR API END POINT (FRONT END TESTING)
-// app.get('/api/tickers', async (req, res) => {
-//     try {
-//         const response = await fetch('https://api.bybit.com/v2/public/tickers?symbol=BTCUSDT');
-//         const data = await response.json();
-//         res.json(data);
-//     } catch (error) {
-//         console.error('Error fetching data:', error);
-//         res.status(500).json({ error: 'Internal Server Error' });
-//     }
-// });
-
-
+    });
+    console.log(noNames)
+}
+// lookForNullNames();
 // ONLY FUNDING FETCH
 app.get('/api/bybitfunding', async (req, res) => {
     const apiKey = process.env.API_KEY;
@@ -320,6 +231,261 @@ app.get('/api/bybitfunding', async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
+
+
+let allCurrentFundingRates = [];
+const filterOutFundingUSDT = async () => {
+    // This gets all logos without logos
+    const allFundingRatesWithEmptySymbolUrl = await prisma.coinFundingRate.findMany({
+        where: {
+            symbolUrl: null
+        }
+    });
+    // This flattens the array
+    allCurrentFundingRates = allFundingRatesWithEmptySymbolUrl.flat();
+    // This is the patterns that we want to remove from the names
+    const removalPatterns = ["100000000", "10000000", "1000000", "100000", "10000", "1000"];
+
+    // This trims the names and removes the patterns from the names
+    const trimmedRates = allCurrentFundingRates.map(item => {
+        if (item.name === null) {
+            return null;
+        } else {
+            // Remove the USDT from the name and trim the name
+            let modifiedNameCMC = item.name.trim().replace('USDT', '');
+            let modifiedName = item.name.trim();
+
+            // Remove each pattern from the name
+            removalPatterns.forEach(pattern => {
+                // Ensure that we're matching whole patterns
+                if (modifiedName.includes(pattern)) {
+                    const regex = new RegExp(pattern, 'g');
+                    modifiedName = modifiedName.replace(regex, '');
+                }
+            });
+
+            // Return the new name and the old name (New name is needed for the api call)
+            return {
+                coinId: item.coinId,
+                name: modifiedName,
+                nameCMC: modifiedNameCMC
+            };
+        }
+    });
+
+    // Loop through the array and call the function below
+    for (let item of trimmedRates) {
+        if (item) {
+            await delay(1000);
+            await getFundingRateLogos(item);
+        }
+    }
+};
+// filterOutFundingUSDT();
+
+
+// This fetches the logo from the api and updates the table
+const getFundingRateLogos = async (item, maxRetries = 5) => {
+    let retryCount = 0;
+
+    // Loop through the api call 5 times
+    while (retryCount < maxRetries) {
+        const response = await fetch(
+            `https://pro-api.coinmarketcap.com/v2/cryptocurrency/info?symbol=${item.nameCMC}`, {
+            headers: {
+                'X-CMC_PRO_API_KEY': '1724b6fb-77df-4339-98c1-6f8f43eb609a'
+            }
+        });
+        const data = await response.json();
+
+        // Check if the api call failed and log the coin name
+        if (data.status && data.status.error_message && data.status.error_message.includes("Invalid value")) {
+            console.log("Invalid value for:", item.nameCMC);
+            return;
+        }
+        if (response.ok) {
+            let updateCondition = {};
+
+            // Check if the coinId exists and set the update condition
+            // (coinId is the primary key) (name is the secondary key)
+            if (item.coinId) {
+                updateCondition.coinId = item.coinId;
+            } else if (item.name) {
+                updateCondition.name = item.name;
+            } updateCondition.name = item.name;
+
+            let logoUrl = data && data.data && item.nameCMC && data.data[item.nameCMC] && data.data[item.nameCMC][0] && data.data[item.nameCMC][0].logo;
+
+            // Check if the logo exists and update the table
+            if (logoUrl) {
+                await prisma.coinFundingRate.update({
+                    where: updateCondition,
+                    data: {
+                        nameCMC: item.nameCMC,
+                        symbolUrl: logoUrl,
+                    }
+                });
+                console.log("Logo updated for:", item.nameCMC);
+                return true;
+            }
+            // Return false if the logo doesn't exist
+            return false;
+
+            // Log the error if the api call fails
+        } else {
+            console.error('Fetch failed:', response.statusText);
+            retryCount++;
+
+            // Wait 1 minute if the api call fails and try again
+            if (retryCount >= maxRetries) {
+                console.log(`Maximum retries reached. Waiting for 1 minute before continuing...`);
+                await delay(60000);
+                break;
+            }
+        }
+    }
+
+    // Log the coin name if the api call fails 5 times
+    console.log("Failed after maximum retries for:", item.nameCMC);
+    return false;
+};
+
+
+
+
+
+// CREATE OR UPDATE FOR BORROW
+const createOrUpdateBorrowData = async (borrowData) => {
+    console.log("createBorrowHit");
+
+    const queue = new PQueue({ concurrency: 5 });
+    let borrowCurrentItemIndex = 0;
+    let stopBorrowProcessing = false;
+
+    const coinIds = [...new Set(Object.values(borrowData).flat().map(item => item['coin id']).filter(id => id !== undefined))];
+    const existingRecords = await prisma.coinBorrowRate.findMany({
+        where: { coinId: { in: coinIds } }
+    });
+    const recordsMap = new Map(existingRecords.map(record => [record.coinId, record]));
+
+    for (const key in borrowData) {
+        if (borrowData.hasOwnProperty(key)) {
+            let itemsArray = borrowData[key];
+
+            if (Array.isArray(itemsArray)) {
+                for (const item of itemsArray) {
+                    queue.add(() => processBorrowItem(item, recordsMap));
+                    borrowCurrentItemIndex++;
+                    if (borrowCurrentItemIndex === borrowData.length - 1) {
+                        stopBorrowProcessing = true;
+                        break;
+                    }
+                }
+                if (stopBorrowProcessing) {
+                    break;
+                }
+            } else {
+                console.error(`Expected an array for key ${key}, but received:`, borrowData);
+            }
+        }
+    }
+    await queue.onIdle();
+    borrowCurrentItemIndex = 0;
+    stopBorrowProcessing = false;
+    console.log("Borrow Processing complete");
+}
+
+
+
+
+function delay(time) {
+    return new Promise(resolve => setTimeout(resolve, time));
+}
+
+let borrowCompleted = 0;
+const processBorrowItem = async (item, recordsMap) => {
+    let coinTrim = item.coin.trim()
+    // console.log(coin)
+    await delay(1200);
+    const existingRecord = recordsMap.get(item['coin id']);
+    console.log(existingRecord)
+    const itemResponse = await fetch(`https://api.bybit.com/v5/market/tickers?category=spot&symbol=${coinTrim}USDT`);
+    const itemData = await itemResponse.json();
+    const nestedItemData = itemData.result.list;
+
+    // console.log(nestedItemData)
+    let updateCondition = {};
+
+
+    if (item.coinId) {
+        updateCondition.coinId = item.coinId;
+    } else if (coinTrim) {
+        updateCondition.name = coinTrim;
+    }
+
+    if (existingRecord) {
+        await prisma.coinBorrowRate.update({
+            where: updateCondition,
+            data: {
+                coinId: item && item['coin id'] || null,
+                name: item && coinTrim || null,
+                oneDayAverage: item && item['one day'] || null,
+                threeDayAverage: item && item['three days'] || null,
+                sevenDayAverage: item && item.week || null,
+                thirtyDayAverage: item && item.month || null,
+                ninetyDayAverage: item && item['three months'] || null,
+            }
+        });
+        // console.log(nestedItemData)
+        await prisma.coinBorrowRate.update({
+            where: updateCondition,
+            data: {
+                spotVolume: nestedItemData && parseFloat(nestedItemData['turnover24h']) || null,
+            }
+        });
+    } else {
+        await prisma.coinBorrowRate.create({
+            data: {
+                coinId: item && item['coin id'] || null,
+                name: item && coinTrim || null,
+                oneDayAverage: item && item['one day'] || null,
+                threeDayAverage: item && item['three days'] || null,
+                sevenDayAverage: item && item.week || null,
+                thirtyDayAverage: item && item.month || null,
+                ninetyDayAverage: item && item['three months'] || null,
+            }
+        });
+        await prisma.coinBorrowRate.update({
+            where: updateCondition,
+            data: {
+                spotVolume: nestedItemData && parseFloat(nestedItemData['turnover24h']) || null,
+            }
+        });
+    };
+    borrowCompleted += 1
+    console.log("BORROW WRITE WAS COMPLETED", borrowCompleted)
+}
+
+
+
+// THIS FETCHES THE DATA FOR BORROW API AT BOTTOM OF PAGE AND UPDATES IT AND CALLS TO THE FUNCTIONS ABOVE TO UPDATE THE DATA
+const fetchBorrowRateData = async () => {
+    console.log("borrowFetch hit")
+    try {
+        const borrowResponse = await fetch('http://localhost:3001/api/bybitborrow');
+        // console.log(borrowResponse)
+
+        if (!borrowResponse.ok) {
+            throw new Error('Failed to fetch data');
+        } else {
+            const borrowData = await borrowResponse.json();
+            createOrUpdateBorrowData(borrowData);
+        }
+    } catch (error) {
+        console.error('Error fetching data:', error);
+    }
+};
+// fetchBorrowRateData();
 
 
 // ONLY BORROW FETCH
@@ -355,51 +521,277 @@ app.get('/api/bybitborrow', async (req, res) => {
 
 
 
-// BOTH BORROW AND FUNDING FETCH TOGETHER
-app.get('/api/bybitall', async (req, res) => {
-    const apiKey = process.env.API_KEY;
-    const apiSecret = process.env.API_SECRET;
-
-    if (!apiKey || !apiSecret) {
-        console.error('API key or secret is undefined');
-        res.status(500).json({ error: 'API key or secret is undefined' });
-        return;
-    }
-
-    try {
-        const borrowResponse = await fetch('https://bybit-premiums-api.onrender.com/borrow-rate', {
-            headers: {
-                'apikey': apiKey,
-                'secret': apiSecret
-            }
-        });
-        const fundingResponse = await fetch('https://bybit-premiums-api.onrender.com/funding-rate', {
-            headers: {
-                'apikey': apiKey,
-                'secret': apiSecret
-            }
-        });
-
-        if (!borrowResponse.ok || !fundingResponse.ok) {
-            throw new Error('Failed to fetch data');
+// use the current name to get a usuable version for logo
+// fetch to get the logo using the new name and push the url into the table
+// mainTable => updateTable => fetchLogo => mainTable
+let allCurrentBorrowRates = [];
+const filterOutBorrowUSDT = async () => {
+    // This gets all logos without logos
+    const allBorrowRatesWithEmptySymbolUrl = await prisma.coinBorrowRate.findMany({
+        where: {
+            symbolUrl: null
         }
+    });
+    // This flattens the array
+    allCurrentBorrowRates = allBorrowRatesWithEmptySymbolUrl.flat();
 
-        const borrowData = await borrowResponse.json();
-        const fundingData = await fundingResponse.json();
-        const combinedData = {
-            borrowData,
-            fundingData
-        };
+    // These are the patterns that we want to remove from the names
+    const removalPatterns = ["100000000", "10000000", "1000000", "100000", "10000", "1000"];
 
-        res.json(combinedData);
-        return;
-    } catch (error) {
-        console.error('Error fetching data:', error);
-        res.status(500).json({ error: 'Internal Server Error' });
+    // This trims the names and removes the patterns from the names
+    const trimmedRates = allCurrentBorrowRates.map(item => {
+        if (item.name === null) {
+            return null;
+        } else {
+            // This removes the USDT from the name and trims the name
+            let modifiedNameCMC = item.name.trim().replace('USDT', '');
+            let modifiedName = item.name.trim();
+
+            // Remove each pattern from the name
+            removalPatterns.forEach(pattern => {
+                if (modifiedName.includes(pattern)) {
+                    const regex = new RegExp(pattern, 'g');
+                    modifiedName = modifiedName.replace(regex, '');
+                }
+            });
+            // This returns the new name and the old name
+            // (New name is needed for the api call)
+            return {
+                coinId: item.coinId,
+                name: modifiedName,
+                nameCMC: modifiedNameCMC
+            };
+        }
+    });
+
+    // This loops through the array and calls the function below
+    for (let item of trimmedRates) {
+        if (item) {
+            await delay(1000);
+            await getBorrowRateLogos(item);
+        }
     }
-});
-// **END LINE BELOW IS THE ENDING OF API FETCHES**
-// ----------------------------------------------------------------------------------------------------------------------
+};
+// filterOutBorrowUSDT();
+
+
+// This fetches the logo from the api and updates the table
+const getBorrowRateLogos = async (item, maxRetries = 5) => {
+    let retryCount = 0;
+
+    // This loops through the api call 5 times
+    // (if it fails it waits 1 minute and tries again)
+    // (if it fails 5 times it logs the coin name) The api has failed on some coins
+    while (retryCount < maxRetries) {
+        const response = await fetch(
+            `https://pro-api.coinmarketcap.com/v2/cryptocurrency/info?symbol=${item.nameCMC}`, {
+            headers: {
+                'X-CMC_PRO_API_KEY': '1724b6fb-77df-4339-98c1-6f8f43eb609a'
+            }
+        });
+        const data = await response.json();
+
+        // This checks if the api call failed and logs the coin name
+        if (data.status && data.status.error_message && data.status.error_message.includes("Invalid value")) {
+            console.log("Invalid value for:", item.nameCMC);
+            return;
+        }
+        if (response.ok) {
+            let updateCondition = {};
+
+            // This checks if the coinId exists and sets the update condition
+            // (coinId is the primary key) (name is the secondary key)
+            if (item.coinId) {
+                updateCondition.coinId = item.coinId;
+            } else if (item.name) {
+                updateCondition.name = item.name;
+            } updateCondition.name = item.name;
+
+            let logoUrl = data && data.data && item.nameCMC && data.data[item.nameCMC] && data.data[item.nameCMC][0] && data.data[item.nameCMC][0].logo;
+
+            // This checks if the logo exists and updates the table
+            if (logoUrl) {
+                await prisma.coinBorrowRate.update({
+                    where: updateCondition,
+                    data: {
+                        nameCMC: item.nameCMC,
+                        symbolUrl: logoUrl,
+                    }
+                });
+                console.log("Logo updated for:", item.nameCMC);
+                return true;
+            }
+
+            // This returns false if the logo doesn't exist
+            return false;
+
+        // This logs the error if the api call fails
+        } else {
+            console.error('Fetch failed:', response.statusText);
+            retryCount++;
+
+            // This waits 1 minute if the api call fails and tries again
+            if (retryCount >= maxRetries) {
+                console.log(`Maximum retries reached. Waiting for 1 minute before continuing...`);
+                await delay(60000);
+                break;
+            }
+        }
+    }
+
+    // This logs the coin name if the api call fails 5 times
+    console.log("Failed after maximum retries for:", item.nameCMC);
+    return false;
+};
+
+
+
+
+
+async function deleteDuplicateCoinFundingRates() {
+    const duplicates = await prisma.$queryRaw`
+        SELECT name
+        FROM "CoinFundingRate"
+        GROUP BY name
+        HAVING COUNT(*) > 1
+    `;
+
+    for (const duplicate of duplicates) {
+        const records = await prisma.coinFundingRate.findMany({
+            where: { name: duplicate.name },
+            orderBy: { id: 'asc' }
+        });
+
+        for (let i = 1; i < records.length; i++) {
+            await prisma.coinFundingRate.delete({
+                where: { id: records[i].id }
+            });
+        }
+    }
+
+    console.log('Duplicate records deleted');
+}
+
+// deleteDuplicateCoinFundingRates()
+//     .catch(e => {
+//         throw e;
+//     })
+//     .finally(async () => {
+//         await prisma.$disconnect();
+//     });
+
+
+
+let currentTrimmedCount = 0;
+async function trimCoinFundingRateNames() {
+    // Fetch all records
+    const allRates = await prisma.coinFundingRate.findMany();
+
+    // console.log(allRates)
+
+    for (const rate of allRates) {
+        const trimmedName = rate.name.trim();
+
+        await prisma.coinFundingRate.update({
+            where: { name: rate.name },
+            data: { name: trimmedName }
+        });
+        currentTrimmedCount++
+        console.log("TRIMMED", currentTrimmedCount)
+    }
+
+    console.log('All coin funding rate names have been trimmed');
+}
+// trimCoinFundingRateNames()
+
+
+async function trimCoinBorrowRateNames() {
+    // Fetch all records
+    const allRates = await prisma.coinBorrowRate.findMany();
+
+    console.log(allRates)
+
+    for (const rate of allRates) {
+        const trimmedName = rate.name.trim();
+
+        await prisma.coinBorrowRate.update({
+            where: { name: rate.name },
+            data: { name: trimmedName }
+        });
+    }
+
+    console.log('All coin borrow rate names have been trimmed');
+}
+// trimCoinBorrowRateNames()
+
+
+
+
+
+
+
+async function deleteSpecificDateCoins() {
+    const datePatterns = [
+        "20OCT23", "13OCT23", "15DEC23", "28JUN24",
+        "26JAN24", "28JUN24", "15DEC23", "29SEP23",
+        "29MAR24", "06OCT23", "29DEC23", "22SEP23",
+        "27OCT23", "24NOV23"
+    ];
+
+    for (const datePattern of datePatterns) {
+        const coinsWithDate = await prisma.coinFundingRate.findMany({
+            where: {
+                name: {
+                    contains: datePattern
+                }
+            }
+        });
+
+        for (const coin of coinsWithDate) {
+            await prisma.coinFundingRate.delete({
+                where: { id: coin.id }
+            });
+        }
+    }
+
+    console.log('Coins with specific dates in their names have been deleted');
+}
+
+// deleteSpecificDateCoins().catch(e => {
+//     throw e
+// }).finally(async () => {
+//     await prisma.$disconnect()
+// });
+
+
+
+
+async function deleteCoinsEndingWithPerp() {
+    const coins = await prisma.coinFundingRate.findMany();
+
+    const coinsEndingWithPerp = coins.filter(coin =>
+        coin.name.trim().toUpperCase().endsWith('PERP')
+    );
+
+
+    for (const coin of coinsEndingWithPerp) {
+        await prisma.coinFundingRate.delete({
+            where: { id: coin.id }
+        });
+    }
+
+    console.log(coinsEndingWithPerp);
+
+
+    console.log('Coins ending with PERP have been deleted');
+}
+
+// deleteCoinsEndingWithPerp().catch(e => {
+//     throw e
+// }).finally(async () => {
+//     await prisma.$disconnect()
+// });
+
 
 
 

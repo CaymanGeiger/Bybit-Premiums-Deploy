@@ -59,20 +59,20 @@ const CoinFundingRates = ({ coinFundingRates }) => {
         if (sortConfig.key !== null && sortConfig.direction !== 'none') {
             sortableItems.sort((a, b) => {
                 if (sortConfig.key === 'name') {
-                    const valueA = a[sortConfig.key] || ''; // Treat null/undefined as empty string
-                    const valueB = b[sortConfig.key] || ''; // Treat null/undefined as empty string
+                    const valueA = a[sortConfig.key] || '';
+                    const valueB = b[sortConfig.key] || '';
 
                     if (sortConfig.direction === 'descending') {
-                        return valueB.localeCompare(valueA); // Switched to handle descending
+                        return valueB.localeCompare(valueA);
                     } else {
                         return valueA.localeCompare(valueB);
                     }
                 } else {
-                    const valueA = parseFloat(a[sortConfig.key]) || 0; // Treat null/undefined as 0
-                    const valueB = parseFloat(b[sortConfig.key]) || 0; // Treat null/undefined as 0
+                    const valueA = parseFloat(a[sortConfig.key]) || 0;
+                    const valueB = parseFloat(b[sortConfig.key]) || 0;
 
                     if (sortConfig.direction === 'descending') {
-                        return valueB - valueA; // Switched to handle descending
+                        return valueB - valueA;
                     } else {
                         return valueA - valueB;
                     }
@@ -85,13 +85,12 @@ const CoinFundingRates = ({ coinFundingRates }) => {
 
 
     useEffect(() => {
-        // If there are more items to show, set a timeout to load more
         if (visibleItemsCount < sortedItems.length) {
             const timer = setTimeout(() => {
                 setVisibleItemsCount(visibleItemsCount + incrementalLoadCount);
-            }, 500); // Load more items every 500ms
+            }, 500);
 
-            return () => clearTimeout(timer); // Clear timeout if component unmounts
+            return () => clearTimeout(timer);
         }
     }, [visibleItemsCount, sortedItems]);
 
@@ -127,7 +126,6 @@ const CoinFundingRates = ({ coinFundingRates }) => {
                             <tbody>
                                 <AnimatePresence>
                                     {sortedItems.slice(0, visibleItemsCount).filter((coinFundingRate) => {
-                                        // Add the conditions for the properties you want to check
                                         return coinFundingRate.name ||
                                             coinFundingRate.twentyFourHourVolume ||
                                             coinFundingRate.oneDayAverage ||
@@ -136,6 +134,8 @@ const CoinFundingRates = ({ coinFundingRates }) => {
                                             coinFundingRate.thirtyDayAverage ||
                                             coinFundingRate.ninetyDayAverage;
                                     }).map((coinFundingRate) => {
+                                    let isSymbol = coinFundingRate.symbolUrl ? coinFundingRate.symbolUrl : "/noImage.png";
+                                    let coinName = coinFundingRate.name.trim();
                                     const volume = coinFundingRate.twentyFourHourVolume;
                                     const formattedVolume = volume >= 1000 ? Math.floor(volume)?.toLocaleString() : volume?.toString();
                                     return (
@@ -146,14 +146,21 @@ const CoinFundingRates = ({ coinFundingRates }) => {
                                             animate={{ opacity: 1, x: 0 }}
                                             exit={{ opacity: 0, x: 100 }}
                                             transition={{
-                                                duration: 0.5,
+                                                duration: 0.3,
                                                 ease: "easeInOut",
-                                                delay: 0.1
                                             }}
                                         >
                                             <td className={styles.tdSymbolAndName}>
-                                                <Image width={20} height={20} src="https://cdn-icons-png.flaticon.com/512/4440/4440487.png" alt='coin symbol' />
-                                                <span>{coinFundingRate.name}</span>
+                                                <Image
+                                                width={18}
+                                                height={18}
+                                                src={isSymbol}
+                                                alt='coin symbol'
+                                                    onClick={() => window.open(`https://www.bybit.com/trade/usdt/${coinName}?affiliate_id=62489`)}
+                                                />
+                                                <span onClick={() => window.open(`https://www.bybit.com/trade/usdt/${coinName}?affiliate_id=62489`)}>
+                                                    {coinFundingRate.name}
+                                                </span>
                                             </td>
                                             <td>{formattedVolume ? `$${formattedVolume}` : ""}</td>
                                             <td>{coinFundingRate.oneDayAverage ? `${coinFundingRate.oneDayAverage}%` : ""}</td>

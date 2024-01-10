@@ -5,14 +5,6 @@
   background-color: transparent;
   padding: 0 0 50px 0;
 }
-.mainDivOne {
-  background-color: #000017;
-  color: white;
-  height: 80px;
-  padding: 15px 0;
-  overflow: hidden;
-  position: relative;
-}
 
 .mainDivTwo {
   width: 100%;
@@ -24,16 +16,4 @@
   justify-content: center;
   align-items: center;
   position: relative;
-}
-
-
-.description {
-  font-weight: 600;
-  width: 100%;
-  font-size: clamp(5px, 10vw, 15px);
-  margin: 0;
-  padding: 15px 0 0 0;
-  text-align: start;
-  word-spacing: 1px;
-  line-height: 1.3;
 }

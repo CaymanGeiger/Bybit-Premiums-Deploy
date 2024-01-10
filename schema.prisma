@@ -13,35 +13,35 @@ datasource db {
 model CoinFundingRate {
   id                     String     @default(cuid()) @id
   coinId                 Int?       @unique
-  name                   String?
+  name                   String?    @unique
+  nameCMC                String?
   symbolUrl              String?
   oneDayAverage          Float?
   threeDayAverage        Float?
   sevenDayAverage        Float?
   thirtyDayAverage       Float?
   ninetyDayAverage       Float?
+  YearAverage            Float?
   twentyFourHourVolume   Float?
-  lastTickDirection      String?
 }
 
 model CoinBorrowRate {
   id                     String     @default(cuid()) @id
   coinId                 Int?       @unique
-  name                   String?
+  name                   String?    @unique
+  nameCMC                String?
   symbolUrl              String?
   oneDayAverage          Float?
   threeDayAverage        Float?
   sevenDayAverage        Float?
   thirtyDayAverage       Float?
   ninetyDayAverage       Float?
+  YearAverage            Float?
   spotVolume             Float?
-  lastTickDirection      String
 }
 
-model CoinSymbolImage {
+model Account {
   id                     String     @default(cuid()) @id
-  name                   String?    @unique
-  thumbnail              String?
-  small                  String?
-  large                  String?
+  username               String     @unique
+  password               String
 }

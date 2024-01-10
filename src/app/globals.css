@@ -1,5 +1,8 @@
 
-:root {}
+:root {
+    --def: #96B7C4;
+      --inv: #fff;
+}
 
 
 * {
@@ -19,4 +22,17 @@ body {
 a {
   color: inherit;
   text-decoration: none;
+}
+div[class*=box] {
+  height: 33.33%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
 }

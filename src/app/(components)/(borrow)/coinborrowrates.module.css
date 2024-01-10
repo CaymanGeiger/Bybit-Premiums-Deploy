@@ -1,4 +1,4 @@
-/* borrow CSS MAIN DIV */
+/* FUNDING CSS MAIN DIV */
 .borrowMainDiv {
     padding: 0;
     height: fit-content;
@@ -7,8 +7,12 @@
 
 .borrowMainHeader {
     text-align: start;
-    padding: 12px 12px 12px 0;
+    margin: 12px 12px 12px 0;
+    padding: 0;
     color: #424242;
+    border-bottom: 3px solid rgb(255, 209, 57);
+    width: fit-content;
+    border-radius: 2px;
 }
 
 
@@ -102,6 +106,7 @@
     position: relative;
     transition: color 0.2s ease;
     z-index: 10;
+    margin-left: 5px;
 }
 
 .tdSymbolAndName span::before,
