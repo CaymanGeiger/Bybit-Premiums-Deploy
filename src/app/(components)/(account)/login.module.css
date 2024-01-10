@@ -2,7 +2,7 @@
     position: absolute;
     width: 200px;
     height: 200px;
-    left: 50%;
+    left: 57%;
     top: 10%;
     transform: translate(-50%, 50%);
     background-color: #000017;
@@ -190,7 +190,6 @@
     z-index: 18;
     opacity: 0;
     visibility: hidden;
-    transition: all .2s ease-in-out;
 }
 
 .overlayOpened {
@@ -207,7 +206,7 @@
 @media (max-width: 450px) {
     .btn {
         position: absolute;
-        top: 80px;
+        top: 65px;
         right: 0;
         padding: 3px 4px;
         margin: 0;
@@ -278,7 +277,7 @@
 @media (min-width: 450px) {
     .btn {
         position: absolute;
-        top: 45px;
+        top: 35px;
         right: 5px;
         padding: 3px 4px;
         margin: 0;
