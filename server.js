@@ -56,9 +56,11 @@ cron.schedule('0 0 0,8,16 * * *', () => {
 
 cron.schedule('*/15 * * * * *', () => {
     // fetchFundingRateData();
+    console.log("Server Is Working!!")
 })
 // SYMBOL ID IS THE JSON FOR FUNDING COIN ID IS THE JSON FOR BORROW
 // CREATE OR UPDATE FOR FUNDING
+
 
 
 const createOrUpdateFundingData = async (fundingData) => {
@@ -857,4 +859,4 @@ app.listen(port, () => {
 });
 
 
-fetchBorrowRateData();
+// fetchBorrowRateData();
