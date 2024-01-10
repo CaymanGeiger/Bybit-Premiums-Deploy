@@ -82,7 +82,22 @@
     white-space: nowrap;
     font-size: 13px;
     position: relative;
+}
 
+.fundingTable.active td:first-child {
+    position: sticky;
+    left: 0;
+    z-index: 1;
+    width: 30px;
+}
+
+.fundingTable.active td:first-child::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 100%;
+    background: rgb(255, 255, 255);
+    z-index: -1;
 }
 
 .fundingMainDiv td::after {
@@ -95,9 +110,34 @@
     background: #f4f3f3;
 }
 
+.tableThName {
+    position: relative;
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    align-content: center;
+}
+.tableThNameDiv {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+}
 
-.tdSymbolAndName:hover {
+.tableThNameDiv strong {
+    margin-top: 1px;
+    margin-left: 3px;
+}
+.stickyNamesButton {
+    font-size: 10px;
+    border-radius: 2px;
+    border: 1px solid rgb(162, 162, 162);
+    padding: 1px;
+    margin: 0;
+}
 
+.tdSymbolAndName {
+    /* position: absolute;
+    left: 0; */
 }
 
 .tdSymbolAndName span {

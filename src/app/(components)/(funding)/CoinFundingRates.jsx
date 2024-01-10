@@ -11,29 +11,10 @@ import Image from 'next/image'
 const CoinFundingRates = ({ coinFundingRates }) => {
     const [sortConfig, setSortConfig] = useState({ key: null, direction: 'none' });
     const [data, setData] = useState(coinFundingRates);
-    const [cachedData, setCachedData] = useState(null); // Initialize with null
-    const [visibleItemsCount, setVisibleItemsCount] = useState(50); // Start with 10 items
+    const [stickyNamesClicked, setStickyNamesClicked] = useState(false);
+    const [visibleItemsCount, setVisibleItemsCount] = useState(50);
     const incrementalLoadCount = 50;
-
-
-    useEffect(() => {
-        const cacheKey = 'coinFundingRates';
-        const storedData = localStorage.getItem(cacheKey);
-        if (storedData) {
-            const { data: cachedRates, timestamp } = JSON.parse(storedData);
-            const isExpired = Date.now() - timestamp > 3600000; // 1 hour expiration
-            if (!isExpired) {
-                setCachedData(cachedRates);
-            } else {
-                updateCache(cacheKey, data);
-            }
-        }
-    }, []);
-
-    const updateCache = (key, newData) => {
-        localStorage.setItem(key, JSON.stringify({ data: newData, timestamp: Date.now() }));
-        setCachedData(newData); // Also update cached data state
-    };
+    const isStickyNameClicked = stickyNamesClicked ? styles.active : "";
 
     const getSortIndicator = (columnName) => {
         if (sortConfig.key === columnName) {
@@ -41,7 +22,6 @@ const CoinFundingRates = ({ coinFundingRates }) => {
         }
         return '';
     };
-
 
     const requestSort = (key) => {
         let direction = 'descending';
@@ -53,7 +33,7 @@ const CoinFundingRates = ({ coinFundingRates }) => {
 
 
     const sortedItems = React.useMemo(() => {
-        let dataToSort = cachedData || data;
+        let dataToSort = data;
 
         let sortableItems = [...dataToSort];
         if (sortConfig.key !== null && sortConfig.direction !== 'none') {
@@ -80,7 +60,7 @@ const CoinFundingRates = ({ coinFundingRates }) => {
             });
         }
         return sortableItems;
-    }, [coinFundingRates, sortConfig]);
+    }, [data, sortConfig]);
 
 
 
@@ -102,19 +82,33 @@ const CoinFundingRates = ({ coinFundingRates }) => {
             <div className={styles.scrollDiv}>
             <ScrollArea.Root className="ScrollAreaRoot">
                 <ScrollArea.Viewport className="ScrollAreaViewport">
-                        <table>
+                        <table className={`${styles.fundingTable} ${isStickyNameClicked}`}>
                             <colgroup>
-                                <col style={{ width: "23%", minWidth: "150px" }} />
-                                <col style={{ width: "12.8", minWidth: "fit-content" }} />
-                                <col style={{ width: "12.8", minWidth: "fit-content" }} />
-                                <col style={{ width: "12.8", minWidth: "fit-content" }} />
-                                <col style={{ width: "12.8", minWidth: "fit-content" }} />
-                                <col style={{ width: "12.8", minWidth: "fit-content" }} />
-                                <col style={{ width: "12.8", minWidth: "fit-content" }} />
+                                <col style={{ width: "16%", minWidth: "125px" }} />
+                                <col style={{ width: "14%", minWidth: "100px" }} />
+                                <col style={{ width: "14%", minWidth: "80px" }} />
+                                <col style={{ width: "14%", minWidth: "80px" }} />
+                                <col style={{ width: "14%", minWidth: "80px" }} />
+                                <col style={{ width: "14%", minWidth: "80px" }} />
+                                <col style={{ width: "14%", minWidth: "80px" }} />
                             </colgroup>
                             <thead>
                                 <tr>
-                                    <th onClick={() => requestSort('name')}>Name <strong className={styles.arrows}>{getSortIndicator('name')}</strong></th>
+                                    <th>
+                                        <div className={styles.tableThNameDiv}>
+                                            <div onClick={() => requestSort('name')} className={styles.tableThName}>
+                                                Name
+                                                <strong className={styles.arrows}>{getSortIndicator('name')}</strong>
+                                            </div>
+                                            <button
+                                                className={styles.stickyNamesButton}
+                                                onClick={() => setStickyNamesClicked(!stickyNamesClicked)}
+                                                style={{ backgroundColor: stickyNamesClicked ? "rgb(255, 190, 70)" : "" }}
+                                                >
+                                                Sticky
+                                            </button>
+                                        </div>
+                                    </th>
                                     <th onClick={() => requestSort('twentyFourHourVolume')}>24h Volume <strong className={styles.arrows}>{getSortIndicator('twentyFourHourVolume')}</strong></th>
                                     <th onClick={() => requestSort('oneDayAverage')}>1d <strong className={styles.arrows}>{getSortIndicator('oneDayAverage')}</strong></th>
                                     <th onClick={() => requestSort('threeDayAverage')}>3d <strong className={styles.arrows}>{getSortIndicator('threeDayAverage')}</strong></th>
@@ -137,6 +131,11 @@ const CoinFundingRates = ({ coinFundingRates }) => {
                                     let isSymbol = coinFundingRate.symbolUrl ? coinFundingRate.symbolUrl : "/noImage.png";
                                     let coinName = coinFundingRate.name.trim();
                                     const volume = coinFundingRate.twentyFourHourVolume;
+                                    const newOneDay = Number((coinFundingRate.oneDayAverage * 100).toFixed(3))
+                                    const newThreeDay = Number((coinFundingRate.threeDayAverage * 100).toFixed(3))
+                                    const newSevenDay = Number((coinFundingRate.sevenDayAverage * 100).toFixed(3))
+                                    const newThirtyDay = Number((coinFundingRate.thirtyDayAverage * 100).toFixed(3))
+                                    const newNinetyDay = Number((coinFundingRate.ninetyDayAverage * 100).toFixed(3))
                                     const formattedVolume = volume >= 1000 ? Math.floor(volume)?.toLocaleString() : volume?.toString();
                                     return (
                                         <motion.tr
@@ -163,11 +162,11 @@ const CoinFundingRates = ({ coinFundingRates }) => {
                                                 </span>
                                             </td>
                                             <td>{formattedVolume ? `$${formattedVolume}` : ""}</td>
-                                            <td>{coinFundingRate.oneDayAverage ? `${coinFundingRate.oneDayAverage}%` : ""}</td>
-                                            <td>{coinFundingRate.threeDayAverage ? `${coinFundingRate.threeDayAverage}%` : ""}</td>
-                                            <td>{coinFundingRate.sevenDayAverage ? `${coinFundingRate.sevenDayAverage}%` : ""}</td>
-                                            <td>{coinFundingRate.thirtyDayAverage ? `${coinFundingRate.thirtyDayAverage}%` : ""}</td>
-                                            <td>{coinFundingRate.ninetyDayAverage ? `${coinFundingRate.ninetyDayAverage}%` : ""}</td>
+                                            <td>{newOneDay ? `${newOneDay}%` : ""}</td>
+                                            <td>{newThreeDay ? `${newThreeDay}%` : ""}</td>
+                                            <td>{newSevenDay? `${newSevenDay}%` : ""}</td>
+                                            <td>{newThirtyDay? `${newThirtyDay}%` : ""}</td>
+                                            <td>{newNinetyDay ? `${newNinetyDay}%` : ""}</td>
                                         </motion.tr>
                                     )
                                 })}

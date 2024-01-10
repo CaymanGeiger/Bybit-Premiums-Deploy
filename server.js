@@ -3,7 +3,7 @@ const express = require('express');
 require('dotenv').config();
 const cors = require('cors');
 const cron = require('node-cron');
-const morgan = require('morgan');
+// const morgan = require('morgan');
 const prisma = require('./lib/prisma');
 // const util = require('util');
 
@@ -27,10 +27,11 @@ const app = express();
 const port = 3001;
 app.use(express.json());
 app.use(cors());
-app.use(morgan('combined'));
+// app.use(morgan('combined'));
 
 
-
+// Current funding full fetch for 326 items takes: 5:20
+// Full run for funding into getting its logos and deleting ends with perp takes: 8:00 (with new coins)
 
 
 
@@ -44,10 +45,8 @@ cron.schedule('0 0 0,8,16 * * *', () => {
 
     // const testFetch = async () => {
     // const response = await fetch('http://localhost:3001/api/bybitfunding');
-    // // console.log(response)
 
     // const data = await response.json();
-    // console.log(data)
     // }
     // testFetch();
     // fetchFundingRateData();
@@ -63,7 +62,7 @@ cron.schedule('*/15 * * * * *', () => {
 
 
 const createOrUpdateFundingData = async (fundingData) => {
-    console.log("createHit");
+    console.log("Updating/Creating Borrow Rates Now....");
 
     const queue = new PQueue({ concurrency: 5 });
     let fundingCurrentItemIndex = 0;
@@ -99,7 +98,8 @@ const createOrUpdateFundingData = async (fundingData) => {
     await queue.onIdle();
     fundingCurrentItemIndex = 0;
     stopFundingProcessing = false;
-    console.log("Processing complete");
+    console.log("Funding Update/Create Complete, Getting Funding Logos Now...");
+    filterOutFundingUSDT();
 }
 
 
@@ -114,37 +114,27 @@ const processFundingItem = async (item, recordsMap) => {
     await delay(1200);
 
     const coinTrimmed = item.symbol.trim()
-    // console.log(coin)
     const existingRecord = recordsMap.get(item['symbol id']);
     const itemResponse = await fetch(`https://api.bybit.com/v5/market/tickers?category=linear&symbol=${coinTrimmed}`);
     const itemData = await itemResponse.json();
-    const nestedItemData = itemData.result.list;
-    // console.log(nestedItemData, "NESTED DATA")
+    const nestedItemData = itemData.result.list[0];
 
-    // Update database with the fetched data
-    if (existingRecord) {
-        await prisma.coinFundingRate.update({
-            where: { coinId: item['symbol id'] },
-            data: {
-                coinId: item && item['symbol id'] || null,
-                name: item && coinTrimmed || null,
-                oneDayAverage: item && item['one day'] || null,
-                threeDayAverage: item && item['three days'] || null,
-                sevenDayAverage: item && item.week || null,
-                thirtyDayAverage: item && item.month || null,
-                ninetyDayAverage: item && item['three months'] || null,
-            }
-        });
-        // console.log(nestedItemData)
-        await prisma.coinFundingRate.update({
-            where: { coinId: item['symbol id'] },
-            data: {
-                twentyFourHourVolume: nestedItemData && parseFloat(nestedItemData['turnover24h']) || null,
-            }
-        });
-    } else {
-        try {
-            await prisma.coinFundingRate.create({
+    const datePatterns = [
+        "20OCT23", "13OCT23", "15DEC23", "28JUN24",
+        "26JAN24", "28JUN24", "15DEC23", "29SEP23",
+        "29MAR24", "06OCT23", "29DEC23", "22SEP23",
+        "27OCT23", "24NOV23"
+    ];
+
+    console.log(nestedItemData)
+    let endsWithPerp = coinTrimmed.endsWith('PERP');
+    let includesDate = datePatterns.some(date => coinTrimmed.includes(date));
+
+    if (!endsWithPerp && !includesDate) {
+        // Update database with the fetched data
+        if (existingRecord) {
+            await prisma.coinFundingRate.update({
+                where: { coinId: item['symbol id'] },
                 data: {
                     coinId: item && item['symbol id'] || null,
                     name: item && coinTrimmed || null,
@@ -155,17 +145,37 @@ const processFundingItem = async (item, recordsMap) => {
                     ninetyDayAverage: item && item['three months'] || null,
                 }
             });
-
             await prisma.coinFundingRate.update({
                 where: { coinId: item['symbol id'] },
                 data: {
-                    twentyFourHourVolume: nestedItemData && parseFloat(nestedItemData['turnover24h']) || null,
+                    twentyFourHourVolume: nestedItemData && parseFloat(nestedItemData.turnover24h) || null,
                 }
             });
-        } catch (error) {
-            console.error("An error occurred while creating a record:", error);
-        }
-    };
+        } else {
+            try {
+                await prisma.coinFundingRate.create({
+                    data: {
+                        coinId: item && item['symbol id'] || null,
+                        name: item && coinTrimmed || null,
+                        oneDayAverage: item && item['one day'] || null,
+                        threeDayAverage: item && item['three days'] || null,
+                        sevenDayAverage: item && item.week || null,
+                        thirtyDayAverage: item && item.month || null,
+                        ninetyDayAverage: item && item['three months'] || null,
+                    }
+                });
+
+                await prisma.coinFundingRate.update({
+                    where: { coinId: item['symbol id'] },
+                    data: {
+                        twentyFourHourVolume: nestedItemData && parseFloat(nestedItemData.turnover24h) || null,
+                    }
+                });
+            } catch (error) {
+                console.error("An error occurred while creating a record:", error);
+            }
+        };
+    }
     fundingCompleted += 1
     console.log("FUNDING WRITE WAS COMPLETED", fundingCompleted)
 }
@@ -174,10 +184,9 @@ const processFundingItem = async (item, recordsMap) => {
 
 // THIS FETCHES THE DATA FOR FUNDING API AT BOTTOM OF PAGE AND UPDATES IT AND CALLS TO THE FUNCTIONS ABOVE TO UPDATE THE DATA
 const fetchFundingRateData = async () => {
-    console.log("fundingFetch hit")
+    console.log("Fetching Funding Rates Now...")
     try {
         const fundingResponse = await fetch('http://localhost:3001/api/bybitfunding');
-        console.log(fundingResponse)
 
         if (!fundingResponse.ok) {
             throw new Error('Failed to fetch data');
@@ -190,7 +199,9 @@ const fetchFundingRateData = async () => {
         console.error('Error fetching data:', error);
     }
 };
-fetchFundingRateData();
+// fetchFundingRateData();
+
+
 
 const lookForNullNames = async () => {
     const noNames = await prisma.coinFundingRate.findMany({
@@ -198,9 +209,14 @@ const lookForNullNames = async () => {
             coinId: null
         }
     });
-    console.log(noNames)
 }
 // lookForNullNames();
+
+
+
+
+
+
 // ONLY FUNDING FETCH
 app.get('/api/bybitfunding', async (req, res) => {
     const apiKey = process.env.API_KEY;
@@ -233,8 +249,13 @@ app.get('/api/bybitfunding', async (req, res) => {
 });
 
 
+
+
+
+
 let allCurrentFundingRates = [];
 const filterOutFundingUSDT = async () => {
+    console.log("Getting Funding Rate Logos Now...")
     // This gets all logos without logos
     const allFundingRatesWithEmptySymbolUrl = await prisma.coinFundingRate.findMany({
         where: {
@@ -270,7 +291,7 @@ const filterOutFundingUSDT = async () => {
                 name: modifiedName,
                 nameCMC: modifiedNameCMC
             };
-        }
+        };
     });
 
     // Loop through the array and call the function below
@@ -280,10 +301,16 @@ const filterOutFundingUSDT = async () => {
             await getFundingRateLogos(item);
         }
     }
+    console.log("Funding Logos Updated, Starting Borrow Rates Now...");
+    fetchBorrowRateData();
 };
+
+
+
+
+
+
 // filterOutFundingUSDT();
-
-
 // This fetches the logo from the api and updates the table
 const getFundingRateLogos = async (item, maxRetries = 5) => {
     let retryCount = 0;
@@ -354,9 +381,10 @@ const getFundingRateLogos = async (item, maxRetries = 5) => {
 
 
 
+
 // CREATE OR UPDATE FOR BORROW
 const createOrUpdateBorrowData = async (borrowData) => {
-    console.log("createBorrowHit");
+    console.log("Updating/Creating Borrow Rates Now....");
 
     const queue = new PQueue({ concurrency: 5 });
     let borrowCurrentItemIndex = 0;
@@ -392,8 +420,12 @@ const createOrUpdateBorrowData = async (borrowData) => {
     await queue.onIdle();
     borrowCurrentItemIndex = 0;
     stopBorrowProcessing = false;
-    console.log("Borrow Processing complete");
+    console.log("Borrow Update/Create Complete, Getting Borrow Logos Now...");
+    filterOutBorrowUSDT();
 }
+
+
+
 
 
 
@@ -402,18 +434,17 @@ function delay(time) {
     return new Promise(resolve => setTimeout(resolve, time));
 }
 
+
+
+
 let borrowCompleted = 0;
 const processBorrowItem = async (item, recordsMap) => {
     let coinTrim = item.coin.trim()
-    // console.log(coin)
     await delay(1200);
     const existingRecord = recordsMap.get(item['coin id']);
-    console.log(existingRecord)
     const itemResponse = await fetch(`https://api.bybit.com/v5/market/tickers?category=spot&symbol=${coinTrim}USDT`);
     const itemData = await itemResponse.json();
-    const nestedItemData = itemData.result.list;
 
-    // console.log(nestedItemData)
     let updateCondition = {};
 
 
@@ -436,31 +467,44 @@ const processBorrowItem = async (item, recordsMap) => {
                 ninetyDayAverage: item && item['three months'] || null,
             }
         });
-        // console.log(nestedItemData)
-        await prisma.coinBorrowRate.update({
-            where: updateCondition,
-            data: {
-                spotVolume: nestedItemData && parseFloat(nestedItemData['turnover24h']) || null,
-            }
-        });
+        try {
+            const nestedItemData = itemData.result.list[0];
+            await prisma.coinBorrowRate.update({
+                where: updateCondition,
+                data: {
+                    spotVolume: nestedItemData && parseFloat(nestedItemData.turnover24h) || null,
+                }
+            });
+        } catch (e) {
+            console.error("issue", e)
+        }
     } else {
-        await prisma.coinBorrowRate.create({
-            data: {
-                coinId: item && item['coin id'] || null,
-                name: item && coinTrim || null,
-                oneDayAverage: item && item['one day'] || null,
-                threeDayAverage: item && item['three days'] || null,
-                sevenDayAverage: item && item.week || null,
-                thirtyDayAverage: item && item.month || null,
-                ninetyDayAverage: item && item['three months'] || null,
+        try {
+            await prisma.coinBorrowRate.create({
+                data: {
+                    coinId: item && item['coin id'] || null,
+                    name: item && coinTrim || null,
+                    oneDayAverage: item && item['one day'] || null,
+                    threeDayAverage: item && item['three days'] || null,
+                    sevenDayAverage: item && item.week || null,
+                    thirtyDayAverage: item && item.month || null,
+                    ninetyDayAverage: item && item['three months'] || null,
+                }
+            });
+            try {
+                const nestedItemData = itemData.result.list[0];
+                await prisma.coinBorrowRate.update({
+                    where: updateCondition,
+                    data: {
+                        spotVolume: nestedItemData && parseFloat(nestedItemData.turnover24h) || null,
+                    }
+                });
+            } catch (e) {
+                console.error("issue", e)
             }
-        });
-        await prisma.coinBorrowRate.update({
-            where: updateCondition,
-            data: {
-                spotVolume: nestedItemData && parseFloat(nestedItemData['turnover24h']) || null,
-            }
-        });
+        } catch (error) {
+            console.error("An error occurred while creating a record:", error);
+        }
     };
     borrowCompleted += 1
     console.log("BORROW WRITE WAS COMPLETED", borrowCompleted)
@@ -468,12 +512,13 @@ const processBorrowItem = async (item, recordsMap) => {
 
 
 
+
+
 // THIS FETCHES THE DATA FOR BORROW API AT BOTTOM OF PAGE AND UPDATES IT AND CALLS TO THE FUNCTIONS ABOVE TO UPDATE THE DATA
 const fetchBorrowRateData = async () => {
-    console.log("borrowFetch hit")
+    console.log("Fetching Borrow Rates Now...")
     try {
         const borrowResponse = await fetch('http://localhost:3001/api/bybitborrow');
-        // console.log(borrowResponse)
 
         if (!borrowResponse.ok) {
             throw new Error('Failed to fetch data');
@@ -486,6 +531,9 @@ const fetchBorrowRateData = async () => {
     }
 };
 // fetchBorrowRateData();
+
+
+
 
 
 // ONLY BORROW FETCH
@@ -521,11 +569,15 @@ app.get('/api/bybitborrow', async (req, res) => {
 
 
 
+
+
+
 // use the current name to get a usuable version for logo
 // fetch to get the logo using the new name and push the url into the table
 // mainTable => updateTable => fetchLogo => mainTable
 let allCurrentBorrowRates = [];
 const filterOutBorrowUSDT = async () => {
+    console.log("Getting Borrow Rate Logos Now...")
     // This gets all logos without logos
     const allBorrowRatesWithEmptySymbolUrl = await prisma.coinBorrowRate.findMany({
         where: {
@@ -571,8 +623,12 @@ const filterOutBorrowUSDT = async () => {
             await getBorrowRateLogos(item);
         }
     }
+    console.log("Borrow Rate Logos Updated, END")
 };
 // filterOutBorrowUSDT();
+
+
+
 
 
 // This fetches the logo from the api and updates the table
@@ -648,6 +704,7 @@ const getBorrowRateLogos = async (item, maxRetries = 5) => {
 
 
 
+
 async function deleteDuplicateCoinFundingRates() {
     const duplicates = await prisma.$queryRaw`
         SELECT name
@@ -682,12 +739,13 @@ async function deleteDuplicateCoinFundingRates() {
 
 
 
+
+
 let currentTrimmedCount = 0;
 async function trimCoinFundingRateNames() {
     // Fetch all records
     const allRates = await prisma.coinFundingRate.findMany();
 
-    // console.log(allRates)
 
     for (const rate of allRates) {
         const trimmedName = rate.name.trim();
@@ -705,11 +763,12 @@ async function trimCoinFundingRateNames() {
 // trimCoinFundingRateNames()
 
 
+
+
+
 async function trimCoinBorrowRateNames() {
     // Fetch all records
     const allRates = await prisma.coinBorrowRate.findMany();
-
-    console.log(allRates)
 
     for (const rate of allRates) {
         const trimmedName = rate.name.trim();
@@ -753,8 +812,7 @@ async function deleteSpecificDateCoins() {
             });
         }
     }
-
-    console.log('Coins with specific dates in their names have been deleted');
+    // console.log('Coins with dates deleted, getting logos now...');
 }
 
 // deleteSpecificDateCoins().catch(e => {
@@ -773,17 +831,14 @@ async function deleteCoinsEndingWithPerp() {
         coin.name.trim().toUpperCase().endsWith('PERP')
     );
 
-
     for (const coin of coinsEndingWithPerp) {
         await prisma.coinFundingRate.delete({
             where: { id: coin.id }
         });
     }
 
-    console.log(coinsEndingWithPerp);
-
-
-    console.log('Coins ending with PERP have been deleted');
+    console.log('Coins ending with PERP have been deleted, getting funding rates now...');
+    fetchFundingRateData();
 }
 
 // deleteCoinsEndingWithPerp().catch(e => {
@@ -800,3 +855,6 @@ async function deleteCoinsEndingWithPerp() {
 app.listen(port, () => {
     console.log(`Server running on http://localhost:${port}`);
 });
+
+
+fetchBorrowRateData();

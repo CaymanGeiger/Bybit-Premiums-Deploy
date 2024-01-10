@@ -11,28 +11,13 @@ import Image from 'next/image'
 const CoinBorrowRates = ({ coinBorrowRates }) => {
     const [sortConfig, setSortConfig] = useState({ key: null, direction: 'none' });
     const [data, setData] = useState(coinBorrowRates);
-    const [cachedData, setCachedData] = useState(null); // Initialize with null
-    const [visibleItemsCount, setVisibleItemsCount] = useState(50); // Start with 10 items
+    const [visibleItemsCount, setVisibleItemsCount] = useState(50);
     const incrementalLoadCount = 50;
 
 
-    useEffect(() => {
-        const cacheKey = 'coinBorrowRates';
-        const storedData = localStorage.getItem(cacheKey);
-        if (storedData) {
-            const { data: cachedRates, timestamp } = JSON.parse(storedData);
-            const isExpired = Date.now() - timestamp > 3600000; // 1 hour expiration
-            if (!isExpired) {
-                setCachedData(cachedRates);
-            } else {
-                updateCache(cacheKey, data);
-            }
-        }
-    }, []);
-
     const updateCache = (key, newData) => {
         localStorage.setItem(key, JSON.stringify({ data: newData, timestamp: Date.now() }));
-        setCachedData(newData); // Also update cached data state
+        setCachedData(newData);
     };
 
     const getSortIndicator = (columnName) => {
@@ -53,7 +38,7 @@ const CoinBorrowRates = ({ coinBorrowRates }) => {
 
 
     const sortedItems = React.useMemo(() => {
-        let dataToSort = cachedData || data;
+        let dataToSort = data;
 
         let sortableItems = [...dataToSort];
         if (sortConfig.key !== null && sortConfig.direction !== 'none') {
@@ -80,8 +65,7 @@ const CoinBorrowRates = ({ coinBorrowRates }) => {
             });
         }
         return sortableItems;
-    }, [coinBorrowRates, sortConfig]);
-
+    }, [data, sortConfig]);
 
 
     useEffect(() => {
@@ -104,13 +88,13 @@ const CoinBorrowRates = ({ coinBorrowRates }) => {
                     <ScrollArea.Viewport className="ScrollAreaViewport">
                         <table>
                             <colgroup>
-                                <col style={{ width: "23%", minWidth: "150px" }} />
-                                <col style={{ width: "12.8", minWidth: "fit-content" }} />
-                                <col style={{ width: "12.8", minWidth: "fit-content" }} />
-                                <col style={{ width: "12.8", minWidth: "fit-content" }} />
-                                <col style={{ width: "12.8", minWidth: "fit-content" }} />
-                                <col style={{ width: "12.8", minWidth: "fit-content" }} />
-                                <col style={{ width: "12.8", minWidth: "fit-content" }} />
+                                <col style={{ width: "16%", minWidth: "125px" }} />
+                                <col style={{ width: "14%", minWidth: "100px" }} />
+                                <col style={{ width: "14%", minWidth: "80px" }} />
+                                <col style={{ width: "14%", minWidth: "80px" }} />
+                                <col style={{ width: "14%", minWidth: "80px" }} />
+                                <col style={{ width: "14%", minWidth: "80px" }} />
+                                <col style={{ width: "14%", minWidth: "80px" }} />
                             </colgroup>
                             <thead>
                                 <tr>
@@ -139,6 +123,11 @@ const CoinBorrowRates = ({ coinBorrowRates }) => {
                                         let coinName = coinBorrowRate.name.trim();
                                         const volume = coinBorrowRate.spotVolume;
                                         const formattedVolume = volume >= 1000 ? Math.floor(volume)?.toLocaleString() : volume?.toString();
+                                        const newOneDay = Number((coinBorrowRate.oneDayAverage * 100).toFixed(3))
+                                        const newThreeDay = Number((coinBorrowRate.threeDayAverage * 100).toFixed(3))
+                                        const newSevenDay = Number((coinBorrowRate.sevenDayAverage * 100).toFixed(3))
+                                        const newThirtyDay = Number((coinBorrowRate.thirtyDayAverage * 100).toFixed(3))
+                                        const newNinetyDay = Number((coinBorrowRate.ninetyDayAverage * 100).toFixed(3))
                                         return (
                                             <motion.tr
                                                 key={coinBorrowRate.id}
@@ -165,11 +154,11 @@ const CoinBorrowRates = ({ coinBorrowRates }) => {
                                                     </span>
                                                 </td>
                                                 <td>{formattedVolume ? `$${formattedVolume}` : ""}</td>
-                                                <td>{coinBorrowRate.oneDayAverage ? `${coinBorrowRate.oneDayAverage}%` : ""}</td>
-                                                <td>{coinBorrowRate.threeDayAverage ? `${coinBorrowRate.threeDayAverage}%` : ""}</td>
-                                                <td>{coinBorrowRate.sevenDayAverage ? `${coinBorrowRate.sevenDayAverage}%` : ""}</td>
-                                                <td>{coinBorrowRate.thirtyDayAverage ? `${coinBorrowRate.thirtyDayAverage}%` : ""}</td>
-                                                <td>{coinBorrowRate.ninetyDayAverage ? `${coinBorrowRate.ninetyDayAverage}%` : ""}</td>
+                                                <td>{newOneDay ? `${newOneDay}%` : ""}</td>
+                                                <td>{newThreeDay ? `${newThreeDay}%` : ""}</td>
+                                                <td>{newSevenDay ? `${newSevenDay}%` : ""}</td>
+                                                <td>{newThirtyDay ? `${newThirtyDay}%` : ""}</td>
+                                                <td>{newNinetyDay ? `${newNinetyDay}%` : ""}</td>
                                             </motion.tr>
                                         )
                                     })}
