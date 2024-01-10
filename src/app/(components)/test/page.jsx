@@ -87,6 +87,7 @@ const Test = () => {
         // fetchTickersData();
         // testNodeJs();
         testNodeJsDev();
+        console.log("hit")
     }, []);
 
     return (
