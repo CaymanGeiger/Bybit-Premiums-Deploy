@@ -1,0 +1,47 @@
+// schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+}
+
+model CoinFundingRate {
+  id                     String     @default(cuid()) @id
+  coinId                 Int?       @unique
+  name                   String?    @unique
+  nameCMC                String?
+  symbolUrl              String?
+  oneDayAverage          Float?
+  threeDayAverage        Float?
+  sevenDayAverage        Float?
+  thirtyDayAverage       Float?
+  ninetyDayAverage       Float?
+  YearAverage            Float?
+  twentyFourHourVolume   Float?
+}
+
+model CoinBorrowRate {
+  id                     String     @default(cuid()) @id
+  coinId                 Int?       @unique
+  name                   String?    @unique
+  nameCMC                String?
+  symbolUrl              String?
+  oneDayAverage          Float?
+  threeDayAverage        Float?
+  sevenDayAverage        Float?
+  thirtyDayAverage       Float?
+  ninetyDayAverage       Float?
+  YearAverage            Float?
+  spotVolume             Float?
+}
+
+model Account {
+  id                     String     @default(cuid()) @id
+  username               String     @unique
+  password               String
+}
