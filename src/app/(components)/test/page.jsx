@@ -28,7 +28,7 @@ const Test = () => {
 
         const testNodeJs = async () => {
             try {
-                const response = await fetch('https://bybit-premiums-deploy-8ksx5zps8-cayman-geigers-projects.vercel.app/api/test');
+                const response = await fetch('bybit-premiums-deployment.vercel.app/api/test');
                 console.log(response)
                 if (!response.ok) {
                     throw new Error(`Error: ${response.status}`);
