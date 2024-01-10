@@ -39,6 +39,19 @@ const Test = () => {
                 console.error('Error fetching data:', error);
             }
         };
+        const testNodeJsDev = async () => {
+            try {
+                const response = await fetch('http://localhost:3001/api/test');
+                console.log(response)
+                if (!response.ok) {
+                    throw new Error(`Error: ${response.status}`);
+                }
+                const data = await response.json();
+                setTestData(data);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
 
 
         const fetchFundingData = async () => {
@@ -72,7 +85,8 @@ const Test = () => {
         // fetchBorrowData();
         // fetchFundingData();
         // fetchTickersData();
-        testNodeJs();
+        // testNodeJs();
+        testNodeJsDev();
     }, []);
 
     return (

@@ -3,11 +3,14 @@ const express = require('express');
 require('dotenv').config();
 const cors = require('cors');
 const cron = require('node-cron');
+const next = require('next');
 // const morgan = require('morgan');
 const prisma = require('./lib/prisma');
 // const util = require('util');
 
 let PQueue;
+
+
 
 async function loadPQueue() {
     PQueue = (await import('p-queue')).default;
@@ -18,15 +21,23 @@ loadPQueue();
 
 // const { default: test } = require('node:test');
 
-
-
-
-
 // TO SET UP THE SERVER
-const app = express();
+// const app = express();
 const port = 3001;
-app.use(express.json());
-app.use(cors());
+// app.use(express.json());
+// app.use(cors());
+
+
+const dev = process.env.NODE_ENV !== 'production';
+const app = next({ dev });
+const handle = app.getRequestHandler();
+
+app.prepare().then(() => {
+    const server = express();
+    server.use(express.json());
+    server.use(cors());
+
+
 // app.use(morgan('combined'));
 
 
@@ -36,7 +47,7 @@ app.use(cors());
 
 
 
-app.get('/api/test', async (req, res) => {
+server.get('/api/test', async (req, res) => {
     console.log('Function is running');
     res.status(200).json({ message: 'Hello!' });
     res.json({ message: 'Hello!' });
@@ -228,7 +239,7 @@ const lookForNullNames = async () => {
 
 
 // ONLY FUNDING FETCH
-app.get('/api/bybitfunding', async (req, res) => {
+server.get('/api/bybitfunding', async (req, res) => {
     const apiKey = process.env.API_KEY;
     const apiSecret = process.env.API_SECRET;
 
@@ -547,7 +558,7 @@ const fetchBorrowRateData = async () => {
 
 
 // ONLY BORROW FETCH
-app.get('/api/bybitborrow', async (req, res) => {
+server.get('/api/bybitborrow', async (req, res) => {
     const apiKey = process.env.API_KEY;
     const apiSecret = process.env.API_SECRET;
 
@@ -860,11 +871,15 @@ async function deleteCoinsEndingWithPerp() {
 
 
 
+    server.all('*', (req, res) => {
+        return handle(req, res);
+    });
 
-// TO LISTEN IN
-app.listen(port, () => {
-    console.log(`Server running on http://localhost:${port}`);
+    const port = process.env.PORT || 3001;
+    server.listen(port, (err) => {
+        if (err) throw err;
+        console.log(`> Ready on http://localhost:${port}`);
+    });
 });
-
 
 // fetchBorrowRateData();
