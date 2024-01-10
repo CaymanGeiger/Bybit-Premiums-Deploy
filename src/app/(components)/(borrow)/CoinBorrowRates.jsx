@@ -8,7 +8,7 @@ import Image from 'next/image'
 
 
 
-const coinBorrowRates = ({ coinBorrowRates }) => {
+const CoinBorrowRates = ({ coinBorrowRates }) => {
     const [sortConfig, setSortConfig] = useState({ key: null, direction: 'none' });
     const [data, setData] = useState(coinBorrowRates);
     const [visibleItemsCount, setVisibleItemsCount] = useState(50);
@@ -186,4 +186,4 @@ const coinBorrowRates = ({ coinBorrowRates }) => {
         </div>
     );
 }
-export default coinBorrowRates;
+export default CoinBorrowRates;
