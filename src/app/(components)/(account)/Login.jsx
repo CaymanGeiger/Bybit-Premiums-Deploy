@@ -66,8 +66,14 @@ export default function Login() {
                     onChange={(e) => setPassword(e.target.value)}
                 />
                 <div className={styles.eyesDivPassword}>
-                    <Image alt='eyeOpen' onClick={() => setPasswordEyeClicked(!passwordEyeClicked)} className={styles.openEye} src='/eye1.png' style={{ opacity: passwordOpacityOpen }} />
-                    <Image alt='eyeClose' onClick={() => setPasswordEyeClicked(!passwordEyeClicked)} className={styles.openEye} src='/eye2.png' style={{ opacity: passwordOpacityOpenClosed }} />
+                    <Image
+                    width={14}
+                    height={13}
+                    alt='eyeOpen' onClick={() => setPasswordEyeClicked(!passwordEyeClicked)} className={styles.openEye} src='/eye1.png' style={{ opacity: passwordOpacityOpen }} />
+                    <Image
+                    width={14}
+                    height={13}
+                    alt='eyeClose' onClick={() => setPasswordEyeClicked(!passwordEyeClicked)} className={styles.openEye} src='/eye2.png' style={{ opacity: passwordOpacityOpenClosed }} />
                 </div>
             </div>
             <div className={styles.formLabelAndInputConfirmPassword}>
@@ -79,8 +85,14 @@ export default function Login() {
                     type={confirmPasswordType}
                 />
                 <div className={styles.eyesDivConfirmPassword}>
-                    <Image alt='eyeOpen' onClick={() => setConfirmPasswordEyeClicked(!confirmPasswordEyeClicked)} className={styles.openEye} src='/eye1.png' style={{ opacity: confirmPasswordOpacityOpen }} />
-                    <Image alt='eyeClose' onClick={() => setConfirmPasswordEyeClicked(!confirmPasswordEyeClicked)} className={styles.openEye} src='/eye2.png' style={{ opacity: confirmPasswordOpacityClosed }} />
+                    <Image
+                    width={14}
+                    height={13}
+                    alt='eyeOpen' onClick={() => setConfirmPasswordEyeClicked(!confirmPasswordEyeClicked)} className={styles.openEye} src='/eye1.png' style={{ opacity: confirmPasswordOpacityOpen }} />
+                    <Image
+                    width={14}
+                    height={13}
+                    alt='eyeClose' onClick={() => setConfirmPasswordEyeClicked(!confirmPasswordEyeClicked)} className={styles.openEye} src='/eye2.png' style={{ opacity: confirmPasswordOpacityClosed }} />
                 </div>
             </div>
             <button className={styles.formSubmitButton} type="submit">Submit</button>
