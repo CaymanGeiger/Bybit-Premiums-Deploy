@@ -2,7 +2,6 @@ import styles from './page.module.css'
 import prisma from '../../lib/prisma'
 import CoinFundingRates from './(components)/(funding)/CoinFundingRates'
 import CoinBorrowRates from './(components)/(borrow)/CoinBorrowRates'
-import LoginButton from './(components)/(account)/LoginButton'
 import Nav from './(components)/(nav)/Nav'
 
 async function getCoinFundingRates() {
@@ -22,7 +21,6 @@ export default async function Home() {
   return (
     <main className={styles.main}>
       <Nav/>
-      <LoginButton />
       <div className={styles.mainDivTwo}>
             <CoinFundingRates
               coinFundingRates={coinFundingRates}
