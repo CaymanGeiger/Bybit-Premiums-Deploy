@@ -1,24 +1,20 @@
 "use client"
 import { motion, AnimatePresence } from 'framer-motion';
 import React, { useState, useEffect } from 'react';
-import styles from './coinborrowrates.module.css'
+import styles from './coinBorrowRates.module.css'
 import * as ScrollArea from '@radix-ui/react-scroll-area';
 import "../(reusable)/radixscroll.css";
 import Image from 'next/image'
 
 
 
-const CoinBorrowRates = ({ coinBorrowRates }) => {
+const coinBorrowRates = ({ coinBorrowRates }) => {
     const [sortConfig, setSortConfig] = useState({ key: null, direction: 'none' });
     const [data, setData] = useState(coinBorrowRates);
     const [visibleItemsCount, setVisibleItemsCount] = useState(50);
     const incrementalLoadCount = 50;
-
-
-    const updateCache = (key, newData) => {
-        localStorage.setItem(key, JSON.stringify({ data: newData, timestamp: Date.now() }));
-        setCachedData(newData);
-    };
+    const [stickyNamesClicked, setStickyNamesClicked] = useState(false);
+    const isStickyNameClicked = stickyNamesClicked ? styles.active : "";
 
     const getSortIndicator = (columnName) => {
         if (sortConfig.key === columnName) {
@@ -26,7 +22,6 @@ const CoinBorrowRates = ({ coinBorrowRates }) => {
         }
         return '';
     };
-
 
     const requestSort = (key) => {
         let direction = 'descending';
@@ -68,6 +63,7 @@ const CoinBorrowRates = ({ coinBorrowRates }) => {
     }, [data, sortConfig]);
 
 
+
     useEffect(() => {
         if (visibleItemsCount < sortedItems.length) {
             const timer = setTimeout(() => {
@@ -86,7 +82,7 @@ const CoinBorrowRates = ({ coinBorrowRates }) => {
             <div className={styles.scrollDiv}>
                 <ScrollArea.Root className="ScrollAreaRoot">
                     <ScrollArea.Viewport className="ScrollAreaViewport">
-                        <table>
+                        <table className={`${styles.borrowTable} ${isStickyNameClicked}`}>
                             <colgroup>
                                 <col style={{ width: "16%", minWidth: "125px" }} />
                                 <col style={{ width: "14%", minWidth: "100px" }} />
@@ -98,8 +94,22 @@ const CoinBorrowRates = ({ coinBorrowRates }) => {
                             </colgroup>
                             <thead>
                                 <tr>
-                                    <th onClick={() => requestSort('name')}>Name <strong className={styles.arrows}>{getSortIndicator('name')}</strong></th>
-                                    <th onClick={() => requestSort('spotVolume')}>Spot Volume <strong className={styles.arrows}>{getSortIndicator('spotVolume')}</strong></th>
+                                    <th>
+                                        <div className={styles.tableThNameDiv}>
+                                            <div onClick={() => requestSort('name')} className={styles.tableThName}>
+                                                Name
+                                                <strong className={styles.arrows}>{getSortIndicator('name')}</strong>
+                                            </div>
+                                            <button
+                                                className={styles.stickyNamesButton}
+                                                onClick={() => setStickyNamesClicked(!stickyNamesClicked)}
+                                                style={{ backgroundColor: stickyNamesClicked ? "rgb(255, 190, 70)" : "", color: stickyNamesClicked ? "white" : "" }}
+                                            >
+                                                Sticky
+                                            </button>
+                                        </div>
+                                    </th>
+                                    <th onClick={() => requestSort('spotVolume')}>24h Volume <strong className={styles.arrows}>{getSortIndicator('spotVolume')}</strong></th>
                                     <th onClick={() => requestSort('oneDayAverage')}>1d <strong className={styles.arrows}>{getSortIndicator('oneDayAverage')}</strong></th>
                                     <th onClick={() => requestSort('threeDayAverage')}>3d <strong className={styles.arrows}>{getSortIndicator('threeDayAverage')}</strong></th>
                                     <th onClick={() => requestSort('sevenDayAverage')}>7d <strong className={styles.arrows}>{getSortIndicator('sevenDayAverage')}</strong></th>
@@ -110,7 +120,6 @@ const CoinBorrowRates = ({ coinBorrowRates }) => {
                             <tbody>
                                 <AnimatePresence>
                                     {sortedItems.slice(0, visibleItemsCount).filter((coinBorrowRate) => {
-                                        // Add the conditions for the properties you want to check
                                         return coinBorrowRate.name ||
                                             coinBorrowRate.spotVolume ||
                                             coinBorrowRate.oneDayAverage ||
@@ -122,12 +131,12 @@ const CoinBorrowRates = ({ coinBorrowRates }) => {
                                         let isSymbol = coinBorrowRate.symbolUrl ? coinBorrowRate.symbolUrl : "/noImage.png";
                                         let coinName = coinBorrowRate.name.trim();
                                         const volume = coinBorrowRate.spotVolume;
-                                        const formattedVolume = volume >= 1000 ? Math.floor(volume)?.toLocaleString() : volume?.toString();
                                         const newOneDay = Number((coinBorrowRate.oneDayAverage * 100).toFixed(3))
                                         const newThreeDay = Number((coinBorrowRate.threeDayAverage * 100).toFixed(3))
                                         const newSevenDay = Number((coinBorrowRate.sevenDayAverage * 100).toFixed(3))
                                         const newThirtyDay = Number((coinBorrowRate.thirtyDayAverage * 100).toFixed(3))
                                         const newNinetyDay = Number((coinBorrowRate.ninetyDayAverage * 100).toFixed(3))
+                                        const formattedVolume = volume >= 1000 ? Math.floor(volume)?.toLocaleString() : volume?.toString();
                                         return (
                                             <motion.tr
                                                 key={coinBorrowRate.id}
@@ -136,9 +145,8 @@ const CoinBorrowRates = ({ coinBorrowRates }) => {
                                                 animate={{ opacity: 1, x: 0 }}
                                                 exit={{ opacity: 0, x: 100 }}
                                                 transition={{
-                                                    duration: 0.5,
+                                                    duration: 0.3,
                                                     ease: "easeInOut",
-                                                    delay: 0.1
                                                 }}
                                             >
                                                 <td className={styles.tdSymbolAndName}>
@@ -178,4 +186,4 @@ const CoinBorrowRates = ({ coinBorrowRates }) => {
         </div>
     );
 }
-export default CoinBorrowRates;
+export default coinBorrowRates;

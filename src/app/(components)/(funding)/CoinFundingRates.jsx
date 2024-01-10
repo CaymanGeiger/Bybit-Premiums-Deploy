@@ -11,9 +11,9 @@ import Image from 'next/image'
 const CoinFundingRates = ({ coinFundingRates }) => {
     const [sortConfig, setSortConfig] = useState({ key: null, direction: 'none' });
     const [data, setData] = useState(coinFundingRates);
-    const [stickyNamesClicked, setStickyNamesClicked] = useState(false);
     const [visibleItemsCount, setVisibleItemsCount] = useState(50);
     const incrementalLoadCount = 50;
+    const [stickyNamesClicked, setStickyNamesClicked] = useState(false);
     const isStickyNameClicked = stickyNamesClicked ? styles.active : "";
 
     const getSortIndicator = (columnName) => {
@@ -103,8 +103,7 @@ const CoinFundingRates = ({ coinFundingRates }) => {
                                             <button
                                                 className={styles.stickyNamesButton}
                                                 onClick={() => setStickyNamesClicked(!stickyNamesClicked)}
-                                                style={{ backgroundColor: stickyNamesClicked ? "rgb(255, 190, 70)" : "" }}
-                                                >
+                                                style={{ backgroundColor: stickyNamesClicked ? "rgb(255, 190, 70)" : "", color: stickyNamesClicked ? "white" : "" }}                                                >
                                                 Sticky
                                             </button>
                                         </div>

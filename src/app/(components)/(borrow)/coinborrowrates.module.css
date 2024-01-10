@@ -82,7 +82,22 @@
     white-space: nowrap;
     font-size: 13px;
     position: relative;
+}
 
+.borrowTable.active td:first-child {
+    position: sticky;
+    left: 0;
+    z-index: 1;
+    width: 30px;
+}
+
+.borrowTable.active td:first-child::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 100%;
+    background: rgb(255, 255, 255);
+    z-index: -1;
 }
 
 .borrowMainDiv td::after {
@@ -95,8 +110,51 @@
     background: #f4f3f3;
 }
 
+.tableThName {
+    position: relative;
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    align-content: center;
+}
 
-.tdSymbolAndName:hover {}
+.tableThNameDiv {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+}
+
+.tableThNameDiv strong {
+    margin-top: 1px;
+    margin-left: 3px;
+}
+
+@media (min-width: 600px) {
+    .stickyNamesButton {
+        font-size: 10px;
+        border-radius: 2px;
+        border: 1px solid rgb(162, 162, 162);
+        padding: 1px;
+        margin: 0;
+        visibility: hidden;
+    }
+}
+
+@media (max-width: 600px) {
+    .stickyNamesButton {
+        font-size: 10px;
+        border-radius: 2px;
+        border: 1px solid rgb(162, 162, 162);
+        padding: 1px;
+        margin: 0;
+        transition: all 0.2s ease;
+    }
+}
+
+.tdSymbolAndName {
+    /* position: absolute;
+    left: 0; */
+}
 
 .tdSymbolAndName span {
     overflow: hidden;
