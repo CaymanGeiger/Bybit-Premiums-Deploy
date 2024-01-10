@@ -85,8 +85,8 @@ const Test = () => {
         // fetchBorrowData();
         // fetchFundingData();
         // fetchTickersData();
-        // testNodeJs();
-        testNodeJsDev();
+        testNodeJs();
+        // testNodeJsDev();
         console.log("hit")
     }, []);
 
