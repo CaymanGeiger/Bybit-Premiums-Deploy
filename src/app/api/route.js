@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import prisma from '../../../lib/prisma'
+import prisma from '../../../lib/prisma';
 import PQueue from 'p-queue';
 
 
@@ -8,7 +8,6 @@ export async function GET(req, res) {
     const apiSecret = process.env.API_SECRET;
     // const apiKey = process.env.NEXT_PUBLIC_API_KEY;
     // const apiSecret = process.env.NEXT_PUBLIC_API_SECRET;
-
 
     try {
         const borrowResponse = await fetch('https://bybit-premiums-api.onrender.com/borrow-rate', {
@@ -22,14 +21,13 @@ export async function GET(req, res) {
 
         const borrowData = await borrowResponse.json();
         createOrUpdateBorrowData(borrowData);
-
+        return NextResponse.json(borrowData);
         // return res.status(200).json({ message: 'Borrow data successfully updated' });
 
     } catch (error) {
         console.error('Error:', error);
         return NextResponse.error(new Error('Borrow response failed'));
     }
-    return NextResponse.json(borrowData);
 }
 
 
