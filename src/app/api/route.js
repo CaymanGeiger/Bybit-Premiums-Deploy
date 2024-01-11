@@ -105,7 +105,7 @@ const processBorrowItem = async (item, recordsMap) => {
                 threeDayAverage: item && item['three days'] || null,
                 sevenDayAverage: item && item.week || null,
                 thirtyDayAverage: item && item.month || null,
-                ninetyDayAverage: item && item['three months'] || null,
+                ninetyDayAverage: "working" || null,
             }
         });
         try {
@@ -129,7 +129,7 @@ const processBorrowItem = async (item, recordsMap) => {
                     threeDayAverage: item && item['three days'] || null,
                     sevenDayAverage: item && item.week || null,
                     thirtyDayAverage: item && item.month || null,
-                    ninetyDayAverage: item && item['three months'] || null,
+                    ninetyDayAverage: "working" || null,
                 }
             });
             try {
