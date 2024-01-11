@@ -29,7 +29,7 @@ const Test = () => {
         // const port = process.env.PORT || 3001
         const testNodeJs = async () => {
             try {
-                const response = await fetch('/api/test');
+                const response = await fetch('http://localhost:3000/api');
                 console.log(response)
                 if (!response.ok) {
                     throw new Error(`Error: ${response.status}`);
@@ -40,6 +40,7 @@ const Test = () => {
                 console.error('Error fetching data:', error);
             }
         };
+
         const testNodeJsDev = async () => {
             try {
                 const response = await fetch('http://localhost:3001/api/test');

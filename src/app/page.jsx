@@ -14,9 +14,6 @@ async function getCoinBorrowRates() {
   return response;
 }
 
-
-
-
 export default async function Home() {
   const coinFundingRates = await getCoinFundingRates();
   const coinBorrowRates = await getCoinBorrowRates();
