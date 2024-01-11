@@ -43,7 +43,12 @@ const Test = () => {
 
         const testNodeJsDev = async () => {
             try {
-                const response = await fetch('http://localhost:3001/api/test');
+                const response = await fetch('http://localhost:3001/api/test', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                });
                 console.log(response)
                 if (!response.ok) {
                     throw new Error(`Error: ${response.status}`);
