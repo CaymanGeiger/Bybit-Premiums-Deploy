@@ -14,7 +14,6 @@ export const createOrUpdateBorrowData = async (borrowData) => {
     });
     const recordsMap = new Map(existingRecords.map(record => [record.coinId, record]));
 
-
     for (const key in borrowData) {
         if (borrowData.hasOwnProperty(key)) {
             let itemsArray = borrowData[key];
