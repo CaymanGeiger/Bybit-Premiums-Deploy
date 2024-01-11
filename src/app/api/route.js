@@ -7,8 +7,10 @@ export async function GET(req, res) {
     if (!req.headers === "FETCH_BORROW_DATA") {
         return NextResponse.error(new Error('FETCH_BORROW_DATA is missing or not set to true'));
     }
-    const apiKey = process.env.NEXT_PUBLIC_API_KEY;
-    const apiSecret = process.env.NEXT_PUBLIC_API_SECRET;
+    const apiKey = process.env.API_KEY;
+    const apiSecret = process.env.API_SECRET;
+    // const apiKey = process.env.NEXT_PUBLIC_API_KEY;
+    // const apiSecret = process.env.NEXT_PUBLIC_API_SECRET;
 
     if (!apiKey || !apiSecret) {
         console.error('API key or secret is undefined');
