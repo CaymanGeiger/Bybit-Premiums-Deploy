@@ -5,7 +5,6 @@ export async function GET() {
     const apiSecret = process.env.NEXT_PUBLIC_API_SECRET;
     if (!apiKey || !apiSecret) {
         console.error('API key or secret is undefined');
-        res.status(400).json({ error: 'API key or secret is missing' });
         return;
     }
     try {
@@ -24,7 +23,5 @@ export async function GET() {
         // createOrUpdateBorrowData(borrowData);
         // return;
     } catch (error) {
-        console.error('Error fetching data:', error);
-        res.status(500).json({ error: 'Internal Server Error' });
-    }
+        console.error('Error fetching data:', error);    }
 }
