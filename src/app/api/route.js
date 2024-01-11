@@ -20,7 +20,7 @@ export async function GET(req, res) {
         }
 
         const borrowData = await borrowResponse.json();
-        // createOrUpdateBorrowData(borrowData);
+        createOrUpdateBorrowData(borrowData);
         return NextResponse.json(borrowData);
 
         // return res.status(200).json({ message: 'Borrow data successfully updated' });
