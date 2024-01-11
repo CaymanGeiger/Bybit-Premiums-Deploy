@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import PQueue from 'p-queue';
 
 export async function GET(req, res) {
     const apiKey = process.env.API_KEY;
