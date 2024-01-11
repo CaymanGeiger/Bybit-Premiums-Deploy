@@ -3,10 +3,6 @@ import { NextResponse } from 'next/server';
 import { createOrUpdateBorrowData } from '../(db)/borrow/writeBorrowRates';
 
 export async function POST(req, res) {
-    if (req.method !== 'POST') {
-        res.setHeader('Allow', 'POST');
-        return res.status(405).end(`Method ${req.method} Not Allowed`);
-    }
     // const apiKey = process.env.NEXT_PUBLIC_API_KEY;
     // const apiSecret = process.env.NEXT_PUBLIC_API_SECRET;
     const apiKey = process.env.API_KEY;

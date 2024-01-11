@@ -90,10 +90,7 @@ const Test = () => {
         try {
             console.log("fetching2")
             const response = await fetch('/api', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                method: 'POST'
             });
             console.log(response)
 
