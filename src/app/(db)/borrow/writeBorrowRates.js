@@ -1,3 +1,4 @@
+
 import prisma from '../../../../lib/prisma';
 import PQueue from 'p-queue';
 
@@ -74,7 +75,7 @@ const processBorrowItem = async (item, recordsMap) => {
                 threeDayAverage: item && item['three days'] || null,
                 sevenDayAverage: item && item.week || null,
                 thirtyDayAverage: item && item.month || null,
-                ninetyDayAverage: 5 || null,
+                ninetyDayAverage: 3 || null,
             }
         });
         try {
@@ -98,7 +99,7 @@ const processBorrowItem = async (item, recordsMap) => {
                     threeDayAverage: item && item['three days'] || null,
                     sevenDayAverage: item && item.week || null,
                     thirtyDayAverage: item && item.month || null,
-                    ninetyDayAverage: 5 || null,
+                    ninetyDayAverage: 3 || null,
                 }
             });
             try {

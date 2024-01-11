@@ -27,24 +27,7 @@ const Test = () => {
         };
 
         const port = process.env.PORT || 3001
-        const testNodeJs = async () => {
-            console.log("fetching")
-            try {
-                console.log("fetching2")
-                const response = await fetch('/api');
-                console.log(response)
 
-                if (!response.ok) {
-                    console.log("Failed")
-                    throw new Error(`Error: ${response.status}`);
-                }
-                console.log("fetching3")
-                const data = await response.json();
-                setTestData(data);
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
-        };
 
         const testNodeJsDev = async () => {
             try {
@@ -97,16 +80,44 @@ const Test = () => {
         // fetchBorrowData();
         // fetchFundingData();
         // fetchTickersData();
-        testNodeJs();
+
         // testNodeJsDev();
         console.log("hit")
     }, []);
+
+    const testNodeJs = async () => {
+        console.log("fetching")
+        try {
+            console.log("fetching2")
+            const response = await fetch('/api', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+            console.log(response)
+
+            if (!response.ok) {
+                console.log("Failed")
+                throw new Error(`Error: ${response.status}`);
+            }
+            console.log("fetching3")
+            const data = await response.json();
+            setTestData(data);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    };
 
     return (
         <div>
             <h1>
                 Test
             </h1>
+
+            <button onClick={() => testNodeJs()}>
+                Fetch Test
+            </button>
         </div>
     )
 }
