@@ -4,18 +4,10 @@ import PQueue from 'p-queue';
 
 export async function GET(req, res) {
 
-    if (!req.headers === "FETCH_BORROW_DATA") {
-        return NextResponse.error(new Error('FETCH_BORROW_DATA is missing or not set to true'));
-    }
     const apiKey = process.env.API_KEY;
     const apiSecret = process.env.API_SECRET;
     // const apiKey = process.env.NEXT_PUBLIC_API_KEY;
     // const apiSecret = process.env.NEXT_PUBLIC_API_SECRET;
-
-    if (!apiKey || !apiSecret) {
-        console.error('API key or secret is undefined');
-        return NextResponse.error(new Error('API key or secret is missing'));
-    }
 
     try {
         const borrowResponse = await fetch('https://bybit-premiums-api.onrender.com/borrow-rate', {
@@ -38,6 +30,7 @@ export async function GET(req, res) {
         return NextResponse.error(new Error('Borrow response failed'));
     }
 }
+
 
 
 const createOrUpdateBorrowData = async (borrowData) => {
