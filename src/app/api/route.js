@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import prisma from '../../../lib/prisma'
 import PQueue from 'p-queue';
 
 export async function GET(req, res) {
