@@ -16,12 +16,12 @@ export async function GET() {
         });
 
         if (!borrowResponse.ok) {
-            throw new Error(`HTTP error! status: ${borrowResponse.status}`);
+            console.error('Error fetching data:', error);
         }
         const borrowData = await borrowResponse.json();
         return NextResponse.json(borrowData);
-        // createOrUpdateBorrowData(borrowData);
-        // return;
     } catch (error) {
-        console.error('Error fetching data:', error);    }
+        console.error('Error fetching data:', error);
+        return NextResponse.error(error);
+    }
 }
