@@ -10,7 +10,7 @@ const Test = () => {
     // console.log(tickerData)
     // console.log(fundingData)
     // console.log(borrowData)
-    console.log(testData)
+    // console.log(testData)
 
     React.useEffect(() => {
         const fetchTickersData = async () => {
@@ -28,12 +28,17 @@ const Test = () => {
 
         const port = process.env.PORT || 3001
         const testNodeJs = async () => {
+            console.log("fetching")
             try {
+                console.log("fetching2")
                 const response = await fetch('/api');
                 console.log(response)
+
                 if (!response.ok) {
+                    console.log("Failed")
                     throw new Error(`Error: ${response.status}`);
                 }
+                console.log("fetching3")
                 const data = await response.json();
                 setTestData(data);
             } catch (error) {
