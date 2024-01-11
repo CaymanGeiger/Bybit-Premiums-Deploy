@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
 
 export async function GET() {
-    const apiKey = process.env.NEXT_PUBLIC_API_KEY;
-    const apiSecret = process.env.NEXT_PUBLIC_API_SECRET;
+    const apiKey = process.env.API_KEY;
+    const apiSecret = process.env.API_SECRET;
 
     if (!apiKey || !apiSecret) {
         console.error('API key or secret is undefined');
