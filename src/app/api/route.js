@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { createOrUpdateBorrowData } from '../(db)/(borrow)/writeBorrowRates';
+import { createOrUpdateBorrowData } from '../(db)/borrow/writeBorrowRates';
 
 export async function GET(req, res) {
     const apiKey = process.env.API_KEY;

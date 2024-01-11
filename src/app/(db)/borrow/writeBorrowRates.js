@@ -1,9 +1,11 @@
 import prisma from '../../../../lib/prisma';
 import PQueue from 'p-queue';
 
+
+let working = "not working";
 export const createOrUpdateBorrowData = async (borrowData) => {
     console.log("Updating/Creating Borrow Rates Now....");
-
+    working
     const queue = new PQueue({ concurrency: 5 });
     let borrowCurrentItemIndex = 0;
     let stopBorrowProcessing = false;
@@ -75,7 +77,7 @@ const processBorrowItem = async (item, recordsMap) => {
                 threeDayAverage: item && item['three days'] || null,
                 sevenDayAverage: item && item.week || null,
                 thirtyDayAverage: item && item.month || null,
-                ninetyDayAverage: "working" || null,
+                ninetyDayAverage: 1 || null,
             }
         });
         try {
@@ -99,7 +101,7 @@ const processBorrowItem = async (item, recordsMap) => {
                     threeDayAverage: item && item['three days'] || null,
                     sevenDayAverage: item && item.week || null,
                     thirtyDayAverage: item && item.month || null,
-                    ninetyDayAverage: "working" || null,
+                    ninetyDayAverage: 1 || null,
                 }
             });
             try {
@@ -119,4 +121,12 @@ const processBorrowItem = async (item, recordsMap) => {
     };
     borrowCompleted += 1;
     console.log("BORROW WRITE WAS COMPLETED", borrowCompleted);
+}
+
+export default function Test() {
+    return (
+        <div>
+            <h1>{working}</h1>
+        </div>
+    )
 }
