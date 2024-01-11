@@ -29,7 +29,12 @@ const Test = () => {
         const port = process.env.PORT || 3001
         const testNodeJs = async () => {
             try {
-                const response = await fetch('/api');
+                const response = await fetch('/api', {
+                    method: 'GET',
+                    headers: {
+                        'FETCH_BORROW_DATA': "true",
+                    },
+                });
                 console.log(response)
                 if (!response.ok) {
                     throw new Error(`Error: ${response.status}`);
@@ -92,7 +97,7 @@ const Test = () => {
         // fetchBorrowData();
         // fetchFundingData();
         // fetchTickersData();
-        // testNodeJs();
+        testNodeJs();
         // testNodeJsDev();
         console.log("hit")
     }, []);
