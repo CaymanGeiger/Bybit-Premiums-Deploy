@@ -2,12 +2,13 @@ import { NextResponse } from 'next/server';
 import prisma from '../../../lib/prisma'
 import PQueue from 'p-queue';
 
-export async function GET(req, res) {
 
+export async function GET(req, res) {
     const apiKey = process.env.API_KEY;
     const apiSecret = process.env.API_SECRET;
     // const apiKey = process.env.NEXT_PUBLIC_API_KEY;
     // const apiSecret = process.env.NEXT_PUBLIC_API_SECRET;
+
 
     try {
         const borrowResponse = await fetch('https://bybit-premiums-api.onrender.com/borrow-rate', {
@@ -21,7 +22,7 @@ export async function GET(req, res) {
 
         const borrowData = await borrowResponse.json();
         createOrUpdateBorrowData(borrowData);
-        return NextResponse.json(borrowData);
+        // return NextResponse.json(borrowData);
 
         // return res.status(200).json({ message: 'Borrow data successfully updated' });
 
@@ -30,7 +31,6 @@ export async function GET(req, res) {
         return NextResponse.error(new Error('Borrow response failed'));
     }
 }
-
 
 
 const createOrUpdateBorrowData = async (borrowData) => {
@@ -46,13 +46,14 @@ const createOrUpdateBorrowData = async (borrowData) => {
     });
     const recordsMap = new Map(existingRecords.map(record => [record.coinId, record]));
 
+
     for (const key in borrowData) {
         if (borrowData.hasOwnProperty(key)) {
             let itemsArray = borrowData[key];
 
             if (Array.isArray(itemsArray)) {
                 for (const item of itemsArray) {
-                    // queue.add(() => processBorrowItem(item, recordsMap));
+                    queue.add(() => processBorrowItem(item, recordsMap));
                     borrowCurrentItemIndex++;
                     if (borrowCurrentItemIndex === borrowData.length - 1) {
                         stopBorrowProcessing = true;
@@ -75,80 +76,79 @@ const createOrUpdateBorrowData = async (borrowData) => {
 }
 
 
-// function delay(time) {
-//     return new Promise(resolve => setTimeout(resolve, time));
-// }
+function delay(time) {
+    return new Promise(resolve => setTimeout(resolve, time));
+}
 
 
-// let borrowCompleted = 0;
-// const processBorrowItem = async (item, recordsMap) => {
-//     let coinTrim = item.coin.trim()
-//     await delay(1200);
-//     const existingRecord = recordsMap.get(item['coin id']);
-//     const itemResponse = await fetch(`https://api.bybit.com/v5/market/tickers?category=spot&symbol=${coinTrim}USDT`);
-//     const itemData = await itemResponse.json();
+let borrowCompleted = 0;
+const processBorrowItem = async (item, recordsMap) => {
+    let coinTrim = item.coin.trim();
+    await delay(1200);
+    const existingRecord = recordsMap.get(item['coin id']);
+    const itemResponse = await fetch(`https://api.bybit.com/v5/market/tickers?category=spot&symbol=${coinTrim}USDT`);
+    const itemData = await itemResponse.json();
 
-//     let updateCondition = {};
+    let updateCondition = {};
 
+    if (item.coinId) {
+        updateCondition.coinId = item.coinId;
+    } else if (coinTrim) {
+        updateCondition.name = coinTrim;
+    }
 
-//     if (item.coinId) {
-//         updateCondition.coinId = item.coinId;
-//     } else if (coinTrim) {
-//         updateCondition.name = coinTrim;
-//     }
-
-//     if (existingRecord) {
-//         await prisma.coinBorrowRate.update({
-//             where: updateCondition,
-//             data: {
-//                 coinId: item && item['coin id'] || null,
-//                 name: item && coinTrim || null,
-//                 oneDayAverage: item && item['one day'] || null,
-//                 threeDayAverage: item && item['three days'] || null,
-//                 sevenDayAverage: item && item.week || null,
-//                 thirtyDayAverage: item && item.month || null,
-//                 ninetyDayAverage: item && item['three months'] || null,
-//             }
-//         });
-//         try {
-//             const nestedItemData = itemData.result.list[0];
-//             await prisma.coinBorrowRate.update({
-//                 where: updateCondition,
-//                 data: {
-//                     spotVolume: nestedItemData && parseFloat(nestedItemData.turnover24h) || null,
-//                 }
-//             });
-//         } catch (e) {
-//             console.error("issue", e)
-//         }
-//     } else {
-//         try {
-//             await prisma.coinBorrowRate.create({
-//                 data: {
-//                     coinId: item && item['coin id'] || null,
-//                     name: item && coinTrim || null,
-//                     oneDayAverage: item && item['one day'] || null,
-//                     threeDayAverage: item && item['three days'] || null,
-//                     sevenDayAverage: item && item.week || null,
-//                     thirtyDayAverage: item && item.month || null,
-//                     ninetyDayAverage: item && item['three months'] || null,
-//                 }
-//             });
-//             try {
-//                 const nestedItemData = itemData.result.list[0];
-//                 await prisma.coinBorrowRate.update({
-//                     where: updateCondition,
-//                     data: {
-//                         spotVolume: nestedItemData && parseFloat(nestedItemData.turnover24h) || null,
-//                     }
-//                 });
-//             } catch (e) {
-//                 console.error("issue", e)
-//             }
-//         } catch (error) {
-//             console.error("An error occurred while creating a record:", error);
-//         }
-//     };
-//     borrowCompleted += 1
-//     console.log("BORROW WRITE WAS COMPLETED", borrowCompleted)
-// }
+    if (existingRecord) {
+        await prisma.coinBorrowRate.update({
+            where: updateCondition,
+            data: {
+                coinId: item && item['coin id'] || null,
+                name: item && coinTrim || null,
+                oneDayAverage: item && item['one day'] || null,
+                threeDayAverage: item && item['three days'] || null,
+                sevenDayAverage: item && item.week || null,
+                thirtyDayAverage: item && item.month || null,
+                ninetyDayAverage: item && item['three months'] || null,
+            }
+        });
+        try {
+            const nestedItemData = itemData.result.list[0];
+            await prisma.coinBorrowRate.update({
+                where: updateCondition,
+                data: {
+                    spotVolume: nestedItemData && parseFloat(nestedItemData.turnover24h) || null,
+                }
+            });
+        } catch (e) {
+            console.error("issue", e);
+        }
+    } else {
+        try {
+            await prisma.coinBorrowRate.create({
+                data: {
+                    coinId: item && item['coin id'] || null,
+                    name: item && coinTrim || null,
+                    oneDayAverage: item && item['one day'] || null,
+                    threeDayAverage: item && item['three days'] || null,
+                    sevenDayAverage: item && item.week || null,
+                    thirtyDayAverage: item && item.month || null,
+                    ninetyDayAverage: item && item['three months'] || null,
+                }
+            });
+            try {
+                const nestedItemData = itemData.result.list[0];
+                await prisma.coinBorrowRate.update({
+                    where: updateCondition,
+                    data: {
+                        spotVolume: nestedItemData && parseFloat(nestedItemData.turnover24h) || null,
+                    }
+                });
+            } catch (e) {
+                console.error("issue", e);
+            }
+        } catch (error) {
+            console.error("An error occurred while creating a record:", error);
+        }
+    };
+    borrowCompleted += 1;
+    console.log("BORROW WRITE WAS COMPLETED", borrowCompleted);
+}
