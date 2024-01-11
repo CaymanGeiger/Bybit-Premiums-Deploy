@@ -29,7 +29,7 @@ const Test = () => {
         const port = process.env.PORT || 3001
         const testNodeJs = async () => {
             try {
-                const response = await fetch(`${port}/api`);
+                const response = await fetch('/api');
                 console.log(response)
                 if (!response.ok) {
                     throw new Error(`Error: ${response.status}`);
@@ -58,7 +58,7 @@ const Test = () => {
 
         const fetchFundingData = async () => {
             try {
-                const response = await fetch('http://localhost:3001/api/bybitfunding');
+                const response = await fetch('http://localhost:3000/api/bybitfunding');
                 console.log(response)
                 if (!response.ok) {
                     throw new Error(`Error: ${response.status}`);
