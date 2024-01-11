@@ -3,10 +3,12 @@ import { NextResponse } from "next/server";
 export async function GET() {
     const apiKey = process.env.NEXT_PUBLIC_API_KEY;
     const apiSecret = process.env.NEXT_PUBLIC_API_SECRET;
+
     if (!apiKey || !apiSecret) {
         console.error('API key or secret is undefined');
-        return;
+        return new NextResponse('API key or secret is undefined', { status: 500 });
     }
+
     try {
         const borrowResponse = await fetch('https://bybit-premiums-api.onrender.com/borrow-rate', {
             headers: {
@@ -16,12 +18,15 @@ export async function GET() {
         });
 
         if (!borrowResponse.ok) {
-            console.error('Error fetching data:', error);
+            console.error('Error fetching data:', borrowResponse.statusText);
+            return new NextResponse(borrowResponse.statusText, { status: borrowResponse.status });
         }
+
         const borrowData = await borrowResponse.json();
         return NextResponse.json(borrowData);
+
     } catch (error) {
         console.error('Error fetching data:', error);
-        return NextResponse.error(error);
+        return new NextResponse(error.toString(), { status: 500 });
     }
 }
