@@ -22,7 +22,7 @@ export async function GET(req, res) {
 
         const borrowData = await borrowResponse.json();
         createOrUpdateBorrowData(borrowData);
-        // return NextResponse.json(borrowData);
+        return NextResponse.json(borrowData);
 
         // return res.status(200).json({ message: 'Borrow data successfully updated' });
 
@@ -141,10 +141,10 @@ const processBorrowItem = async (item, recordsMap) => {
                     data: {
                         spotVolume: nestedItemData && parseFloat(nestedItemData.turnover24h) || null,
                     }
-                });
+                })
             } catch (e) {
                 console.error("issue", e);
-            }
+            };
         } catch (error) {
             console.error("An error occurred while creating a record:", error);
         }
