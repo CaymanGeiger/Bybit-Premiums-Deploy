@@ -7,14 +7,15 @@ import "../(reusable)/radixscroll.css";
 import Image from 'next/image'
 
 
-
 const CoinFundingRates = ({ coinFundingRates }) => {
-    const [sortConfig, setSortConfig] = useState({ key: null, direction: 'none' });
+    const [sortConfig, setSortConfig] = useState({ key: "twentyFourHourVolume", direction: 'ascending' });
     const [data, setData] = useState(coinFundingRates);
-    const [visibleItemsCount, setVisibleItemsCount] = useState(50);
-    const incrementalLoadCount = 50;
+    const [visibleItemsCount, setVisibleItemsCount] = useState(100);
+    const incrementalLoadCount = 100;
     const [stickyNamesClicked, setStickyNamesClicked] = useState(false);
     const isStickyNameClicked = stickyNamesClicked ? styles.active : "";
+    const [lastClickedData, setLastClickedData] = useState(null);
+
 
     const getSortIndicator = (columnName) => {
         if (sortConfig.key === columnName) {
@@ -23,44 +24,43 @@ const CoinFundingRates = ({ coinFundingRates }) => {
         return '';
     };
 
+
     const requestSort = (key) => {
-        let direction = 'descending';
-        if (sortConfig.key === key && sortConfig.direction === 'descending') {
-            direction = 'ascending';
+        let direction = 'ascending';
+        if (lastClickedData === key) {
+            direction = sortConfig.direction === 'ascending' ? 'descending' : 'ascending';
+            setLastClickedData(key);
+            setSortConfig({ key, direction });
+        } else if (lastClickedData !== key) {
+            setLastClickedData(key);
+            setSortConfig({ key, direction });
         }
-        setSortConfig({ key, direction });
     }
 
 
+
     const sortedItems = React.useMemo(() => {
-        let dataToSort = data;
-
-        let sortableItems = [...dataToSort];
-        if (sortConfig.key !== null && sortConfig.direction !== 'none') {
-            sortableItems.sort((a, b) => {
-                if (sortConfig.key === 'name') {
-                    const valueA = a[sortConfig.key] || '';
-                    const valueB = b[sortConfig.key] || '';
-
-                    if (sortConfig.direction === 'descending') {
-                        return valueB.localeCompare(valueA);
-                    } else {
-                        return valueA.localeCompare(valueB);
-                    }
-                } else {
-                    const valueA = parseFloat(a[sortConfig.key]) || 0;
-                    const valueB = parseFloat(b[sortConfig.key]) || 0;
-
-                    if (sortConfig.direction === 'descending') {
-                        return valueB - valueA;
-                    } else {
-                        return valueA - valueB;
-                    }
-                }
-            });
+        if (sortConfig.key === null || sortConfig.direction === 'descending') {
+            return data;
         }
+
+        let sortableItems = [...data];
+        sortableItems.sort((a, b) => {
+            const valueA = a[sortConfig.key];
+            const valueB = b[sortConfig.key];
+
+            if (typeof valueA === 'string' && typeof valueB === 'string') {
+                return sortConfig.direction === 'ascending' ? valueA.localeCompare(valueB) : valueB.localeCompare(valueA);
+            } else {
+                return sortConfig.direction === 'ascending' ? (valueA || 0) - (valueB || 0) : (valueB || 0) - (valueA || 0);
+            }
+        });
+
         return sortableItems;
     }, [data, sortConfig]);
+
+
+
 
 
 
@@ -130,11 +130,11 @@ const CoinFundingRates = ({ coinFundingRates }) => {
                                     let isSymbol = coinFundingRate.symbolUrl ? coinFundingRate.symbolUrl : "/noImage.png";
                                     let coinName = coinFundingRate.name.trim();
                                     const volume = coinFundingRate.twentyFourHourVolume;
-                                    const newOneDay = Number((coinFundingRate.oneDayAverage * 100).toFixed(3))
-                                    const newThreeDay = Number((coinFundingRate.threeDayAverage * 100).toFixed(3))
-                                    const newSevenDay = Number((coinFundingRate.sevenDayAverage * 100).toFixed(3))
-                                    const newThirtyDay = Number((coinFundingRate.thirtyDayAverage * 100).toFixed(3))
-                                    const newNinetyDay = Number((coinFundingRate.ninetyDayAverage * 100).toFixed(3))
+                                    // const newOneDay = Number((coinFundingRate.oneDayAverage * 100).toFixed(3))
+                                    // const newThreeDay = Number((coinFundingRate.threeDayAverage * 100).toFixed(3))
+                                    // const newSevenDay = Number((coinFundingRate.sevenDayAverage * 100).toFixed(3))
+                                    // const newThirtyDay = Number((coinFundingRate.thirtyDayAverage * 100).toFixed(3))
+                                    // const newNinetyDay = Number((coinFundingRate.ninetyDayAverage * 100).toFixed(3))
                                     const formattedVolume = volume >= 1000 ? Math.floor(volume)?.toLocaleString() : volume?.toString();
                                     return (
                                         <motion.tr
@@ -161,11 +161,11 @@ const CoinFundingRates = ({ coinFundingRates }) => {
                                                 </span>
                                             </td>
                                             <td>{formattedVolume ? `$${formattedVolume}` : ""}</td>
-                                            <td>{newOneDay ? `${newOneDay}%` : ""}</td>
-                                            <td>{newThreeDay ? `${newThreeDay}%` : ""}</td>
-                                            <td>{newSevenDay? `${newSevenDay}%` : ""}</td>
-                                            <td>{newThirtyDay? `${newThirtyDay}%` : ""}</td>
-                                            <td>{newNinetyDay ? `${newNinetyDay}%` : ""}</td>
+                                            <td>{coinFundingRate.oneDayAverage ? `${coinFundingRate.oneDayAverage}%` : ""}</td>
+                                            <td>{coinFundingRate.threeDayAverage ? `${coinFundingRate.threeDayAverage}%` : ""}</td>
+                                            <td>{coinFundingRate.sevenDayAverage ? `${coinFundingRate.sevenDayAverage}%` : ""}</td>
+                                            <td>{coinFundingRate.thirtyDayAverage ? `${coinFundingRate.thirtyDayAverage}%` : ""}</td>
+                                            <td>{coinFundingRate.ninetyDayAverage ? `${coinFundingRate.ninetyDayAverage}%` : ""}</td>
                                         </motion.tr>
                                     )
                                 })}

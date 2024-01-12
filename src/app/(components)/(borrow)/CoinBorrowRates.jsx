@@ -7,13 +7,14 @@ import "../(reusable)/radixscroll.css";
 import Image from 'next/image'
 
 
-
 const CoinBorrowRates = ({ coinBorrowRates }) => {
-    const [sortConfig, setSortConfig] = useState({ key: null, direction: 'none' });
+    const [sortConfig, setSortConfig] = useState({ key: 'spotVolume', direction: 'ascending' });
     const [data, setData] = useState(coinBorrowRates);
-    const [visibleItemsCount, setVisibleItemsCount] = useState(50);
-    const incrementalLoadCount = 50;
+    const [visibleItemsCount, setVisibleItemsCount] = useState(100);
+    const incrementalLoadCount = 100;
     const [stickyNamesClicked, setStickyNamesClicked] = useState(false);
+    const [lastClickedData, setLastClickedData] = useState(null);
+
     const isStickyNameClicked = stickyNamesClicked ? styles.active : "";
 
     const getSortIndicator = (columnName) => {
@@ -24,44 +25,34 @@ const CoinBorrowRates = ({ coinBorrowRates }) => {
     };
 
     const requestSort = (key) => {
-        let direction = 'descending';
-        if (sortConfig.key === key && sortConfig.direction === 'descending') {
-            direction = 'ascending';
+        let direction = 'ascending';
+        if (lastClickedData === key) {
+            direction = sortConfig.direction === 'ascending' ? 'descending' : 'ascending';
+            setLastClickedData(key);
+            setSortConfig({ key, direction });
+        } else if (lastClickedData !== key) {
+            setLastClickedData(key);
+            setSortConfig({ key, direction });
         }
-        setSortConfig({ key, direction });
     }
 
 
     const sortedItems = React.useMemo(() => {
-        let dataToSort = data;
 
-        let sortableItems = [...dataToSort];
-        if (sortConfig.key !== null && sortConfig.direction !== 'none') {
-            sortableItems.sort((a, b) => {
-                if (sortConfig.key === 'name') {
-                    const valueA = a[sortConfig.key] || '';
-                    const valueB = b[sortConfig.key] || '';
+        let sortableItems = [...data];
+        sortableItems.sort((a, b) => {
+            const valueA = a[sortConfig.key];
+            const valueB = b[sortConfig.key];
 
-                    if (sortConfig.direction === 'descending') {
-                        return valueB.localeCompare(valueA);
-                    } else {
-                        return valueA.localeCompare(valueB);
-                    }
-                } else {
-                    const valueA = parseFloat(a[sortConfig.key]) || 0;
-                    const valueB = parseFloat(b[sortConfig.key]) || 0;
+            if (typeof valueA === 'string' && typeof valueB === 'string') {
+                return sortConfig.direction === 'ascending' ? valueA.localeCompare(valueB) : valueB.localeCompare(valueA);
+            } else {
+                return sortConfig.direction === 'ascending' ? (valueA || 0) - (valueB || 0) : (valueB || 0) - (valueA || 0);
+            }
+        });
 
-                    if (sortConfig.direction === 'descending') {
-                        return valueB - valueA;
-                    } else {
-                        return valueA - valueB;
-                    }
-                }
-            });
-        }
         return sortableItems;
     }, [data, sortConfig]);
-
 
 
     useEffect(() => {
@@ -103,13 +94,12 @@ const CoinBorrowRates = ({ coinBorrowRates }) => {
                                             <button
                                                 className={styles.stickyNamesButton}
                                                 onClick={() => setStickyNamesClicked(!stickyNamesClicked)}
-                                                style={{ backgroundColor: stickyNamesClicked ? "rgb(255, 190, 70)" : "", color: stickyNamesClicked ? "white" : "" }}
-                                            >
+                                                style={{ backgroundColor: stickyNamesClicked ? "rgb(255, 190, 70)" : "", color: stickyNamesClicked ? "white" : "" }}                                                >
                                                 Sticky
-                                            </button>
+                                            </button>g
                                         </div>
                                     </th>
-                                    <th onClick={() => requestSort('spotVolume')}>Spot Volume <strong className={styles.arrows}>{getSortIndicator('spotVolume')}</strong></th>
+                                    <th onClick={() => requestSort('spotVolume')}>24h Volume <strong className={styles.arrows}>{getSortIndicator('spotVolume')}</strong></th>
                                     <th onClick={() => requestSort('oneDayAverage')}>1d <strong className={styles.arrows}>{getSortIndicator('oneDayAverage')}</strong></th>
                                     <th onClick={() => requestSort('threeDayAverage')}>3d <strong className={styles.arrows}>{getSortIndicator('threeDayAverage')}</strong></th>
                                     <th onClick={() => requestSort('sevenDayAverage')}>7d <strong className={styles.arrows}>{getSortIndicator('sevenDayAverage')}</strong></th>
@@ -131,11 +121,11 @@ const CoinBorrowRates = ({ coinBorrowRates }) => {
                                         let isSymbol = coinBorrowRate.symbolUrl ? coinBorrowRate.symbolUrl : "/noImage.png";
                                         let coinName = coinBorrowRate.name.trim();
                                         const volume = coinBorrowRate.spotVolume;
-                                        const newOneDay = Number((coinBorrowRate.oneDayAverage * 100).toFixed(3))
-                                        const newThreeDay = Number((coinBorrowRate.threeDayAverage * 100).toFixed(3))
-                                        const newSevenDay = Number((coinBorrowRate.sevenDayAverage * 100).toFixed(3))
-                                        const newThirtyDay = Number((coinBorrowRate.thirtyDayAverage * 100).toFixed(3))
-                                        const newNinetyDay = Number((coinBorrowRate.ninetyDayAverage * 100).toFixed(3))
+                                        // const newOneDay = Number((coinBorrowRate.oneDayAverage * 100).toFixed(3))
+                                        // const newThreeDay = Number((coinBorrowRate.threeDayAverage * 100).toFixed(3))
+                                        // const newSevenDay = Number((coinBorrowRate.sevenDayAverage * 100).toFixed(3))
+                                        // const newThirtyDay = Number((coinBorrowRate.thirtyDayAverage * 100).toFixed(3))
+                                        // const newNinetyDay = Number((coinBorrowRate.ninetyDayAverage * 100).toFixed(3))
                                         const formattedVolume = volume >= 1000 ? Math.floor(volume)?.toLocaleString() : volume?.toString();
                                         return (
                                             <motion.tr
@@ -155,18 +145,18 @@ const CoinBorrowRates = ({ coinBorrowRates }) => {
                                                         height={18}
                                                         src={isSymbol}
                                                         alt='coin symbol'
-                                                        onClick={() => window.open(`https://www.bybit.com/trade/usdt/${coinName}?affiliate_id=62489`)}
+                                                        onClick={() => window.open(`https://www.bybit.com/en/trade/spot/${coinName}/USDT?affiliate_id=62489`)}
                                                     />
-                                                    <span onClick={() => window.open(`https://www.bybit.com/trade/usdt/${coinName}?affiliate_id=62489`)}>
+                                                    <span onClick={() => window.open(`https://www.bybit.com/en/trade/spot/${coinName}/USDT?affiliate_id=62489`)}>
                                                         {coinBorrowRate.name}
                                                     </span>
                                                 </td>
                                                 <td>{formattedVolume ? `$${formattedVolume}` : ""}</td>
-                                                <td>{newOneDay ? `${newOneDay}%` : ""}</td>
-                                                <td>{newThreeDay ? `${newThreeDay}%` : ""}</td>
-                                                <td>{newSevenDay ? `${newSevenDay}%` : ""}</td>
-                                                <td>{newThirtyDay ? `${newThirtyDay}%` : ""}</td>
-                                                <td>{newNinetyDay ? `${newNinetyDay}%` : ""}</td>
+                                                <td>{coinBorrowRate.oneDayAverage ? `${coinBorrowRate.oneDayAverage}%` : ""}</td>
+                                                <td>{coinBorrowRate.threeDayAverage ? `${coinBorrowRate.threeDayAverage}%` : ""}</td>
+                                                <td>{coinBorrowRate.sevenDayAverage ? `${coinBorrowRate.sevenDayAverage}%` : ""}</td>
+                                                <td>{coinBorrowRate.thirtyDayAverage ? `${coinBorrowRate.thirtyDayAverage}%` : ""}</td>
+                                                <td>{coinBorrowRate.ninetyDayAverage ? `${coinBorrowRate.ninetyDayAverage}%` : ""}</td>
                                             </motion.tr>
                                         )
                                     })}

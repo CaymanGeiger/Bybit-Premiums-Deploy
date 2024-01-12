@@ -89,8 +89,8 @@ const Test = () => {
         console.log("fetching")
         try {
             console.log("fetching2")
-            const response = await fetch('/api', {
-                method: 'POST'
+            const response = await fetch('/(api)', {
+                method: 'GET'
             });
             console.log(response)
 
