@@ -96,7 +96,7 @@ const CoinBorrowRates = ({ coinBorrowRates }) => {
                                                 onClick={() => setStickyNamesClicked(!stickyNamesClicked)}
                                                 style={{ backgroundColor: stickyNamesClicked ? "rgb(255, 190, 70)" : "", color: stickyNamesClicked ? "white" : "" }}                                                >
                                                 Sticky
-                                            </button>g
+                                            </button>
                                         </div>
                                     </th>
                                     <th onClick={() => requestSort('spotVolume')}>24h Volume <strong className={styles.arrows}>{getSortIndicator('spotVolume')}</strong></th>
