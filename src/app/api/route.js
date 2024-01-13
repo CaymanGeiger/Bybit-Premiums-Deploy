@@ -24,7 +24,7 @@ export async function GET(req, res) {
             [{
                 month: 0.35743795,
                 'one day': 0.4703143,
-                coin: 'EQOUSDTGGGG',
+                coin: 'EQOUSDTGGGGT',
                 'coin id': 187242427,
                 'three days': 0.805499838,
                 'three months': 9,
@@ -33,7 +33,7 @@ export async function GET(req, res) {
             {
                 month: 0.21500107,
                 'one day': 0.672144,
-                coin: 'CFKUSDTGGGG',
+                coin: 'CFKUSDTGGGGT',
                 'coin id': 116242427,
                 'three days': 0.591818977,
                 'three months': 9,
@@ -42,7 +42,7 @@ export async function GET(req, res) {
             {
                 month: 0.78573547,
                 'one day': 0.4307549,
-                coin: 'NWSUSDTGGGG',
+                coin: 'NWSUSDTGGGGT',
                 'coin id': 198242427,
                 'three days': 0.491935873,
                 'three months': 9,
@@ -51,7 +51,7 @@ export async function GET(req, res) {
             {
                 month: 0.16631783,
                 'one day': 0.7703422,
-                coin: 'VSIUSDTGGGG',
+                coin: 'VSIUSDTGGGGT',
                 'coin id': 164242427,
                 'three days': 0.140050335,
                 'three months': 9,
@@ -60,7 +60,7 @@ export async function GET(req, res) {
             {
                 month: 0.36509659,
                 'one day': 0.7001823,
-                coin: 'PAGUSDTGGGG',
+                coin: 'PAGUSDTGGGGT',
                 'coin id': 153242427,
                 'three days': 0.731306104,
                 'three months': 9,
@@ -69,7 +69,7 @@ export async function GET(req, res) {
             {
                 month: 0.35743795,
                 'one day': 0.4703143,
-                coin: 'EQOUSDTGGGG',
+                coin: 'EQOUSDTGGGGT',
                 'coin id': 187242427,
                 'three days': 0.805499838,
                 'three months': 9,
@@ -78,7 +78,7 @@ export async function GET(req, res) {
             {
                 month: 0.21500107,
                 'one day': 0.672144,
-                coin: 'CFKUSDTGGGG',
+                coin: 'CFKUSDTGGGGT',
                 'coin id': 116242427,
                 'three days': 0.591818977,
                 'three months': 9,
@@ -87,7 +87,7 @@ export async function GET(req, res) {
             {
                 month: 0.78573547,
                 'one day': 0.4307549,
-                coin: 'NWSUSDTGGGG',
+                coin: 'NWSUSDTGGGGT',
                 'coin id': 198242427,
                 'three days': 0.491935873,
                 'three months': 9,
@@ -96,7 +96,7 @@ export async function GET(req, res) {
             {
                 month: 0.16631783,
                 'one day': 0.7703422,
-                coin: 'VSIUSDTGGGG',
+                coin: 'VSIUSDTGGGGT',
                 'coin id': 164242427,
                 'three days': 0.140050335,
                 'three months': 9,
@@ -105,7 +105,7 @@ export async function GET(req, res) {
             {
                 month: 0.36509659,
                 'one day': 0.7001823,
-                coin: 'PAGUSDTGGGG',
+                coin: 'PAGUSDTGGGGT',
                 'coin id': 153242427,
                 'three days': 0.731306104,
                 'three months': 9,
@@ -114,7 +114,7 @@ export async function GET(req, res) {
             {
                 month: 0.35743795,
                 'one day': 0.4703143,
-                coin: 'EQOUSDTGGGG',
+                coin: 'EQOUSDTGGGGT',
                 'coin id': 187242427,
                 'three days': 0.805499838,
                 'three months': 9,
@@ -123,7 +123,7 @@ export async function GET(req, res) {
             {
                 month: 0.21500107,
                 'one day': 0.672144,
-                coin: 'CFKUSDTGGGG',
+                coin: 'CFKUSDTGGGGT',
                 'coin id': 116242427,
                 'three days': 0.591818977,
                 'three months': 9,
@@ -132,7 +132,7 @@ export async function GET(req, res) {
             {
                 month: 0.78573547,
                 'one day': 0.4307549,
-                coin: 'NWSUSDTGGGG',
+                coin: 'NWSUSDTGGGGT',
                 'coin id': 198242427,
                 'three days': 0.491935873,
                 'three months': 9,
@@ -141,7 +141,7 @@ export async function GET(req, res) {
             {
                 month: 0.16631783,
                 'one day': 0.7703422,
-                coin: 'VSIUSDTGGGG',
+                coin: 'VSIUSDTGGGGT',
                 'coin id': 164242427,
                 'three days': 0.140050335,
                 'three months': 9,
@@ -150,7 +150,7 @@ export async function GET(req, res) {
             {
                 month: 0.36509659,
                 'one day': 0.7001823,
-                coin: 'PAGUSDTGGGG',
+                coin: 'PAGUSDTGGGGT',
                 'coin id': 153242427,
                 'three days': 0.731306104,
                 'three months': 9,
@@ -159,7 +159,7 @@ export async function GET(req, res) {
             {
                 month: 0.35743795,
                 'one day': 0.4703143,
-                coin: 'EQOUSDTGGGG',
+                coin: 'EQOUSDTGGGGT',
                 'coin id': 187242427,
                 'three days': 0.805499838,
                 'three months': 9,
@@ -168,7 +168,7 @@ export async function GET(req, res) {
             {
                 month: 0.21500107,
                 'one day': 0.672144,
-                coin: 'CFKUSDTGGGG',
+                coin: 'CFKUSDTGGGGT',
                 'coin id': 116242427,
                 'three days': 0.591818977,
                 'three months': 9,
@@ -177,7 +177,7 @@ export async function GET(req, res) {
             {
                 month: 0.78573547,
                 'one day': 0.4307549,
-                coin: 'NWSUSDTGGGG',
+                coin: 'NWSUSDTGGGGT',
                 'coin id': 198242427,
                 'three days': 0.491935873,
                 'three months': 9,
@@ -186,7 +186,7 @@ export async function GET(req, res) {
             {
                 month: 0.16631783,
                 'one day': 0.7703422,
-                coin: 'VSIUSDTGGGG',
+                coin: 'VSIUSDTGGGGT',
                 'coin id': 164242427,
                 'three days': 0.140050335,
                 'three months': 9,
@@ -195,7 +195,7 @@ export async function GET(req, res) {
             {
                 month: 0.36509659,
                 'one day': 0.7001823,
-                coin: 'PAGUSDTGGGG',
+                coin: 'PAGUSDTGGGGT',
                 'coin id': 153242427,
                 'three days': 0.731306104,
                 'three months': 9,
@@ -204,7 +204,7 @@ export async function GET(req, res) {
             {
                 month: 0.35743795,
                 'one day': 0.4703143,
-                coin: 'EQOUSDTGGGG',
+                coin: 'EQOUSDTGGGGT',
                 'coin id': 187242427,
                 'three days': 0.805499838,
                 'three months': 9,
@@ -213,7 +213,7 @@ export async function GET(req, res) {
             {
                 month: 0.21500107,
                 'one day': 0.672144,
-                coin: 'CFKUSDTGGGG',
+                coin: 'CFKUSDTGGGGT',
                 'coin id': 116242427,
                 'three days': 0.591818977,
                 'three months': 9,
@@ -222,7 +222,7 @@ export async function GET(req, res) {
             {
                 month: 0.78573547,
                 'one day': 0.4307549,
-                coin: 'NWSUSDTGGGG',
+                coin: 'NWSUSDTGGGGT',
                 'coin id': 198242427,
                 'three days': 0.491935873,
                 'three months': 9,
@@ -231,7 +231,7 @@ export async function GET(req, res) {
             {
                 month: 0.16631783,
                 'one day': 0.7703422,
-                coin: 'VSIUSDTGGGG',
+                coin: 'VSIUSDTGGGGT',
                 'coin id': 164242427,
                 'three days': 0.140050335,
                 'three months': 9,
@@ -240,7 +240,7 @@ export async function GET(req, res) {
             {
                 month: 0.36509659,
                 'one day': 0.7001823,
-                coin: 'PAGUSDTGGGG',
+                coin: 'PAGUSDTGGGGT',
                 'coin id': 153242427,
                 'three days': 0.731306104,
                 'three months': 9,
@@ -249,7 +249,7 @@ export async function GET(req, res) {
             {
                 month: 0.35743795,
                 'one day': 0.4703143,
-                coin: 'EQOUSDTGGGG',
+                coin: 'EQOUSDTGGGGT',
                 'coin id': 187242427,
                 'three days': 0.805499838,
                 'three months': 9,
@@ -258,7 +258,7 @@ export async function GET(req, res) {
             {
                 month: 0.21500107,
                 'one day': 0.672144,
-                coin: 'CFKUSDTGGGG',
+                coin: 'CFKUSDTGGGGT',
                 'coin id': 116242427,
                 'three days': 0.591818977,
                 'three months': 9,
@@ -267,7 +267,7 @@ export async function GET(req, res) {
             {
                 month: 0.78573547,
                 'one day': 0.4307549,
-                coin: 'NWSUSDTGGGG',
+                coin: 'NWSUSDTGGGGT',
                 'coin id': 198242427,
                 'three days': 0.491935873,
                 'three months': 9,
@@ -276,7 +276,7 @@ export async function GET(req, res) {
             {
                 month: 0.16631783,
                 'one day': 0.7703422,
-                coin: 'VSIUSDTGGGG',
+                coin: 'VSIUSDTGGGGT',
                 'coin id': 164242427,
                 'three days': 0.140050335,
                 'three months': 9,
@@ -285,7 +285,7 @@ export async function GET(req, res) {
             {
                 month: 0.36509659,
                 'one day': 0.7001823,
-                coin: 'PAGUSDTGGGG',
+                coin: 'PAGUSDTGGGGT',
                 'coin id': 153242427,
                 'three days': 0.731306104,
                 'three months': 9,
@@ -294,7 +294,7 @@ export async function GET(req, res) {
             {
                 month: 0.35743795,
                 'one day': 0.4703143,
-                coin: 'EQOUSDTGGGG',
+                coin: 'EQOUSDTGGGGT',
                 'coin id': 187242427,
                 'three days': 0.805499838,
                 'three months': 9,
@@ -303,7 +303,7 @@ export async function GET(req, res) {
             {
                 month: 0.21500107,
                 'one day': 0.672144,
-                coin: 'CFKUSDTGGGG',
+                coin: 'CFKUSDTGGGGT',
                 'coin id': 116242427,
                 'three days': 0.591818977,
                 'three months': 9,
@@ -312,7 +312,7 @@ export async function GET(req, res) {
             {
                 month: 0.78573547,
                 'one day': 0.4307549,
-                coin: 'NWSUSDTGGGG',
+                coin: 'NWSUSDTGGGGT',
                 'coin id': 198242427,
                 'three days': 0.491935873,
                 'three months': 9,
@@ -321,7 +321,7 @@ export async function GET(req, res) {
             {
                 month: 0.16631783,
                 'one day': 0.7703422,
-                coin: 'VSIUSDTGGGG',
+                coin: 'VSIUSDTGGGGT',
                 'coin id': 164242427,
                 'three days': 0.140050335,
                 'three months': 9,
@@ -330,7 +330,7 @@ export async function GET(req, res) {
             {
                 month: 0.36509659,
                 'one day': 0.7001823,
-                coin: 'PAGUSDTGGGG',
+                coin: 'PAGUSDTGGGGT',
                 'coin id': 153242427,
                 'three days': 0.731306104,
                 'three months': 9,
@@ -339,7 +339,7 @@ export async function GET(req, res) {
             {
                 month: 0.35743795,
                 'one day': 0.4703143,
-                coin: 'EQOUSDTGGGG',
+                coin: 'EQOUSDTGGGGT',
                 'coin id': 187242427,
                 'three days': 0.805499838,
                 'three months': 9,
@@ -348,7 +348,7 @@ export async function GET(req, res) {
             {
                 month: 0.21500107,
                 'one day': 0.672144,
-                coin: 'CFKUSDTGGGG',
+                coin: 'CFKUSDTGGGGT',
                 'coin id': 116242427,
                 'three days': 0.591818977,
                 'three months': 9,
@@ -357,7 +357,7 @@ export async function GET(req, res) {
             {
                 month: 0.78573547,
                 'one day': 0.4307549,
-                coin: 'NWSUSDTGGGG',
+                coin: 'NWSUSDTGGGGT',
                 'coin id': 198242427,
                 'three days': 0.491935873,
                 'three months': 9,
@@ -366,7 +366,7 @@ export async function GET(req, res) {
             {
                 month: 0.16631783,
                 'one day': 0.7703422,
-                coin: 'VSIUSDTGGGG',
+                coin: 'VSIUSDTGGGGT',
                 'coin id': 164242427,
                 'three days': 0.140050335,
                 'three months': 9,
@@ -375,7 +375,7 @@ export async function GET(req, res) {
             {
                 month: 0.36509659,
                 'one day': 0.7001823,
-                coin: 'PAGUSDTGGGG',
+                coin: 'PAGUSDTGGGGT',
                 'coin id': 153242427,
                 'three days': 0.731306104,
                 'three months': 9,
@@ -384,7 +384,7 @@ export async function GET(req, res) {
             {
                 month: 0.35743795,
                 'one day': 0.4703143,
-                coin: 'EQOUSDTGGGG',
+                coin: 'EQOUSDTGGGGT',
                 'coin id': 187242427,
                 'three days': 0.805499838,
                 'three months': 9,
@@ -393,7 +393,7 @@ export async function GET(req, res) {
             {
                 month: 0.21500107,
                 'one day': 0.672144,
-                coin: 'CFKUSDTGGGG',
+                coin: 'CFKUSDTGGGGT',
                 'coin id': 116242427,
                 'three days': 0.591818977,
                 'three months': 9,
@@ -402,7 +402,7 @@ export async function GET(req, res) {
             {
                 month: 0.78573547,
                 'one day': 0.4307549,
-                coin: 'NWSUSDTGGGG',
+                coin: 'NWSUSDTGGGGT',
                 'coin id': 198242427,
                 'three days': 0.491935873,
                 'three months': 9,
@@ -411,7 +411,7 @@ export async function GET(req, res) {
             {
                 month: 0.16631783,
                 'one day': 0.7703422,
-                coin: 'VSIUSDTGGGG',
+                coin: 'VSIUSDTGGGGT',
                 'coin id': 164242427,
                 'three days': 0.140050335,
                 'three months': 9,
@@ -420,7 +420,7 @@ export async function GET(req, res) {
             {
                 month: 0.36509659,
                 'one day': 0.7001823,
-                coin: 'PAGUSDTGGGG',
+                coin: 'PAGUSDTGGGGT',
                 'coin id': 153242427,
                 'three days': 0.731306104,
                 'three months': 9,
@@ -429,7 +429,7 @@ export async function GET(req, res) {
             {
                 month: 0.35743795,
                 'one day': 0.4703143,
-                coin: 'EQOUSDTGGGG',
+                coin: 'EQOUSDTGGGGT',
                 'coin id': 187242427,
                 'three days': 0.805499838,
                 'three months': 9,
@@ -438,7 +438,7 @@ export async function GET(req, res) {
             {
                 month: 0.21500107,
                 'one day': 0.672144,
-                coin: 'CFKUSDTGGGG',
+                coin: 'CFKUSDTGGGGT',
                 'coin id': 116242427,
                 'three days': 0.591818977,
                 'three months': 9,
@@ -447,7 +447,7 @@ export async function GET(req, res) {
             {
                 month: 0.78573547,
                 'one day': 0.4307549,
-                coin: 'NWSUSDTGGGG',
+                coin: 'NWSUSDTGGGGT',
                 'coin id': 198242427,
                 'three days': 0.491935873,
                 'three months': 9,
@@ -456,7 +456,7 @@ export async function GET(req, res) {
             {
                 month: 0.16631783,
                 'one day': 0.7703422,
-                coin: 'VSIUSDTGGGG',
+                coin: 'VSIUSDTGGGGT',
                 'coin id': 164242427,
                 'three days': 0.140050335,
                 'three months': 9,
@@ -465,7 +465,7 @@ export async function GET(req, res) {
             {
                 month: 0.36509659,
                 'one day': 0.7001823,
-                coin: 'PAGUSDTGGGG',
+                coin: 'PAGUSDTGGGGT',
                 'coin id': 153242427,
                 'three days': 0.731306104,
                 'three months': 9,
@@ -474,7 +474,7 @@ export async function GET(req, res) {
             {
                 month: 0.35743795,
                 'one day': 0.4703143,
-                coin: 'EQOUSDTGGGG',
+                coin: 'EQOUSDTGGGGT',
                 'coin id': 187242427,
                 'three days': 0.805499838,
                 'three months': 9,
@@ -483,7 +483,7 @@ export async function GET(req, res) {
             {
                 month: 0.21500107,
                 'one day': 0.672144,
-                coin: 'CFKUSDTGGGG',
+                coin: 'CFKUSDTGGGGT',
                 'coin id': 116242427,
                 'three days': 0.591818977,
                 'three months': 9,
@@ -492,7 +492,7 @@ export async function GET(req, res) {
             {
                 month: 0.78573547,
                 'one day': 0.4307549,
-                coin: 'NWSUSDTGGGG',
+                coin: 'NWSUSDTGGGGT',
                 'coin id': 198242427,
                 'three days': 0.491935873,
                 'three months': 9,
@@ -501,7 +501,7 @@ export async function GET(req, res) {
             {
                 month: 0.16631783,
                 'one day': 0.7703422,
-                coin: 'VSIUSDTGGGG',
+                coin: 'VSIUSDTGGGGT',
                 'coin id': 164242427,
                 'three days': 0.140050335,
                 'three months': 9,
@@ -510,7 +510,7 @@ export async function GET(req, res) {
             {
                 month: 0.36509659,
                 'one day': 0.7001823,
-                coin: 'PAGUSDTGGGG',
+                coin: 'PAGUSDTGGGGT',
                 'coin id': 153242427,
                 'three days': 0.731306104,
                 'three months': 9,
@@ -519,7 +519,7 @@ export async function GET(req, res) {
             {
                 month: 0.35743795,
                 'one day': 0.4703143,
-                coin: 'EQOUSDTGGGG',
+                coin: 'EQOUSDTGGGGT',
                 'coin id': 187242427,
                 'three days': 0.805499838,
                 'three months': 9,
@@ -528,7 +528,7 @@ export async function GET(req, res) {
             {
                 month: 0.21500107,
                 'one day': 0.672144,
-                coin: 'CFKUSDTGGGG',
+                coin: 'CFKUSDTGGGGT',
                 'coin id': 116242427,
                 'three days': 0.591818977,
                 'three months': 9,
@@ -537,7 +537,7 @@ export async function GET(req, res) {
             {
                 month: 0.78573547,
                 'one day': 0.4307549,
-                coin: 'NWSUSDTGGGG',
+                coin: 'NWSUSDTGGGGT',
                 'coin id': 198242427,
                 'three days': 0.491935873,
                 'three months': 9,
@@ -546,7 +546,7 @@ export async function GET(req, res) {
             {
                 month: 0.16631783,
                 'one day': 0.7703422,
-                coin: 'VSIUSDTGGGG',
+                coin: 'VSIUSDTGGGGT',
                 'coin id': 164242427,
                 'three days': 0.140050335,
                 'three months': 9,
@@ -555,7 +555,7 @@ export async function GET(req, res) {
             {
                 month: 0.36509659,
                 'one day': 0.7001823,
-                coin: 'PAGUSDTGGGG',
+                coin: 'PAGUSDTGGGGT',
                 'coin id': 153242427,
                 'three days': 0.731306104,
                 'three months': 9,
@@ -564,7 +564,7 @@ export async function GET(req, res) {
             {
                 month: 0.35743795,
                 'one day': 0.4703143,
-                coin: 'EQOUSDTGGGG',
+                coin: 'EQOUSDTGGGGT',
                 'coin id': 187242427,
                 'three days': 0.805499838,
                 'three months': 9,
@@ -573,7 +573,7 @@ export async function GET(req, res) {
             {
                 month: 0.21500107,
                 'one day': 0.672144,
-                coin: 'CFKUSDTGGGG',
+                coin: 'CFKUSDTGGGGT',
                 'coin id': 116242427,
                 'three days': 0.591818977,
                 'three months': 9,
@@ -582,7 +582,7 @@ export async function GET(req, res) {
             {
                 month: 0.78573547,
                 'one day': 0.4307549,
-                coin: 'NWSUSDTGGGG',
+                coin: 'NWSUSDTGGGGT',
                 'coin id': 198242427,
                 'three days': 0.491935873,
                 'three months': 9,
@@ -591,7 +591,7 @@ export async function GET(req, res) {
             {
                 month: 0.16631783,
                 'one day': 0.7703422,
-                coin: 'VSIUSDTGGGG',
+                coin: 'VSIUSDTGGGGT',
                 'coin id': 164242427,
                 'three days': 0.140050335,
                 'three months': 9,
@@ -600,7 +600,7 @@ export async function GET(req, res) {
             {
                 month: 0.36509659,
                 'one day': 0.7001823,
-                coin: 'PAGUSDTGGGG',
+                coin: 'PAGUSDTGGGGT',
                 'coin id': 153242427,
                 'three days': 0.731306104,
                 'three months': 9,
@@ -609,7 +609,7 @@ export async function GET(req, res) {
             {
                 month: 0.35743795,
                 'one day': 0.4703143,
-                coin: 'EQOUSDTGGGG',
+                coin: 'EQOUSDTGGGGT',
                 'coin id': 187242427,
                 'three days': 0.805499838,
                 'three months': 9,
@@ -618,7 +618,7 @@ export async function GET(req, res) {
             {
                 month: 0.21500107,
                 'one day': 0.672144,
-                coin: 'CFKUSDTGGGG',
+                coin: 'CFKUSDTGGGGT',
                 'coin id': 116242427,
                 'three days': 0.591818977,
                 'three months': 9,
@@ -627,7 +627,7 @@ export async function GET(req, res) {
             {
                 month: 0.78573547,
                 'one day': 0.4307549,
-                coin: 'NWSUSDTGGGG',
+                coin: 'NWSUSDTGGGGT',
                 'coin id': 198242427,
                 'three days': 0.491935873,
                 'three months': 9,
@@ -636,7 +636,7 @@ export async function GET(req, res) {
             {
                 month: 0.16631783,
                 'one day': 0.7703422,
-                coin: 'VSIUSDTGGGG',
+                coin: 'VSIUSDTGGGGT',
                 'coin id': 164242427,
                 'three days': 0.140050335,
                 'three months': 9,
@@ -645,7 +645,7 @@ export async function GET(req, res) {
             {
                 month: 0.36509659,
                 'one day': 0.7001823,
-                coin: 'PAGUSDTGGGG',
+                coin: 'PAGUSDTGGGGT',
                 'coin id': 153242427,
                 'three days': 0.731306104,
                 'three months': 9,
@@ -654,7 +654,7 @@ export async function GET(req, res) {
             {
                 month: 0.35743795,
                 'one day': 0.4703143,
-                coin: 'EQOUSDTGGGG',
+                coin: 'EQOUSDTGGGGT',
                 'coin id': 187242427,
                 'three days': 0.805499838,
                 'three months': 9,
@@ -663,7 +663,7 @@ export async function GET(req, res) {
             {
                 month: 0.21500107,
                 'one day': 0.672144,
-                coin: 'CFKUSDTGGGG',
+                coin: 'CFKUSDTGGGGT',
                 'coin id': 116242427,
                 'three days': 0.591818977,
                 'three months': 9,
@@ -672,7 +672,7 @@ export async function GET(req, res) {
             {
                 month: 0.78573547,
                 'one day': 0.4307549,
-                coin: 'NWSUSDTGGGG',
+                coin: 'NWSUSDTGGGGT',
                 'coin id': 198242427,
                 'three days': 0.491935873,
                 'three months': 9,
@@ -681,7 +681,7 @@ export async function GET(req, res) {
             {
                 month: 0.16631783,
                 'one day': 0.7703422,
-                coin: 'VSIUSDTGGGG',
+                coin: 'VSIUSDTGGGGT',
                 'coin id': 164242427,
                 'three days': 0.140050335,
                 'three months': 9,
@@ -690,7 +690,7 @@ export async function GET(req, res) {
             {
                 month: 0.36509659,
                 'one day': 0.7001823,
-                coin: 'PAGUSDTGGGG',
+                coin: 'PAGUSDTGGGGT',
                 'coin id': 153242427,
                 'three days': 0.731306104,
                 'three months': 9,
@@ -699,7 +699,7 @@ export async function GET(req, res) {
             {
                 month: 0.35743795,
                 'one day': 0.4703143,
-                coin: 'EQOUSDTGGGG',
+                coin: 'EQOUSDTGGGGT',
                 'coin id': 187242427,
                 'three days': 0.805499838,
                 'three months': 9,
@@ -708,7 +708,7 @@ export async function GET(req, res) {
             {
                 month: 0.21500107,
                 'one day': 0.672144,
-                coin: 'CFKUSDTGGGG',
+                coin: 'CFKUSDTGGGGT',
                 'coin id': 116242427,
                 'three days': 0.591818977,
                 'three months': 9,
@@ -717,7 +717,7 @@ export async function GET(req, res) {
             {
                 month: 0.78573547,
                 'one day': 0.4307549,
-                coin: 'NWSUSDTGGGG',
+                coin: 'NWSUSDTGGGGT',
                 'coin id': 198242427,
                 'three days': 0.491935873,
                 'three months': 9,
@@ -726,7 +726,7 @@ export async function GET(req, res) {
             {
                 month: 0.16631783,
                 'one day': 0.7703422,
-                coin: 'VSIUSDTGGGG',
+                coin: 'VSIUSDTGGGGT',
                 'coin id': 164242427,
                 'three days': 0.140050335,
                 'three months': 9,
@@ -735,7 +735,7 @@ export async function GET(req, res) {
             {
                 month: 0.36509659,
                 'one day': 0.7001823,
-                coin: 'PAGUSDTGGGG',
+                coin: 'PAGUSDTGGGGT',
                 'coin id': 153242427,
                 'three days': 0.731306104,
                 'three months': 9,
@@ -744,7 +744,7 @@ export async function GET(req, res) {
             {
                 month: 0.35743795,
                 'one day': 0.4703143,
-                coin: 'EQOUSDTGGGG',
+                coin: 'EQOUSDTGGGGT',
                 'coin id': 187242427,
                 'three days': 0.805499838,
                 'three months': 9,
@@ -753,7 +753,7 @@ export async function GET(req, res) {
             {
                 month: 0.21500107,
                 'one day': 0.672144,
-                coin: 'CFKUSDTGGGG',
+                coin: 'CFKUSDTGGGGT',
                 'coin id': 116242427,
                 'three days': 0.591818977,
                 'three months': 9,
@@ -762,7 +762,7 @@ export async function GET(req, res) {
             {
                 month: 0.78573547,
                 'one day': 0.4307549,
-                coin: 'NWSUSDTGGGG',
+                coin: 'NWSUSDTGGGGT',
                 'coin id': 198242427,
                 'three days': 0.491935873,
                 'three months': 9,
@@ -771,7 +771,7 @@ export async function GET(req, res) {
             {
                 month: 0.16631783,
                 'one day': 0.7703422,
-                coin: 'VSIUSDTGGGG',
+                coin: 'VSIUSDTGGGGT',
                 'coin id': 164242427,
                 'three days': 0.140050335,
                 'three months': 9,
@@ -780,7 +780,7 @@ export async function GET(req, res) {
             {
                 month: 0.36509659,
                 'one day': 0.7001823,
-                coin: 'PAGUSDTGGGG',
+                coin: 'PAGUSDTGGGGT',
                 'coin id': 153242427,
                 'three days': 0.731306104,
                 'three months': 9,
@@ -789,7 +789,7 @@ export async function GET(req, res) {
             {
                 month: 0.35743795,
                 'one day': 0.4703143,
-                coin: 'EQOUSDTGGGG',
+                coin: 'EQOUSDTGGGGT',
                 'coin id': 187242427,
                 'three days': 0.805499838,
                 'three months': 9,
@@ -798,7 +798,7 @@ export async function GET(req, res) {
             {
                 month: 0.21500107,
                 'one day': 0.672144,
-                coin: 'CFKUSDTGGGG',
+                coin: 'CFKUSDTGGGGT',
                 'coin id': 116242427,
                 'three days': 0.591818977,
                 'three months': 9,
@@ -807,7 +807,7 @@ export async function GET(req, res) {
             {
                 month: 0.78573547,
                 'one day': 0.4307549,
-                coin: 'NWSUSDTGGGG',
+                coin: 'NWSUSDTGGGGT',
                 'coin id': 198242427,
                 'three days': 0.491935873,
                 'three months': 9,
@@ -816,7 +816,7 @@ export async function GET(req, res) {
             {
                 month: 0.16631783,
                 'one day': 0.7703422,
-                coin: 'VSIUSDTGGGG',
+                coin: 'VSIUSDTGGGGT',
                 'coin id': 164242427,
                 'three days': 0.140050335,
                 'three months': 9,
@@ -825,7 +825,7 @@ export async function GET(req, res) {
             {
                 month: 0.36509659,
                 'one day': 0.7001823,
-                coin: 'PAGUSDTGGGG',
+                coin: 'PAGUSDTGGGGT',
                 'coin id': 153242427,
                 'three days': 0.731306104,
                 'three months': 9,
@@ -834,7 +834,7 @@ export async function GET(req, res) {
             {
                 month: 0.35743795,
                 'one day': 0.4703143,
-                coin: 'EQOUSDTGGGG',
+                coin: 'EQOUSDTGGGGT',
                 'coin id': 187242427,
                 'three days': 0.805499838,
                 'three months': 9,
@@ -843,7 +843,7 @@ export async function GET(req, res) {
             {
                 month: 0.21500107,
                 'one day': 0.672144,
-                coin: 'CFKUSDTGGGG',
+                coin: 'CFKUSDTGGGGT',
                 'coin id': 116242427,
                 'three days': 0.591818977,
                 'three months': 9,
@@ -852,7 +852,7 @@ export async function GET(req, res) {
             {
                 month: 0.78573547,
                 'one day': 0.4307549,
-                coin: 'NWSUSDTGGGG',
+                coin: 'NWSUSDTGGGGT',
                 'coin id': 198242427,
                 'three days': 0.491935873,
                 'three months': 9,
@@ -861,7 +861,7 @@ export async function GET(req, res) {
             {
                 month: 0.16631783,
                 'one day': 0.7703422,
-                coin: 'VSIUSDTGGGG',
+                coin: 'VSIUSDTGGGGT',
                 'coin id': 164242427,
                 'three days': 0.140050335,
                 'three months': 9,
@@ -870,7 +870,7 @@ export async function GET(req, res) {
             {
                 month: 0.36509659,
                 'one day': 0.7001823,
-                coin: 'PAGUSDTGGGG',
+                coin: 'PAGUSDTGGGGT',
                 'coin id': 153242427,
                 'three days': 0.731306104,
                 'three months': 9,
