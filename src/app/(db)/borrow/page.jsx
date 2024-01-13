@@ -187,5 +187,5 @@ const processBorrowItem = async (item, recordsMap) => {
 
 export default function Test3() {
 
-    return <div> Test {started} {newList}</div>
+    return <div> Test {started}</div>
 }
