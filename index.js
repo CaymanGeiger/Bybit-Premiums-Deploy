@@ -941,7 +941,6 @@ const createOrUpdateBorrowData = async (borrowData) => {
     newList = borrowData;
     started = "stage1"
     console.log("Updating/Creating Borrow Rates Now....");
-    const queue = new PQueue({ concurrency: 5 });
     let borrowCurrentItemIndex = 0;
     let stopBorrowProcessing = false;
     console.log("working")
@@ -950,11 +949,9 @@ const createOrUpdateBorrowData = async (borrowData) => {
         where: { coinId: { in: coinIds } }
     });
     const recordsMap = new Map(existingRecords.map(record => [record.coinId, record]));
-    console.log(borrowData)
-    console.log(borrowData);
     for (const item of borrowData) {
         console.log("Processing item", item);
-        queue.add(() => processBorrowItem(item, recordsMap));
+        processBorrowItem(item, recordsMap);
         if (borrowCurrentItemIndex === borrowData.length - 1) {
             stopBorrowProcessing = true;
             break;
@@ -963,12 +960,50 @@ const createOrUpdateBorrowData = async (borrowData) => {
             break;
         }
     }
-    await queue.onIdle();
     borrowCurrentItemIndex = 0;
     stopBorrowProcessing = false;
     console.log("Borrow Update/Create Complete.");
     // filterOutBorrowUSDT();
 }
+
+// let newList = [];
+// let started = "stage0"
+// const createOrUpdateBorrowData = async (borrowData) => {
+//     if (!Array.isArray(borrowData)) {
+//         console.error("Expected borrowData to be an array.");
+//         return;
+//     }
+//     newList = borrowData;
+//     started = "stage1"
+//     console.log("Updating/Creating Borrow Rates Now....");
+//     const queue = new PQueue({ concurrency: 5 });
+//     let borrowCurrentItemIndex = 0;
+//     let stopBorrowProcessing = false;
+//     console.log("working")
+//     const coinIds = [...new Set(Object.values(borrowData).flat().map(item => item['coin id']).filter(id => id !== undefined))];
+//     const existingRecords = await prisma.coinBorrowRate.findMany({
+//         where: { coinId: { in: coinIds } }
+//     });
+//     const recordsMap = new Map(existingRecords.map(record => [record.coinId, record]));
+//     console.log(borrowData)
+//     console.log(borrowData);
+//     for (const item of borrowData) {
+//         console.log("Processing item", item);
+//         queue.add(() => processBorrowItem(item, recordsMap));
+//         if (borrowCurrentItemIndex === borrowData.length - 1) {
+//             stopBorrowProcessing = true;
+//             break;
+//         }
+//         if (stopBorrowProcessing) {
+//             break;
+//         }
+//     }
+//     await queue.onIdle();
+//     borrowCurrentItemIndex = 0;
+//     stopBorrowProcessing = false;
+//     console.log("Borrow Update/Create Complete.");
+//     // filterOutBorrowUSDT();
+// }
 
 function delay(time) {
     return new Promise(resolve => setTimeout(resolve, time));
@@ -978,7 +1013,7 @@ function delay(time) {
 let borrowCompleted = 0;
 const processBorrowItem = async (item, recordsMap) => {
     let coinTrim = item.coin.trim();
-    await delay(1200);
+    await delay(2000);
     const existingRecord = recordsMap.get(item['coin id']);
     // const itemResponse = await fetch(`https://api.bybit.com/v5/market/tickers?category=spot&symbol=${coinTrim}USDT`);
     // const itemData = await itemResponse.json();
