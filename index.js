@@ -1029,7 +1029,7 @@ const processBorrowItem = async (item, recordsMap) => {
                     threeDayAverage: item && item['three days'] || null,
                     sevenDayAverage: item && item.week || null,
                     thirtyDayAverage: item && item.month || null,
-                    ninetyDayAverage: 6 || null,
+                    ninetyDayAverage: 1.5 || null,
                 }
             });
         } catch(error){
@@ -1057,7 +1057,7 @@ const processBorrowItem = async (item, recordsMap) => {
                     threeDayAverage: item && item['three days'] || null,
                     sevenDayAverage: item && item.week || null,
                     thirtyDayAverage: item && item.month || null,
-                    ninetyDayAverage: 6 || null,
+                    ninetyDayAverage: 1.5 || null,
                 }
             });
             // try {
