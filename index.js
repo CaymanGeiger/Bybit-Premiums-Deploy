@@ -890,11 +890,11 @@ app.listen(port, () => {
 })
 
 
-app.get('/api/test', (req, res) => {
+app.get('/api/test', async (req, res) => {
     res.send("TESTING")
-    createOrUpdateFundingData(testData);
+    await createOrUpdateFundingData(testData);
 });
-.3
+
 
 module.exports = app
 
