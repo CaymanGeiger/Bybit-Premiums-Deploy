@@ -890,9 +890,13 @@ app.listen(port, () => {
 })
 
 
-app.get('/api/test', (req, res) => {
+app.get('/api/test', async (req, res) => {
     res.send("TESTING")
-    createOrUpdateBorrowData(testData);
+    try {
+        await createOrUpdateBorrowData(testData);
+    } catch(error) {
+        res.send("Issue Found", error)
+    }
 });
 
 
