@@ -14,8 +14,8 @@ let PQueue;
             [{
                 month: 0.35743795,
                 'one day': 0.4703143,
-                coin: 'EQOUSDTGGGGTWASE3',
-                'coin id': 1872362,
+                coin: 'EQOUSDTGGGGTWASE4',
+                'coin id': 1872363,
                 'three days': 0.805499838,
                 'three months': 9,
                 week: 0.6697941
@@ -23,8 +23,8 @@ let PQueue;
             {
                 month: 0.21500107,
                 'one day': 0.672144,
-                coin: 'CFKUSDTGGGGTWASE3',
-                'coin id': 1162362,
+                coin: 'CFKUSDTGGGGTWASE4',
+                'coin id': 1162363,
                 'three days': 0.591818977,
                 'three months': 9,
                 week: null
@@ -32,8 +32,8 @@ let PQueue;
             {
                 month: 0.78573547,
                 'one day': 0.4307549,
-                coin: 'NWSUSDTGGGGTWASE3',
-                'coin id': 1982362,
+                coin: 'NWSUSDTGGGGTWASE4',
+                'coin id': 1982363,
                 'three days': 0.491935873,
                 'three months': 9,
                 week: 0.29510518
@@ -41,8 +41,8 @@ let PQueue;
             {
                 month: 0.16631783,
                 'one day': 0.7703422,
-                coin: 'VSIUSDTGGGGTWASE3',
-                'coin id': 1642362,
+                coin: 'VSIUSDTGGGGTWASE4',
+                'coin id': 1642363,
                 'three days': 0.140050335,
                 'three months': 9,
                 week: 0.12202607
@@ -50,8 +50,8 @@ let PQueue;
             {
                 month: 0.36509659,
                 'one day': 0.7001823,
-                coin: 'PAGUSDTGGGGTWASE3',
-                'coin id': 1532362,
+                coin: 'PAGUSDTGGGGTWASE4',
+                'coin id': 1532363,
                 'three days': 0.731306104,
                 'three months': 9,
                 week: null
@@ -59,8 +59,8 @@ let PQueue;
             {
                 month: 0.35743795,
                 'one day': 0.4703143,
-                coin: 'EQOUSDTGGGGTWASE3',
-                'coin id': 1872362,
+                coin: 'EQOUSDTGGGGTWASE4',
+                'coin id': 1872363,
                 'three days': 0.805499838,
                 'three months': 9,
                 week: 0.6697941
@@ -68,8 +68,8 @@ let PQueue;
             {
                 month: 0.21500107,
                 'one day': 0.672144,
-                coin: 'CFKUSDTGGGGTWASE3',
-                'coin id': 1162362,
+                coin: 'CFKUSDTGGGGTWASE4',
+                'coin id': 1162363,
                 'three days': 0.591818977,
                 'three months': 9,
                 week: null
@@ -77,8 +77,8 @@ let PQueue;
             {
                 month: 0.78573547,
                 'one day': 0.4307549,
-                coin: 'NWSUSDTGGGGTWASE3',
-                'coin id': 1982362,
+                coin: 'NWSUSDTGGGGTWASE4',
+                'coin id': 1982363,
                 'three days': 0.491935873,
                 'three months': 9,
                 week: 0.29510518
@@ -86,8 +86,8 @@ let PQueue;
             {
                 month: 0.16631783,
                 'one day': 0.7703422,
-                coin: 'VSIUSDTGGGGTWASE3',
-                'coin id': 1642362,
+                coin: 'VSIUSDTGGGGTWASE4',
+                'coin id': 1642363,
                 'three days': 0.140050335,
                 'three months': 9,
                 week: 0.12202607
@@ -95,8 +95,8 @@ let PQueue;
             {
                 month: 0.36509659,
                 'one day': 0.7001823,
-                coin: 'PAGUSDTGGGGTWASE3',
-                'coin id': 1532362,
+                coin: 'PAGUSDTGGGGTWASE4',
+                'coin id': 1532363,
                 'three days': 0.731306104,
                 'three months': 9,
                 week: null
@@ -104,8 +104,8 @@ let PQueue;
             {
                 month: 0.35743795,
                 'one day': 0.4703143,
-                coin: 'EQOUSDTGGGGTWASE3',
-                'coin id': 1872362,
+                coin: 'EQOUSDTGGGGTWASE4',
+                'coin id': 1872363,
                 'three days': 0.805499838,
                 'three months': 9,
                 week: 0.6697941
@@ -113,8 +113,8 @@ let PQueue;
             {
                 month: 0.21500107,
                 'one day': 0.672144,
-                coin: 'CFKUSDTGGGGTWASE3',
-                'coin id': 1162362,
+                coin: 'CFKUSDTGGGGTWASE4',
+                'coin id': 1162363,
                 'three days': 0.591818977,
                 'three months': 9,
                 week: null
@@ -122,8 +122,8 @@ let PQueue;
             {
                 month: 0.78573547,
                 'one day': 0.4307549,
-                coin: 'NWSUSDTGGGGTWASE3',
-                'coin id': 1982362,
+                coin: 'NWSUSDTGGGGTWASE4',
+                'coin id': 1982363,
                 'three days': 0.491935873,
                 'three months': 9,
                 week: 0.29510518
@@ -131,8 +131,8 @@ let PQueue;
             {
                 month: 0.16631783,
                 'one day': 0.7703422,
-                coin: 'VSIUSDTGGGGTWASE3',
-                'coin id': 1642362,
+                coin: 'VSIUSDTGGGGTWASE4',
+                'coin id': 1642363,
                 'three days': 0.140050335,
                 'three months': 9,
                 week: 0.12202607
@@ -140,8 +140,8 @@ let PQueue;
             {
                 month: 0.36509659,
                 'one day': 0.7001823,
-                coin: 'PAGUSDTGGGGTWASE3',
-                'coin id': 1532362,
+                coin: 'PAGUSDTGGGGTWASE4',
+                'coin id': 1532363,
                 'three days': 0.731306104,
                 'three months': 9,
                 week: null
@@ -149,8 +149,8 @@ let PQueue;
             {
                 month: 0.35743795,
                 'one day': 0.4703143,
-                coin: 'EQOUSDTGGGGTWASE3',
-                'coin id': 1872362,
+                coin: 'EQOUSDTGGGGTWASE4',
+                'coin id': 1872363,
                 'three days': 0.805499838,
                 'three months': 9,
                 week: 0.6697941
@@ -158,8 +158,8 @@ let PQueue;
             {
                 month: 0.21500107,
                 'one day': 0.672144,
-                coin: 'CFKUSDTGGGGTWASE3',
-                'coin id': 1162362,
+                coin: 'CFKUSDTGGGGTWASE4',
+                'coin id': 1162363,
                 'three days': 0.591818977,
                 'three months': 9,
                 week: null
@@ -167,8 +167,8 @@ let PQueue;
             {
                 month: 0.78573547,
                 'one day': 0.4307549,
-                coin: 'NWSUSDTGGGGTWASE3',
-                'coin id': 1982362,
+                coin: 'NWSUSDTGGGGTWASE4',
+                'coin id': 1982363,
                 'three days': 0.491935873,
                 'three months': 9,
                 week: 0.29510518
@@ -176,8 +176,8 @@ let PQueue;
             {
                 month: 0.16631783,
                 'one day': 0.7703422,
-                coin: 'VSIUSDTGGGGTWASE3',
-                'coin id': 1642362,
+                coin: 'VSIUSDTGGGGTWASE4',
+                'coin id': 1642363,
                 'three days': 0.140050335,
                 'three months': 9,
                 week: 0.12202607
@@ -185,8 +185,8 @@ let PQueue;
             {
                 month: 0.36509659,
                 'one day': 0.7001823,
-                coin: 'PAGUSDTGGGGTWASE3',
-                'coin id': 1532362,
+                coin: 'PAGUSDTGGGGTWASE4',
+                'coin id': 1532363,
                 'three days': 0.731306104,
                 'three months': 9,
                 week: null
@@ -194,8 +194,8 @@ let PQueue;
             {
                 month: 0.35743795,
                 'one day': 0.4703143,
-                coin: 'EQOUSDTGGGGTWASE3',
-                'coin id': 1872362,
+                coin: 'EQOUSDTGGGGTWASE4',
+                'coin id': 1872363,
                 'three days': 0.805499838,
                 'three months': 9,
                 week: 0.6697941
@@ -203,8 +203,8 @@ let PQueue;
             {
                 month: 0.21500107,
                 'one day': 0.672144,
-                coin: 'CFKUSDTGGGGTWASE3',
-                'coin id': 1162362,
+                coin: 'CFKUSDTGGGGTWASE4',
+                'coin id': 1162363,
                 'three days': 0.591818977,
                 'three months': 9,
                 week: null
@@ -212,8 +212,8 @@ let PQueue;
             {
                 month: 0.78573547,
                 'one day': 0.4307549,
-                coin: 'NWSUSDTGGGGTWASE3',
-                'coin id': 1982362,
+                coin: 'NWSUSDTGGGGTWASE4',
+                'coin id': 1982363,
                 'three days': 0.491935873,
                 'three months': 9,
                 week: 0.29510518
@@ -221,8 +221,8 @@ let PQueue;
             {
                 month: 0.16631783,
                 'one day': 0.7703422,
-                coin: 'VSIUSDTGGGGTWASE3',
-                'coin id': 1642362,
+                coin: 'VSIUSDTGGGGTWASE4',
+                'coin id': 1642363,
                 'three days': 0.140050335,
                 'three months': 9,
                 week: 0.12202607
@@ -230,8 +230,8 @@ let PQueue;
             {
                 month: 0.36509659,
                 'one day': 0.7001823,
-                coin: 'PAGUSDTGGGGTWASE3',
-                'coin id': 1532362,
+                coin: 'PAGUSDTGGGGTWASE4',
+                'coin id': 1532363,
                 'three days': 0.731306104,
                 'three months': 9,
                 week: null
@@ -239,8 +239,8 @@ let PQueue;
             {
                 month: 0.35743795,
                 'one day': 0.4703143,
-                coin: 'EQOUSDTGGGGTWASE3',
-                'coin id': 1872362,
+                coin: 'EQOUSDTGGGGTWASE4',
+                'coin id': 1872363,
                 'three days': 0.805499838,
                 'three months': 9,
                 week: 0.6697941
@@ -248,8 +248,8 @@ let PQueue;
             {
                 month: 0.21500107,
                 'one day': 0.672144,
-                coin: 'CFKUSDTGGGGTWASE3',
-                'coin id': 1162362,
+                coin: 'CFKUSDTGGGGTWASE4',
+                'coin id': 1162363,
                 'three days': 0.591818977,
                 'three months': 9,
                 week: null
@@ -257,8 +257,8 @@ let PQueue;
             {
                 month: 0.78573547,
                 'one day': 0.4307549,
-                coin: 'NWSUSDTGGGGTWASE3',
-                'coin id': 1982362,
+                coin: 'NWSUSDTGGGGTWASE4',
+                'coin id': 1982363,
                 'three days': 0.491935873,
                 'three months': 9,
                 week: 0.29510518
@@ -266,8 +266,8 @@ let PQueue;
             {
                 month: 0.16631783,
                 'one day': 0.7703422,
-                coin: 'VSIUSDTGGGGTWASE3',
-                'coin id': 1642362,
+                coin: 'VSIUSDTGGGGTWASE4',
+                'coin id': 1642363,
                 'three days': 0.140050335,
                 'three months': 9,
                 week: 0.12202607
@@ -275,8 +275,8 @@ let PQueue;
             {
                 month: 0.36509659,
                 'one day': 0.7001823,
-                coin: 'PAGUSDTGGGGTWASE3',
-                'coin id': 1532362,
+                coin: 'PAGUSDTGGGGTWASE4',
+                'coin id': 1532363,
                 'three days': 0.731306104,
                 'three months': 9,
                 week: null
@@ -284,8 +284,8 @@ let PQueue;
             {
                 month: 0.35743795,
                 'one day': 0.4703143,
-                coin: 'EQOUSDTGGGGTWASE3',
-                'coin id': 1872362,
+                coin: 'EQOUSDTGGGGTWASE4',
+                'coin id': 1872363,
                 'three days': 0.805499838,
                 'three months': 9,
                 week: 0.6697941
@@ -293,8 +293,8 @@ let PQueue;
             {
                 month: 0.21500107,
                 'one day': 0.672144,
-                coin: 'CFKUSDTGGGGTWASE3',
-                'coin id': 1162362,
+                coin: 'CFKUSDTGGGGTWASE4',
+                'coin id': 1162363,
                 'three days': 0.591818977,
                 'three months': 9,
                 week: null
@@ -302,8 +302,8 @@ let PQueue;
             {
                 month: 0.78573547,
                 'one day': 0.4307549,
-                coin: 'NWSUSDTGGGGTWASE3',
-                'coin id': 1982362,
+                coin: 'NWSUSDTGGGGTWASE4',
+                'coin id': 1982363,
                 'three days': 0.491935873,
                 'three months': 9,
                 week: 0.29510518
@@ -311,8 +311,8 @@ let PQueue;
             {
                 month: 0.16631783,
                 'one day': 0.7703422,
-                coin: 'VSIUSDTGGGGTWASE3',
-                'coin id': 1642362,
+                coin: 'VSIUSDTGGGGTWASE4',
+                'coin id': 1642363,
                 'three days': 0.140050335,
                 'three months': 9,
                 week: 0.12202607
@@ -320,8 +320,8 @@ let PQueue;
             {
                 month: 0.36509659,
                 'one day': 0.7001823,
-                coin: 'PAGUSDTGGGGTWASE3',
-                'coin id': 1532362,
+                coin: 'PAGUSDTGGGGTWASE4',
+                'coin id': 1532363,
                 'three days': 0.731306104,
                 'three months': 9,
                 week: null
@@ -329,8 +329,8 @@ let PQueue;
             {
                 month: 0.35743795,
                 'one day': 0.4703143,
-                coin: 'EQOUSDTGGGGTWASE3',
-                'coin id': 1872362,
+                coin: 'EQOUSDTGGGGTWASE4',
+                'coin id': 1872363,
                 'three days': 0.805499838,
                 'three months': 9,
                 week: 0.6697941
@@ -338,8 +338,8 @@ let PQueue;
             {
                 month: 0.21500107,
                 'one day': 0.672144,
-                coin: 'CFKUSDTGGGGTWASE3',
-                'coin id': 1162362,
+                coin: 'CFKUSDTGGGGTWASE4',
+                'coin id': 1162363,
                 'three days': 0.591818977,
                 'three months': 9,
                 week: null
@@ -347,8 +347,8 @@ let PQueue;
             {
                 month: 0.78573547,
                 'one day': 0.4307549,
-                coin: 'NWSUSDTGGGGTWASE3',
-                'coin id': 1982362,
+                coin: 'NWSUSDTGGGGTWASE4',
+                'coin id': 1982363,
                 'three days': 0.491935873,
                 'three months': 9,
                 week: 0.29510518
@@ -356,8 +356,8 @@ let PQueue;
             {
                 month: 0.16631783,
                 'one day': 0.7703422,
-                coin: 'VSIUSDTGGGGTWASE3',
-                'coin id': 1642362,
+                coin: 'VSIUSDTGGGGTWASE4',
+                'coin id': 1642363,
                 'three days': 0.140050335,
                 'three months': 9,
                 week: 0.12202607
@@ -365,8 +365,8 @@ let PQueue;
             {
                 month: 0.36509659,
                 'one day': 0.7001823,
-                coin: 'PAGUSDTGGGGTWASE3',
-                'coin id': 1532362,
+                coin: 'PAGUSDTGGGGTWASE4',
+                'coin id': 1532363,
                 'three days': 0.731306104,
                 'three months': 9,
                 week: null
@@ -374,8 +374,8 @@ let PQueue;
             {
                 month: 0.35743795,
                 'one day': 0.4703143,
-                coin: 'EQOUSDTGGGGTWASE3',
-                'coin id': 1872362,
+                coin: 'EQOUSDTGGGGTWASE4',
+                'coin id': 1872363,
                 'three days': 0.805499838,
                 'three months': 9,
                 week: 0.6697941
@@ -383,8 +383,8 @@ let PQueue;
             {
                 month: 0.21500107,
                 'one day': 0.672144,
-                coin: 'CFKUSDTGGGGTWASE3',
-                'coin id': 1162362,
+                coin: 'CFKUSDTGGGGTWASE4',
+                'coin id': 1162363,
                 'three days': 0.591818977,
                 'three months': 9,
                 week: null
@@ -392,8 +392,8 @@ let PQueue;
             {
                 month: 0.78573547,
                 'one day': 0.4307549,
-                coin: 'NWSUSDTGGGGTWASE3',
-                'coin id': 1982362,
+                coin: 'NWSUSDTGGGGTWASE4',
+                'coin id': 1982363,
                 'three days': 0.491935873,
                 'three months': 9,
                 week: 0.29510518
@@ -401,8 +401,8 @@ let PQueue;
             {
                 month: 0.16631783,
                 'one day': 0.7703422,
-                coin: 'VSIUSDTGGGGTWASE3',
-                'coin id': 1642362,
+                coin: 'VSIUSDTGGGGTWASE4',
+                'coin id': 1642363,
                 'three days': 0.140050335,
                 'three months': 9,
                 week: 0.12202607
@@ -410,8 +410,8 @@ let PQueue;
             {
                 month: 0.36509659,
                 'one day': 0.7001823,
-                coin: 'PAGUSDTGGGGTWASE3',
-                'coin id': 1532362,
+                coin: 'PAGUSDTGGGGTWASE4',
+                'coin id': 1532363,
                 'three days': 0.731306104,
                 'three months': 9,
                 week: null
@@ -419,8 +419,8 @@ let PQueue;
             {
                 month: 0.35743795,
                 'one day': 0.4703143,
-                coin: 'EQOUSDTGGGGTWASE3',
-                'coin id': 1872362,
+                coin: 'EQOUSDTGGGGTWASE4',
+                'coin id': 1872363,
                 'three days': 0.805499838,
                 'three months': 9,
                 week: 0.6697941
@@ -428,8 +428,8 @@ let PQueue;
             {
                 month: 0.21500107,
                 'one day': 0.672144,
-                coin: 'CFKUSDTGGGGTWASE3',
-                'coin id': 1162362,
+                coin: 'CFKUSDTGGGGTWASE4',
+                'coin id': 1162363,
                 'three days': 0.591818977,
                 'three months': 9,
                 week: null
@@ -437,8 +437,8 @@ let PQueue;
             {
                 month: 0.78573547,
                 'one day': 0.4307549,
-                coin: 'NWSUSDTGGGGTWASE3',
-                'coin id': 1982362,
+                coin: 'NWSUSDTGGGGTWASE4',
+                'coin id': 1982363,
                 'three days': 0.491935873,
                 'three months': 9,
                 week: 0.29510518
@@ -446,8 +446,8 @@ let PQueue;
             {
                 month: 0.16631783,
                 'one day': 0.7703422,
-                coin: 'VSIUSDTGGGGTWASE3',
-                'coin id': 1642362,
+                coin: 'VSIUSDTGGGGTWASE4',
+                'coin id': 1642363,
                 'three days': 0.140050335,
                 'three months': 9,
                 week: 0.12202607
@@ -455,8 +455,8 @@ let PQueue;
             {
                 month: 0.36509659,
                 'one day': 0.7001823,
-                coin: 'PAGUSDTGGGGTWASE3',
-                'coin id': 1532362,
+                coin: 'PAGUSDTGGGGTWASE4',
+                'coin id': 1532363,
                 'three days': 0.731306104,
                 'three months': 9,
                 week: null
@@ -464,8 +464,8 @@ let PQueue;
             {
                 month: 0.35743795,
                 'one day': 0.4703143,
-                coin: 'EQOUSDTGGGGTWASE3',
-                'coin id': 1872362,
+                coin: 'EQOUSDTGGGGTWASE4',
+                'coin id': 1872363,
                 'three days': 0.805499838,
                 'three months': 9,
                 week: 0.6697941
@@ -473,8 +473,8 @@ let PQueue;
             {
                 month: 0.21500107,
                 'one day': 0.672144,
-                coin: 'CFKUSDTGGGGTWASE3',
-                'coin id': 1162362,
+                coin: 'CFKUSDTGGGGTWASE4',
+                'coin id': 1162363,
                 'three days': 0.591818977,
                 'three months': 9,
                 week: null
@@ -482,8 +482,8 @@ let PQueue;
             {
                 month: 0.78573547,
                 'one day': 0.4307549,
-                coin: 'NWSUSDTGGGGTWASE3',
-                'coin id': 1982362,
+                coin: 'NWSUSDTGGGGTWASE4',
+                'coin id': 1982363,
                 'three days': 0.491935873,
                 'three months': 9,
                 week: 0.29510518
@@ -491,8 +491,8 @@ let PQueue;
             {
                 month: 0.16631783,
                 'one day': 0.7703422,
-                coin: 'VSIUSDTGGGGTWASE3',
-                'coin id': 1642362,
+                coin: 'VSIUSDTGGGGTWASE4',
+                'coin id': 1642363,
                 'three days': 0.140050335,
                 'three months': 9,
                 week: 0.12202607
@@ -500,8 +500,8 @@ let PQueue;
             {
                 month: 0.36509659,
                 'one day': 0.7001823,
-                coin: 'PAGUSDTGGGGTWASE3',
-                'coin id': 1532362,
+                coin: 'PAGUSDTGGGGTWASE4',
+                'coin id': 1532363,
                 'three days': 0.731306104,
                 'three months': 9,
                 week: null
@@ -509,8 +509,8 @@ let PQueue;
             {
                 month: 0.35743795,
                 'one day': 0.4703143,
-                coin: 'EQOUSDTGGGGTWASE3',
-                'coin id': 1872362,
+                coin: 'EQOUSDTGGGGTWASE4',
+                'coin id': 1872363,
                 'three days': 0.805499838,
                 'three months': 9,
                 week: 0.6697941
@@ -518,8 +518,8 @@ let PQueue;
             {
                 month: 0.21500107,
                 'one day': 0.672144,
-                coin: 'CFKUSDTGGGGTWASE3',
-                'coin id': 1162362,
+                coin: 'CFKUSDTGGGGTWASE4',
+                'coin id': 1162363,
                 'three days': 0.591818977,
                 'three months': 9,
                 week: null
@@ -527,8 +527,8 @@ let PQueue;
             {
                 month: 0.78573547,
                 'one day': 0.4307549,
-                coin: 'NWSUSDTGGGGTWASE3',
-                'coin id': 1982362,
+                coin: 'NWSUSDTGGGGTWASE4',
+                'coin id': 1982363,
                 'three days': 0.491935873,
                 'three months': 9,
                 week: 0.29510518
@@ -536,8 +536,8 @@ let PQueue;
             {
                 month: 0.16631783,
                 'one day': 0.7703422,
-                coin: 'VSIUSDTGGGGTWASE3',
-                'coin id': 1642362,
+                coin: 'VSIUSDTGGGGTWASE4',
+                'coin id': 1642363,
                 'three days': 0.140050335,
                 'three months': 9,
                 week: 0.12202607
@@ -545,8 +545,8 @@ let PQueue;
             {
                 month: 0.36509659,
                 'one day': 0.7001823,
-                coin: 'PAGUSDTGGGGTWASE3',
-                'coin id': 1532362,
+                coin: 'PAGUSDTGGGGTWASE4',
+                'coin id': 1532363,
                 'three days': 0.731306104,
                 'three months': 9,
                 week: null
@@ -554,8 +554,8 @@ let PQueue;
             {
                 month: 0.35743795,
                 'one day': 0.4703143,
-                coin: 'EQOUSDTGGGGTWASE3',
-                'coin id': 1872362,
+                coin: 'EQOUSDTGGGGTWASE4',
+                'coin id': 1872363,
                 'three days': 0.805499838,
                 'three months': 9,
                 week: 0.6697941
@@ -563,8 +563,8 @@ let PQueue;
             {
                 month: 0.21500107,
                 'one day': 0.672144,
-                coin: 'CFKUSDTGGGGTWASE3',
-                'coin id': 1162362,
+                coin: 'CFKUSDTGGGGTWASE4',
+                'coin id': 1162363,
                 'three days': 0.591818977,
                 'three months': 9,
                 week: null
@@ -572,8 +572,8 @@ let PQueue;
             {
                 month: 0.78573547,
                 'one day': 0.4307549,
-                coin: 'NWSUSDTGGGGTWASE3',
-                'coin id': 1982362,
+                coin: 'NWSUSDTGGGGTWASE4',
+                'coin id': 1982363,
                 'three days': 0.491935873,
                 'three months': 9,
                 week: 0.29510518
@@ -581,8 +581,8 @@ let PQueue;
             {
                 month: 0.16631783,
                 'one day': 0.7703422,
-                coin: 'VSIUSDTGGGGTWASE3',
-                'coin id': 1642362,
+                coin: 'VSIUSDTGGGGTWASE4',
+                'coin id': 1642363,
                 'three days': 0.140050335,
                 'three months': 9,
                 week: 0.12202607
@@ -590,8 +590,8 @@ let PQueue;
             {
                 month: 0.36509659,
                 'one day': 0.7001823,
-                coin: 'PAGUSDTGGGGTWASE3',
-                'coin id': 1532362,
+                coin: 'PAGUSDTGGGGTWASE4',
+                'coin id': 1532363,
                 'three days': 0.731306104,
                 'three months': 9,
                 week: null
@@ -599,8 +599,8 @@ let PQueue;
             {
                 month: 0.35743795,
                 'one day': 0.4703143,
-                coin: 'EQOUSDTGGGGTWASE3',
-                'coin id': 1872362,
+                coin: 'EQOUSDTGGGGTWASE4',
+                'coin id': 1872363,
                 'three days': 0.805499838,
                 'three months': 9,
                 week: 0.6697941
@@ -608,8 +608,8 @@ let PQueue;
             {
                 month: 0.21500107,
                 'one day': 0.672144,
-                coin: 'CFKUSDTGGGGTWASE3',
-                'coin id': 1162362,
+                coin: 'CFKUSDTGGGGTWASE4',
+                'coin id': 1162363,
                 'three days': 0.591818977,
                 'three months': 9,
                 week: null
@@ -617,8 +617,8 @@ let PQueue;
             {
                 month: 0.78573547,
                 'one day': 0.4307549,
-                coin: 'NWSUSDTGGGGTWASE3',
-                'coin id': 1982362,
+                coin: 'NWSUSDTGGGGTWASE4',
+                'coin id': 1982363,
                 'three days': 0.491935873,
                 'three months': 9,
                 week: 0.29510518
@@ -626,8 +626,8 @@ let PQueue;
             {
                 month: 0.16631783,
                 'one day': 0.7703422,
-                coin: 'VSIUSDTGGGGTWASE3',
-                'coin id': 1642362,
+                coin: 'VSIUSDTGGGGTWASE4',
+                'coin id': 1642363,
                 'three days': 0.140050335,
                 'three months': 9,
                 week: 0.12202607
@@ -635,8 +635,8 @@ let PQueue;
             {
                 month: 0.36509659,
                 'one day': 0.7001823,
-                coin: 'PAGUSDTGGGGTWASE3',
-                'coin id': 1532362,
+                coin: 'PAGUSDTGGGGTWASE4',
+                'coin id': 1532363,
                 'three days': 0.731306104,
                 'three months': 9,
                 week: null
@@ -644,8 +644,8 @@ let PQueue;
             {
                 month: 0.35743795,
                 'one day': 0.4703143,
-                coin: 'EQOUSDTGGGGTWASE3',
-                'coin id': 1872362,
+                coin: 'EQOUSDTGGGGTWASE4',
+                'coin id': 1872363,
                 'three days': 0.805499838,
                 'three months': 9,
                 week: 0.6697941
@@ -653,8 +653,8 @@ let PQueue;
             {
                 month: 0.21500107,
                 'one day': 0.672144,
-                coin: 'CFKUSDTGGGGTWASE3',
-                'coin id': 1162362,
+                coin: 'CFKUSDTGGGGTWASE4',
+                'coin id': 1162363,
                 'three days': 0.591818977,
                 'three months': 9,
                 week: null
@@ -662,8 +662,8 @@ let PQueue;
             {
                 month: 0.78573547,
                 'one day': 0.4307549,
-                coin: 'NWSUSDTGGGGTWASE3',
-                'coin id': 1982362,
+                coin: 'NWSUSDTGGGGTWASE4',
+                'coin id': 1982363,
                 'three days': 0.491935873,
                 'three months': 9,
                 week: 0.29510518
@@ -671,8 +671,8 @@ let PQueue;
             {
                 month: 0.16631783,
                 'one day': 0.7703422,
-                coin: 'VSIUSDTGGGGTWASE3',
-                'coin id': 1642362,
+                coin: 'VSIUSDTGGGGTWASE4',
+                'coin id': 1642363,
                 'three days': 0.140050335,
                 'three months': 9,
                 week: 0.12202607
@@ -680,8 +680,8 @@ let PQueue;
             {
                 month: 0.36509659,
                 'one day': 0.7001823,
-                coin: 'PAGUSDTGGGGTWASE3',
-                'coin id': 1532362,
+                coin: 'PAGUSDTGGGGTWASE4',
+                'coin id': 1532363,
                 'three days': 0.731306104,
                 'three months': 9,
                 week: null
@@ -689,8 +689,8 @@ let PQueue;
             {
                 month: 0.35743795,
                 'one day': 0.4703143,
-                coin: 'EQOUSDTGGGGTWASE3',
-                'coin id': 1872362,
+                coin: 'EQOUSDTGGGGTWASE4',
+                'coin id': 1872363,
                 'three days': 0.805499838,
                 'three months': 9,
                 week: 0.6697941
@@ -698,8 +698,8 @@ let PQueue;
             {
                 month: 0.21500107,
                 'one day': 0.672144,
-                coin: 'CFKUSDTGGGGTWASE3',
-                'coin id': 1162362,
+                coin: 'CFKUSDTGGGGTWASE4',
+                'coin id': 1162363,
                 'three days': 0.591818977,
                 'three months': 9,
                 week: null
@@ -707,8 +707,8 @@ let PQueue;
             {
                 month: 0.78573547,
                 'one day': 0.4307549,
-                coin: 'NWSUSDTGGGGTWASE3',
-                'coin id': 1982362,
+                coin: 'NWSUSDTGGGGTWASE4',
+                'coin id': 1982363,
                 'three days': 0.491935873,
                 'three months': 9,
                 week: 0.29510518
@@ -716,8 +716,8 @@ let PQueue;
             {
                 month: 0.16631783,
                 'one day': 0.7703422,
-                coin: 'VSIUSDTGGGGTWASE3',
-                'coin id': 1642362,
+                coin: 'VSIUSDTGGGGTWASE4',
+                'coin id': 1642363,
                 'three days': 0.140050335,
                 'three months': 9,
                 week: 0.12202607
@@ -725,8 +725,8 @@ let PQueue;
             {
                 month: 0.36509659,
                 'one day': 0.7001823,
-                coin: 'PAGUSDTGGGGTWASE3',
-                'coin id': 1532362,
+                coin: 'PAGUSDTGGGGTWASE4',
+                'coin id': 1532363,
                 'three days': 0.731306104,
                 'three months': 9,
                 week: null
@@ -734,8 +734,8 @@ let PQueue;
             {
                 month: 0.35743795,
                 'one day': 0.4703143,
-                coin: 'EQOUSDTGGGGTWASE3',
-                'coin id': 1872362,
+                coin: 'EQOUSDTGGGGTWASE4',
+                'coin id': 1872363,
                 'three days': 0.805499838,
                 'three months': 9,
                 week: 0.6697941
@@ -743,8 +743,8 @@ let PQueue;
             {
                 month: 0.21500107,
                 'one day': 0.672144,
-                coin: 'CFKUSDTGGGGTWASE3',
-                'coin id': 1162362,
+                coin: 'CFKUSDTGGGGTWASE4',
+                'coin id': 1162363,
                 'three days': 0.591818977,
                 'three months': 9,
                 week: null
@@ -752,8 +752,8 @@ let PQueue;
             {
                 month: 0.78573547,
                 'one day': 0.4307549,
-                coin: 'NWSUSDTGGGGTWASE3',
-                'coin id': 1982362,
+                coin: 'NWSUSDTGGGGTWASE4',
+                'coin id': 1982363,
                 'three days': 0.491935873,
                 'three months': 9,
                 week: 0.29510518
@@ -761,8 +761,8 @@ let PQueue;
             {
                 month: 0.16631783,
                 'one day': 0.7703422,
-                coin: 'VSIUSDTGGGGTWASE3',
-                'coin id': 1642362,
+                coin: 'VSIUSDTGGGGTWASE4',
+                'coin id': 1642363,
                 'three days': 0.140050335,
                 'three months': 9,
                 week: 0.12202607
@@ -770,8 +770,8 @@ let PQueue;
             {
                 month: 0.36509659,
                 'one day': 0.7001823,
-                coin: 'PAGUSDTGGGGTWASE3',
-                'coin id': 1532362,
+                coin: 'PAGUSDTGGGGTWASE4',
+                'coin id': 1532363,
                 'three days': 0.731306104,
                 'three months': 9,
                 week: null
@@ -779,8 +779,8 @@ let PQueue;
             {
                 month: 0.35743795,
                 'one day': 0.4703143,
-                coin: 'EQOUSDTGGGGTWASE3',
-                'coin id': 1872362,
+                coin: 'EQOUSDTGGGGTWASE4',
+                'coin id': 1872363,
                 'three days': 0.805499838,
                 'three months': 9,
                 week: 0.6697941
@@ -788,8 +788,8 @@ let PQueue;
             {
                 month: 0.21500107,
                 'one day': 0.672144,
-                coin: 'CFKUSDTGGGGTWASE3',
-                'coin id': 1162362,
+                coin: 'CFKUSDTGGGGTWASE4',
+                'coin id': 1162363,
                 'three days': 0.591818977,
                 'three months': 9,
                 week: null
@@ -797,8 +797,8 @@ let PQueue;
             {
                 month: 0.78573547,
                 'one day': 0.4307549,
-                coin: 'NWSUSDTGGGGTWASE3',
-                'coin id': 1982362,
+                coin: 'NWSUSDTGGGGTWASE4',
+                'coin id': 1982363,
                 'three days': 0.491935873,
                 'three months': 9,
                 week: 0.29510518
@@ -806,8 +806,8 @@ let PQueue;
             {
                 month: 0.16631783,
                 'one day': 0.7703422,
-                coin: 'VSIUSDTGGGGTWASE3',
-                'coin id': 1642362,
+                coin: 'VSIUSDTGGGGTWASE4',
+                'coin id': 1642363,
                 'three days': 0.140050335,
                 'three months': 9,
                 week: 0.12202607
@@ -815,8 +815,8 @@ let PQueue;
             {
                 month: 0.36509659,
                 'one day': 0.7001823,
-                coin: 'PAGUSDTGGGGTWASE3',
-                'coin id': 1532362,
+                coin: 'PAGUSDTGGGGTWASE4',
+                'coin id': 1532363,
                 'three days': 0.731306104,
                 'three months': 9,
                 week: null
@@ -824,8 +824,8 @@ let PQueue;
             {
                 month: 0.35743795,
                 'one day': 0.4703143,
-                coin: 'EQOUSDTGGGGTWASE3',
-                'coin id': 1872362,
+                coin: 'EQOUSDTGGGGTWASE4',
+                'coin id': 1872363,
                 'three days': 0.805499838,
                 'three months': 9,
                 week: 0.6697941
@@ -833,8 +833,8 @@ let PQueue;
             {
                 month: 0.21500107,
                 'one day': 0.672144,
-                coin: 'CFKUSDTGGGGTWASE3',
-                'coin id': 1162362,
+                coin: 'CFKUSDTGGGGTWASE4',
+                'coin id': 1162363,
                 'three days': 0.591818977,
                 'three months': 9,
                 week: null
@@ -842,8 +842,8 @@ let PQueue;
             {
                 month: 0.78573547,
                 'one day': 0.4307549,
-                coin: 'NWSUSDTGGGGTWASE3',
-                'coin id': 1982362,
+                coin: 'NWSUSDTGGGGTWASE4',
+                'coin id': 1982363,
                 'three days': 0.491935873,
                 'three months': 9,
                 week: 0.29510518
@@ -851,8 +851,8 @@ let PQueue;
             {
                 month: 0.16631783,
                 'one day': 0.7703422,
-                coin: 'VSIUSDTGGGGTWASE3',
-                'coin id': 1642362,
+                coin: 'VSIUSDTGGGGTWASE4',
+                'coin id': 1642363,
                 'three days': 0.140050335,
                 'three months': 9,
                 week: 0.12202607
@@ -860,8 +860,8 @@ let PQueue;
             {
                 month: 0.36509659,
                 'one day': 0.7001823,
-                coin: 'PAGUSDTGGGGTWASE3',
-                'coin id': 1532362,
+                coin: 'PAGUSDTGGGGTWASE4',
+                'coin id': 1532363,
                 'three days': 0.731306104,
                 'three months': 9,
                 week: null
@@ -951,6 +951,7 @@ const createOrUpdateBorrowData = async (borrowData) => {
     const recordsMap = new Map(existingRecords.map(record => [record.coinId, record]));
     for (const item of borrowData) {
         console.log("Processing item", item);
+        await delay(1000);
         processBorrowItem(item, recordsMap);
         if (borrowCurrentItemIndex === borrowData.length - 1) {
             stopBorrowProcessing = true;
@@ -1019,17 +1020,22 @@ const processBorrowItem = async (item, recordsMap) => {
     // const itemData = await itemResponse.json();
 
     if (existingRecord) {
-        await prisma.coinBorrowRate.create({
-            data: {
-                coinId: item && item['coin id'] || null,
-                name: item && coinTrim || null,
-                oneDayAverage: item && item['one day'] || null,
-                threeDayAverage: item && item['three days'] || null,
-                sevenDayAverage: item && item.week || null,
-                thirtyDayAverage: item && item.month || null,
-                ninetyDayAverage: 6 || null,
-            }
-        });
+        try {
+            await prisma.coinBorrowRate.create({
+                data: {
+                    coinId: item && item['coin id'] || null,
+                    name: item && coinTrim || null,
+                    oneDayAverage: item && item['one day'] || null,
+                    threeDayAverage: item && item['three days'] || null,
+                    sevenDayAverage: item && item.week || null,
+                    thirtyDayAverage: item && item.month || null,
+                    ninetyDayAverage: 6 || null,
+                }
+            });
+        } catch(error){
+            console.error("An error occurred while creating a record:", error);
+
+        }
         // try {
         //     const nestedItemData = itemData.result.list[0];
         //     await prisma.coinBorrowRate.update({
