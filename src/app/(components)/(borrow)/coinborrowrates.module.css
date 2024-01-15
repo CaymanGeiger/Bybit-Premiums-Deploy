@@ -9,11 +9,11 @@
     text-align: start;
     margin: 12px 12px 12px 0;
     padding: 0;
-    color: #424242;
-    border-bottom: 3px solid rgb(255, 209, 57);
+    color: #363636;
+    border-bottom: 3px solid rgba(255, 194, 28, 0.678);
     width: fit-content;
     border-radius: 2px;
-    
+    font-size: 30px;
 }
 
 
@@ -136,6 +136,8 @@
         border-radius: 2px;
         border: 1px solid rgb(162, 162, 162);
         padding: 1px;
+        color: rgb(100, 100, 100);
+        background-color: transparent;
         margin: 0;
         visibility: hidden;
     }
@@ -148,7 +150,9 @@
         border: 1px solid rgb(162, 162, 162);
         padding: 1px;
         margin: 0;
+        color: rgb(100, 100, 100);
         transition: all 0.2s ease;
+        background-color: transparent;
     }
 }
 
@@ -161,7 +165,7 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    color: blue;
+    color: rgb(68, 68, 255);
     position: relative;
     transition: color 0.2s ease;
     z-index: 10;
@@ -175,7 +179,7 @@
     bottom: 0;
     width: 50%;
     height: 1px;
-    background-color: blue;
+    background-color: rgb(68, 68, 255);
     transition: width 0.2s ease;
 }
 

@@ -40,7 +40,7 @@ const CoinFundingRates = ({ coinFundingRates }) => {
 
 
     const sortedItems = React.useMemo(() => {
-        if (sortConfig.key === null || sortConfig.direction === 'descending') {
+        if (sortConfig.key === null) {
             return data;
         }
 
@@ -84,8 +84,8 @@ const CoinFundingRates = ({ coinFundingRates }) => {
                 <ScrollArea.Viewport className="ScrollAreaViewport">
                         <table className={`${styles.fundingTable} ${isStickyNameClicked}`}>
                             <colgroup>
-                                <col style={{ width: "16%", minWidth: "125px" }} />
-                                <col style={{ width: "14%", minWidth: "100px" }} />
+                                <col style={{ width: "16%", minWidth: "160px" }} />
+                                <col style={{ width: "14%", minWidth: "120px" }} />
                                 <col style={{ width: "14%", minWidth: "80px" }} />
                                 <col style={{ width: "14%", minWidth: "80px" }} />
                                 <col style={{ width: "14%", minWidth: "80px" }} />

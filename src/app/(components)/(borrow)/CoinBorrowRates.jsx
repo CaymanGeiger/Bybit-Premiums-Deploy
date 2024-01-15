@@ -38,6 +38,9 @@ const CoinBorrowRates = ({ coinBorrowRates }) => {
 
 
     const sortedItems = React.useMemo(() => {
+        if (sortConfig.key === null) {
+            return data;
+        }
 
         let sortableItems = [...data];
         sortableItems.sort((a, b) => {

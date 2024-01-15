@@ -42,83 +42,9 @@ export const createOrUpdateBorrowData = async (borrowData) => {
     // filterOutBorrowUSDT();
 }
 
-
 function delay(time) {
     return new Promise(resolve => setTimeout(resolve, time));
 }
-
-
-// let borrowCompleted = 0;
-// const processBorrowItem = async (item, recordsMap) => {
-//     let coinTrim = item.coin.trim();
-//     await delay(1200);
-//     const existingRecord = recordsMap.get(item['coin id']);
-//     const itemResponse = await fetch(`https://api.bybit.com/v5/market/tickers?category=spot&symbol=${coinTrim}USDT`);
-//     const itemData = await itemResponse.json();
-
-//     let updateCondition = {};
-
-//     if (item.coinId) {
-//         updateCondition.coinId = item.coinId;
-//     } else if (coinTrim) {
-//         updateCondition.name = coinTrim;
-//     }
-
-//     if (existingRecord) {
-//         await prisma.coinBorrowRate.update({
-//             where: updateCondition,
-//             data: {
-//                 coinId: item && item['coin id'] || null,
-//                 name: item && coinTrim || null,
-//                 oneDayAverage: item && item['one day'] || null,
-//                 threeDayAverage: item && item['three days'] || null,
-//                 sevenDayAverage: item && item.week || null,
-//                 thirtyDayAverage: item && item.month || null,
-//                 ninetyDayAverage: 3 || null,
-//             }
-//         });
-//         try {
-//             const nestedItemData = itemData.result.list[0];
-//             await prisma.coinBorrowRate.update({
-//                 where: updateCondition,
-//                 data: {
-//                     spotVolume: nestedItemData && parseFloat(nestedItemData.turnover24h) || null,
-//                 }
-//             });
-//         } catch (e) {
-//             console.error("issue", e);
-//         }
-//     } else {
-//         try {
-//             await prisma.coinBorrowRate.create({
-//                 data: {
-//                     coinId: item && item['coin id'] || null,
-//                     name: item && coinTrim || null,
-//                     oneDayAverage: item && item['one day'] || null,
-//                     threeDayAverage: item && item['three days'] || null,
-//                     sevenDayAverage: item && item.week || null,
-//                     thirtyDayAverage: item && item.month || null,
-//                     ninetyDayAverage: 3 || null,
-//                 }
-//             });
-//             try {
-//                 const nestedItemData = itemData.result.list[0];
-//                 await prisma.coinBorrowRate.update({
-//                     where: updateCondition,
-//                     data: {
-//                         spotVolume: nestedItemData && parseFloat(nestedItemData.turnover24h) || null,
-//                     }
-//                 })
-//             } catch (e) {
-//                 console.error("issue", e);
-//             };
-//         } catch (error) {
-//             console.error("An error occurred while creating a record:", error);
-//         }
-//     };
-//     borrowCompleted += 1;
-//     console.log("BORROW WRITE WAS COMPLETED", borrowCompleted);
-// }
 
 
 let borrowCompleted = 0;
