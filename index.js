@@ -1053,132 +1053,129 @@ const processBorrowItem = async (item, recordsMap) => {
 
 
 
-
-
-
 // SYMBOL ID IS THE JSON FOR FUNDING COIN ID IS THE JSON FOR BORROW
 // CREATE OR UPDATE FOR FUNDING
 
 
 
-// const createOrUpdateFundingData = async (fundingData) => {
-//     console.log("Updating/Creating Borrow Rates Now....");
+const createOrUpdateFundingData = async (fundingData) => {
+    console.log("Updating/Creating Borrow Rates Now....");
 
-//     const queue = new PQueue({ concurrency: 5 });
-//     let fundingCurrentItemIndex = 0;
-//     let stopFundingProcessing = false;
+    const queue = new PQueue({ concurrency: 5 });
+    let fundingCurrentItemIndex = 0;
+    let stopFundingProcessing = false;
 
-//     const coinIds = [...new Set(Object.values(fundingData).flat().map(item => item['symbol id']).filter(id => id !== undefined))];
-//     const existingRecords = await prisma.coinFundingRate.findMany({
-//         where: { coinId: { in: coinIds } }
-//     });
-//     const recordsMap = new Map(existingRecords.map(record => [record.coinId, record]));
+    const coinIds = [...new Set(Object.values(fundingData).flat().map(item => item['symbol id']).filter(id => id !== undefined))];
+    const existingRecords = await prisma.coinFundingRate.findMany({
+        where: { coinId: { in: coinIds } }
+    });
+    const recordsMap = new Map(existingRecords.map(record => [record.coinId, record]));
 
-//     for (const key in fundingData) {
-//         if (fundingData.hasOwnProperty(key)) {
-//             let itemsArray = fundingData[key];
+    for (const key in fundingData) {
+        if (fundingData.hasOwnProperty(key)) {
+            let itemsArray = fundingData[key];
 
-//             if (Array.isArray(itemsArray)) {
-//                 for (const item of itemsArray) {
-//                     queue.add(() => processFundingItem(item, recordsMap));
-//                     fundingCurrentItemIndex++;
-//                     if (fundingCurrentItemIndex === fundingData.length - 1) {
-//                         stopFundingProcessing = true;
-//                         break;
-//                     }
-//                 }
-//                 if (stopFundingProcessing) {
-//                     break;
-//                 }
-//             } else {
-//                 console.error(`Expected an array for key ${key}, but received:`, fundingData);
-//             }
-//         }
-//     }
-//     await queue.onIdle();
-//     fundingCurrentItemIndex = 0;
-//     stopFundingProcessing = false;
-//     console.log("Funding Update/Create Complete, Getting Funding Logos Now...");
-//     filterOutFundingUSDT();
-// }
-
-
+            if (Array.isArray(itemsArray)) {
+                for (const item of itemsArray) {
+                    queue.add(() => processFundingItem(item, recordsMap));
+                    fundingCurrentItemIndex++;
+                    if (fundingCurrentItemIndex === fundingData.length - 1) {
+                        stopFundingProcessing = true;
+                        break;
+                    }
+                }
+                if (stopFundingProcessing) {
+                    break;
+                }
+            } else {
+                console.error(`Expected an array for key ${key}, but received:`, fundingData);
+            }
+        }
+    }
+    await queue.onIdle();
+    fundingCurrentItemIndex = 0;
+    stopFundingProcessing = false;
+    console.log("Funding Update/Create Complete, Getting Funding Logos Now...");
+    filterOutFundingUSDT();
+}
 
 
-// function delay(time) {
-//     return new Promise(resolve => setTimeout(resolve, time));
-// }
 
-// let fundingCompleted = 0;
-// const processFundingItem = async (item, recordsMap) => {
-//     await delay(1200);
 
-//     const coinTrimmed = item.symbol.trim()
-//     const existingRecord = recordsMap.get(item['symbol id']);
-//     const itemResponse = await fetch(`https://api.bybit.com/v5/market/tickers?category=linear&symbol=${coinTrimmed}`);
-//     const itemData = await itemResponse.json();
-//     const nestedItemData = itemData.result.list[0];
+function delay(time) {
+    return new Promise(resolve => setTimeout(resolve, time));
+}
 
-//     const datePatterns = [
-//         "20OCT23", "13OCT23", "15DEC23", "28JUN24",
-//         "26JAN24", "28JUN24", "15DEC23", "29SEP23",
-//         "29MAR24", "06OCT23", "29DEC23", "22SEP23",
-//         "27OCT23", "24NOV23"
-//     ];
+let fundingCompleted = 0;
+const processFundingItem = async (item, recordsMap) => {
+    await delay(1200);
 
-//     console.log(nestedItemData)
-//     let endsWithPerp = coinTrimmed.endsWith('PERP');
-//     let includesDate = datePatterns.some(date => coinTrimmed.includes(date));
+    const coinTrimmed = item.symbol.trim()
+    const existingRecord = recordsMap.get(item['symbol id']);
+    const itemResponse = await fetch(`https://api.bybit.com/v5/market/tickers?category=linear&symbol=${coinTrimmed}`);
+    const itemData = await itemResponse.json();
+    const nestedItemData = itemData.result.list[0];
 
-//     if (!endsWithPerp && !includesDate) {
-//         // Update database with the fetched data
-//         if (existingRecord) {
-//             await prisma.coinFundingRate.update({
-//                 where: { coinId: item['symbol id'] },
-//                 data: {
-//                     coinId: item && item['symbol id'] || null,
-//                     name: item && coinTrimmed || null,
-//                     oneDayAverage: item && item['one day'] || null,
-//                     threeDayAverage: item && item['three days'] || null,
-//                     sevenDayAverage: item && item.week || null,
-//                     thirtyDayAverage: item && item.month || null,
-//                     ninetyDayAverage: item && item['three months'] || null,
-//                 }
-//             });
-//             await prisma.coinFundingRate.update({
-//                 where: { coinId: item['symbol id'] },
-//                 data: {
-//                     twentyFourHourVolume: nestedItemData && parseFloat(nestedItemData.turnover24h) || null,
-//                 }
-//             });
-//         } else {
-//             try {
-//                 await prisma.coinFundingRate.create({
-//                     data: {
-//                         coinId: item && item['symbol id'] || null,
-//                         name: item && coinTrimmed || null,
-//                         oneDayAverage: item && item['one day'] || null,
-//                         threeDayAverage: item && item['three days'] || null,
-//                         sevenDayAverage: item && item.week || null,
-//                         thirtyDayAverage: item && item.month || null,
-//                         ninetyDayAverage: item && item['three months'] || null,
-//                     }
-//                 });
+    const datePatterns = [
+        "20OCT23", "13OCT23", "15DEC23", "28JUN24",
+        "26JAN24", "28JUN24", "15DEC23", "29SEP23",
+        "29MAR24", "06OCT23", "29DEC23", "22SEP23",
+        "27OCT23", "24NOV23"
+    ];
 
-//                 await prisma.coinFundingRate.update({
-//                     where: { coinId: item['symbol id'] },
-//                     data: {
-//                         twentyFourHourVolume: nestedItemData && parseFloat(nestedItemData.turnover24h) || null,
-//                     }
-//                 });
-//             } catch (error) {
-//                 console.error("An error occurred while creating a record:", error);
-//             }
-//         };
-//     }
-//     fundingCompleted += 1
-//     console.log("FUNDING WRITE WAS COMPLETED", fundingCompleted)
-// }
+    console.log(nestedItemData)
+    let endsWithPerp = coinTrimmed.endsWith('PERP');
+    let includesDate = datePatterns.some(date => coinTrimmed.includes(date));
+
+    if (!endsWithPerp && !includesDate) {
+        // Update database with the fetched data
+        if (existingRecord) {
+            await prisma.coinFundingRate.update({
+                where: { coinId: item['symbol id'] },
+                data: {
+                    coinId: item && item['symbol id'] || null,
+                    name: item && coinTrimmed || null,
+                    oneDayAverage: item && item['one day'] || null,
+                    threeDayAverage: item && item['three days'] || null,
+                    sevenDayAverage: item && item.week || null,
+                    thirtyDayAverage: item && item.month || null,
+                    ninetyDayAverage: item && item['three months'] || null,
+                }
+            });
+            await prisma.coinFundingRate.update({
+                where: { coinId: item['symbol id'] },
+                data: {
+                    twentyFourHourVolume: nestedItemData && parseFloat(nestedItemData.turnover24h) || null,
+                }
+            });
+        } else {
+            try {
+                await prisma.coinFundingRate.create({
+                    data: {
+                        coinId: item && item['symbol id'] || null,
+                        name: item && coinTrimmed || null,
+                        oneDayAverage: item && item['one day'] || null,
+                        threeDayAverage: item && item['three days'] || null,
+                        sevenDayAverage: item && item.week || null,
+                        thirtyDayAverage: item && item.month || null,
+                        ninetyDayAverage: item && item['three months'] || null,
+                    }
+                });
+
+                await prisma.coinFundingRate.update({
+                    where: { coinId: item['symbol id'] },
+                    data: {
+                        twentyFourHourVolume: nestedItemData && parseFloat(nestedItemData.turnover24h) || null,
+                    }
+                });
+            } catch (error) {
+                console.error("An error occurred while creating a record:", error);
+            }
+        };
+    }
+    fundingCompleted += 1
+    console.log("FUNDING WRITE WAS COMPLETED", fundingCompleted)
+}
 
 
 
