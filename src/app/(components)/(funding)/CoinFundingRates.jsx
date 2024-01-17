@@ -191,13 +191,13 @@ const CoinFundingRates = ({ coinFundingRates }) => {
                                 <AnimatePresence>
                                     {finalItemsToDisplay.map((coinFundingRate) => {
                                     const handleCoinClick = (coinName) => {
-                                        event({
-                                            action: 'coin_click',
-                                            params: {
-                                                'event_category': 'Coin',
-                                                'event_label': coinName
-                                            }
-                                        });
+                                        // Send the event to Google Analytics
+                                        if (typeof gtag === 'function') {
+                                            gtag('event', 'select_content', {
+                                                'content_type': 'coin',
+                                                'item_id': coinName
+                                            });
+                                        }
                                         window.open(`https://www.bybit.com/trade/usdt/${coinName}?affiliate_id=62489`);
                                     };
                                     const isInWatchlist = watchlist.includes(coinFundingRate.id);
