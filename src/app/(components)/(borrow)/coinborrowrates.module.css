@@ -166,25 +166,30 @@
     position: relative;
 }
 
-
 .watchListMinus {
     position: absolute;
     right: 5px;
-    top: 50%;
+    top: 45%;
     transform: translateY(-50%);
-    font-size: 18px;
+    font-size: 21px;
     color: rgb(109, 109, 109);
     cursor: pointer;
+    height: 100%;
+    width: 10px;
+    user-select: none;
 }
 
 .watchListPlus {
     position: absolute;
     right: 3px;
-    top: 50%;
+    top: 60%;
     transform: translateY(-50%);
-    font-size: 15px;
+    font-size: 18px;
     color: rgb(109, 109, 109);
     cursor: pointer;
+    height: 100%;
+    width: 13px;
+    user-select: none;
 }
 
 .watchListMinus:hover {
@@ -195,20 +200,6 @@
     color: rgb(255, 190, 70);
 }
 
-.watchListMinus:focus,
-.watchListMinus:active {
-    color: rgb(255, 190, 70);
-    scale: 1.05;
-    top: 53%;
-    right: 3px;
-}
-
-.watchListPlus:focus,
-.watchListPlus:active {
-    color: rgb(255, 190, 70);
-    scale: 1.05;
-    top: 54%;
-}
 
 
 

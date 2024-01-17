@@ -170,18 +170,25 @@
     right: 5px;
     top: 45%;
     transform: translateY(-50%);
-    font-size: 19px;
+    font-size: 21px;
     color: rgb(109, 109, 109);
     cursor: pointer;
+    height: 100%;
+    width: 10px;
+    user-select: none;
 }
+
 .watchListPlus {
     position: absolute;
     right: 3px;
-    top: 51%;
+    top: 60%;
     transform: translateY(-50%);
-    font-size: 16px;
+    font-size: 18px;
     color: rgb(109, 109, 109);
     cursor: pointer;
+    height: 100%;
+    width: 13px;
+    user-select: none;
 }
 
 .watchListMinus:hover {
