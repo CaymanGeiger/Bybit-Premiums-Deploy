@@ -5,17 +5,27 @@ import styles from './coinborrowrates.module.css'
 import * as ScrollArea from '@radix-ui/react-scroll-area';
 import "../(reusable)/radixscroll.css";
 import Image from 'next/image'
+import { toast } from "sonner";
 
 
 const CoinBorrowRates = ({ coinBorrowRates }) => {
-    const [sortConfig, setSortConfig] = useState({ key: 'spotVolume', direction: 'descending' });
+    const [sortConfig, setSortConfig] = useState({ key: "twentyFourHourVolume", direction: 'descending' });
     const [data, setData] = useState(coinBorrowRates);
     const [visibleItemsCount, setVisibleItemsCount] = useState(100);
     const incrementalLoadCount = 100;
     const [stickyNamesClicked, setStickyNamesClicked] = useState(false);
-    const [lastClickedData, setLastClickedData] = useState(null);
-
+    const [isClientSide, setIsClientSide] = useState(false);
     const isStickyNameClicked = stickyNamesClicked ? styles.active : "";
+    const [lastClickedData, setLastClickedData] = useState(null);
+    const [watchlist, setWatchlist] = useState([]);
+
+
+    useEffect(() => {
+        setIsClientSide(true);
+        const savedWatchlist = JSON.parse(localStorage.getItem('borrow_watchlist')) || [];
+        setWatchlist(savedWatchlist);
+    }, []);
+
 
     const getSortIndicator = (columnName) => {
         if (sortConfig.key === columnName) {
@@ -37,12 +47,13 @@ const CoinBorrowRates = ({ coinBorrowRates }) => {
         }
     }
 
+
     const sortedItems = React.useMemo(() => {
         if (sortConfig.key === null) {
             return data;
         }
 
-        let sortableItems = data ? [...data] : [];
+        let sortableItems = [...data];
         sortableItems.sort((a, b) => {
             const valueA = a[sortConfig.key];
             const valueB = b[sortConfig.key];
@@ -68,6 +79,43 @@ const CoinBorrowRates = ({ coinBorrowRates }) => {
         }
     }, [visibleItemsCount, sortedItems]);
 
+
+
+
+    const handleWatchlistChange = (coin) => {
+        let updatedWatchlist = [...watchlist];
+        if (watchlist.includes(coin.id)) {
+            toast.error("Removed From Watchlist.");
+            updatedWatchlist = updatedWatchlist.filter(watchlistId => watchlistId !== coin.id);
+        } else {
+            toast.success("Added To Watchlist.");
+            updatedWatchlist.push(coin.id);
+        }
+        setWatchlist(updatedWatchlist);
+        localStorage.setItem('borrow_watchlist', JSON.stringify(updatedWatchlist));
+    };
+
+
+    const sortedAndFilteredItems = sortedItems.filter((coinBorrowRate) => {
+        return coinBorrowRate.name ||
+            coinBorrowRate.twentyFourHourVolume ||
+            coinBorrowRate.oneDayAverage ||
+            coinBorrowRate.threeDayAverage ||
+            coinBorrowRate.sevenDayAverage ||
+            coinBorrowRate.thirtyDayAverage ||
+            coinBorrowRate.ninetyDayAverage;
+    });
+
+    const watchlistItems = sortedAndFilteredItems.filter(item => watchlist.includes(item.id));
+    const nonWatchlistItems = sortedAndFilteredItems.filter(item => !watchlist.includes(item.id));
+    const finalItemsToDisplay = [...watchlistItems, ...nonWatchlistItems].slice(0, visibleItemsCount);
+
+
+    if (!isClientSide) {
+        return <div></div>;
+    }
+
+
     return (
         <div className={styles.borrowMainDiv}>
             <h1 className={styles.borrowMainHeader}>
@@ -78,8 +126,8 @@ const CoinBorrowRates = ({ coinBorrowRates }) => {
                     <ScrollArea.Viewport className="ScrollAreaViewport">
                         <table className={`${styles.borrowTable} ${isStickyNameClicked}`}>
                             <colgroup>
-                                <col style={{ width: "16%", minWidth: "125px" }} />
-                                <col style={{ width: "14%", minWidth: "100px" }} />
+                                <col style={{ width: "16%", minWidth: "160px" }} />
+                                <col style={{ width: "14%", minWidth: "120px" }} />
                                 <col style={{ width: "14%", minWidth: "80px" }} />
                                 <col style={{ width: "14%", minWidth: "80px" }} />
                                 <col style={{ width: "14%", minWidth: "80px" }} />
@@ -111,17 +159,9 @@ const CoinBorrowRates = ({ coinBorrowRates }) => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {data && data.length > 0 && (
                                 <AnimatePresence>
-                                    {sortedItems.slice(0, visibleItemsCount).filter((coinBorrowRate) => {
-                                        return coinBorrowRate.name ||
-                                            coinBorrowRate.spotVolume ||
-                                            coinBorrowRate.oneDayAverage ||
-                                            coinBorrowRate.threeDayAverage ||
-                                            coinBorrowRate.sevenDayAverage ||
-                                            coinBorrowRate.thirtyDayAverage ||
-                                            coinBorrowRate.ninetyDayAverage;
-                                    }).map((coinBorrowRate) => {
+                                    {finalItemsToDisplay.map((coinBorrowRate) => {
+                                        const isInWatchlist = watchlist.includes(coinBorrowRate.id);
                                         let isSymbol = coinBorrowRate.symbolUrl ? coinBorrowRate.symbolUrl : "/noImage.png";
                                         let coinName = coinBorrowRate.name.trim();
                                         const volume = coinBorrowRate.spotVolume;
@@ -144,11 +184,15 @@ const CoinBorrowRates = ({ coinBorrowRates }) => {
                                                         height={18}
                                                         src={isSymbol}
                                                         alt='coin symbol'
-                                                        onClick={() => window.open(`https://www.bybit.com/en/trade/spot/${coinName}/USDT?affiliate_id=62489`)}
+                                                        onClick={() => window.open(`https://www.bybit.com/trade/usdt/${coinName}?affiliate_id=62489`)}
                                                     />
-                                                    <span onClick={() => window.open(`https://www.bybit.com/en/trade/spot/${coinName}/USDT?affiliate_id=62489`)}>
+                                                    <span onClick={() => window.open(`https://www.bybit.com/trade/usdt/${coinName}?affiliate_id=62489`)}>
                                                         {coinBorrowRate.name}
                                                     </span>
+                                                    {isInWatchlist ?
+                                                        <h5 className={styles.watchListMinus} onClick={() => handleWatchlistChange(coinBorrowRate)}>-</h5> :
+                                                        <h5 className={styles.watchListPlus} onClick={() => handleWatchlistChange(coinBorrowRate)}>+</h5>
+                                                    }
                                                 </td>
                                                 <td>{formattedVolume ? `$${formattedVolume}` : ""}</td>
                                                 <td>{coinBorrowRate.oneDayAverage ? `${coinBorrowRate.oneDayAverage}%` : ""}</td>
@@ -160,7 +204,6 @@ const CoinBorrowRates = ({ coinBorrowRates }) => {
                                         )
                                     })}
                                 </AnimatePresence>
-                                )}
                             </tbody>
                         </table>
                     </ScrollArea.Viewport>

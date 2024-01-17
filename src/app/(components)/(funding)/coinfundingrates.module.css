@@ -147,14 +147,15 @@
 }
 @media (max-width: 600px) {
     .stickyNamesButton {
-        font-size: 10px;
+        font-size: 9px;
         border-radius: 2px;
         border: 1px solid rgb(162, 162, 162);
         padding: 1px;
         margin: 0;
         color: rgb(100, 100, 100);
         transition: all 0.2s ease;
-        background-color: transparent;
+        background-color: white;
+        height: 14px;
     }
 }
 
@@ -163,21 +164,22 @@
 }
 
 
+
 .watchListMinus {
     position: absolute;
     right: 5px;
-    top: 50%;
+    top: 45%;
     transform: translateY(-50%);
-    font-size: 16px;
+    font-size: 19px;
     color: rgb(109, 109, 109);
     cursor: pointer;
 }
 .watchListPlus {
     position: absolute;
     right: 3px;
-    top: 50%;
+    top: 51%;
     transform: translateY(-50%);
-    font-size: 13px;
+    font-size: 16px;
     color: rgb(109, 109, 109);
     cursor: pointer;
 }
@@ -188,21 +190,6 @@
 
 .watchListPlus:hover {
     color: rgb(255, 190, 70);
-}
-
-.watchListMinus:focus,
-.watchListMinus:active {
-    color: rgb(255, 190, 70);
-    scale: 1.05;
-    top: 53.5%;
-    right: 5.5px;
-}
-
-.watchListPlus:focus,
-.watchListPlus:active {
-    color: rgb(255, 190, 70);
-    scale: 1.05;
-    top: 54%;
 }
 
 

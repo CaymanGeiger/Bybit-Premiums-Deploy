@@ -5,6 +5,8 @@ import styles from './coinfundingrates.module.css'
 import * as ScrollArea from '@radix-ui/react-scroll-area';
 import "../(reusable)/radixscroll.css";
 import Image from 'next/image'
+import { toast } from "sonner";
+
 
 
 const CoinFundingRates = ({ coinFundingRates }) => {
@@ -21,7 +23,7 @@ const CoinFundingRates = ({ coinFundingRates }) => {
 
     useEffect(() => {
         setIsClientSide(true);
-        const savedWatchlist = JSON.parse(localStorage.getItem('watchlist')) || [];
+        const savedWatchlist = JSON.parse(localStorage.getItem('funding_watchlist')) || [];
         setWatchlist(savedWatchlist);
     }, []);
 
@@ -84,14 +86,14 @@ const CoinFundingRates = ({ coinFundingRates }) => {
     const handleWatchlistChange = (coin) => {
         let updatedWatchlist = [...watchlist];
         if (watchlist.includes(coin.id)) {
-            // Remove from watchlist
             updatedWatchlist = updatedWatchlist.filter(watchlistId => watchlistId !== coin.id);
+            toast.error("Removed From Watchlist.");
         } else {
-            // Add to watchlist
             updatedWatchlist.push(coin.id);
+            toast.success("Added To Watchlist.");
         }
         setWatchlist(updatedWatchlist);
-        localStorage.setItem('watchlist', JSON.stringify(updatedWatchlist));
+        localStorage.setItem('funding_watchlist', JSON.stringify(updatedWatchlist));
     };
 
 
@@ -111,7 +113,7 @@ const CoinFundingRates = ({ coinFundingRates }) => {
 
 
     if (!isClientSide) {
-        return <div>Loading...</div>;
+        return <div></div>;
     }
 
 

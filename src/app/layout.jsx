@@ -1,4 +1,5 @@
 import { Metadata } from 'next'
+import { Toaster } from "./(components)/(reusable)/Toaster";
 import { Inter } from 'next/font/google'
 import './globals.css'
 import Head from 'next/head';
@@ -18,7 +19,10 @@ export default function RootLayout({children}) {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <link rel="shortcut icon" sizes='16x16' href="/favicon.png"/>
       </Head>
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        {children}
+        <Toaster position="bottom-center" />
+      </body>
     </html>
   )
 }

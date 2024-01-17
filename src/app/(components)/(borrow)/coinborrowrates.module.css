@@ -150,21 +150,67 @@
 
 @media (max-width: 600px) {
     .stickyNamesButton {
-        font-size: 10px;
+        font-size: 9px;
         border-radius: 2px;
         border: 1px solid rgb(162, 162, 162);
         padding: 1px;
         margin: 0;
         color: rgb(100, 100, 100);
         transition: all 0.2s ease;
-        background-color: transparent;
+        background-color: white;
+        height: 14px;
     }
 }
 
 .tdSymbolAndName {
-    /* position: absolute;
-    left: 0; */
+    position: relative;
 }
+
+
+.watchListMinus {
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: rgb(109, 109, 109);
+    cursor: pointer;
+}
+
+.watchListPlus {
+    position: absolute;
+    right: 3px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 15px;
+    color: rgb(109, 109, 109);
+    cursor: pointer;
+}
+
+.watchListMinus:hover {
+    color: rgb(255, 190, 70);
+}
+
+.watchListPlus:hover {
+    color: rgb(255, 190, 70);
+}
+
+.watchListMinus:focus,
+.watchListMinus:active {
+    color: rgb(255, 190, 70);
+    scale: 1.05;
+    top: 53%;
+    right: 3px;
+}
+
+.watchListPlus:focus,
+.watchListPlus:active {
+    color: rgb(255, 190, 70);
+    scale: 1.05;
+    top: 54%;
+}
+
+
 
 .tdSymbolAndName span {
     overflow: hidden;
