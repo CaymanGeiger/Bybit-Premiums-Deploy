@@ -3,6 +3,7 @@ import { Toaster } from "./(components)/(reusable)/Toaster";
 import { Inter } from 'next/font/google'
 import './globals.css'
 import Head from 'next/head';
+import Script from 'next/script'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -15,24 +16,27 @@ export default function RootLayout({children}) {
   return (
     <html lang="en">
       <Head>
+
         <meta charSet="UTF-8" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-        <link rel="shortcut icon" sizes='16x16' href="/favicon.png"/>
-        <script
-          async
-          src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_ANALYTICS_KEY}`}
-        />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
+        <link rel="shortcut icon" sizes='16x16' href="/favicon.png" />
+      </Head>
+      <Script
+        async
+        src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_ANALYTICS_KEY}`}
+      />
+      <Script
+        dangerouslySetInnerHTML={{
+          __html: `
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
-              gtag('config', 'G-CYB3Q9FQQ9');
+              gtag('config', '${process.env.NEXT_PUBLIC_ANALYTICS_KEY}', {
+              page_path: window.location.pathname,
+              });
             `,
-          }}
-          />
-      </Head>
+        }}
+      />
       <body className={inter.className}>
         {children}
         <Toaster position="top-center" />

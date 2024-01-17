@@ -6,7 +6,7 @@ import * as ScrollArea from '@radix-ui/react-scroll-area';
 import "../(reusable)/radixscroll.css";
 import Image from 'next/image'
 import { toast } from "sonner";
-
+import {event} from "../../../../lib/ga"
 
 
 const CoinFundingRates = ({ coinFundingRates }) => {
@@ -122,6 +122,18 @@ const CoinFundingRates = ({ coinFundingRates }) => {
             <h1 className={styles.fundingMainHeader}>
                 BYBIT Funding Rates
             </h1>
+            <button
+            onClick={() => (
+                event({
+                    action: "click",
+                    params: {
+                        click_name: "test",
+                    },
+                })
+            )}
+            >
+                Click Me
+            </button>
             <div className={styles.scrollDiv}>
             <ScrollArea.Root className="ScrollAreaRoot">
                 <ScrollArea.Viewport className="ScrollAreaViewport">
