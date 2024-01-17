@@ -22,10 +22,12 @@ export default function RootLayout({children}) {
         <link rel="shortcut icon" sizes='16x16' href="/favicon.png" />
       </Head>
       <Script
+        id='google_script1'
         async
         src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_ANALYTICS_KEY}`}
       />
       <Script
+        id='google_script2'
         dangerouslySetInnerHTML={{
           __html: `
               window.dataLayer = window.dataLayer || [];
