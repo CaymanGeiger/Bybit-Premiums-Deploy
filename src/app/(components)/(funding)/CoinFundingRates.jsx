@@ -87,10 +87,10 @@ const CoinFundingRates = ({ coinFundingRates }) => {
         let updatedWatchlist = [...watchlist];
         if (watchlist.includes(coin.id)) {
             updatedWatchlist = updatedWatchlist.filter(watchlistId => watchlistId !== coin.id);
-            toast.error("Removed From Watchlist.");
+            toast.error(`Removed ${coin.name} From Watchlist.`);
         } else {
             updatedWatchlist.push(coin.id);
-            toast.success("Added To Watchlist.");
+            toast.success(`Added ${coin.name} To Watchlist.`);
         }
         setWatchlist(updatedWatchlist);
         localStorage.setItem('funding_watchlist', JSON.stringify(updatedWatchlist));
