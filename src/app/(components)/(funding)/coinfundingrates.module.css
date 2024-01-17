@@ -155,7 +155,7 @@
         color: rgb(100, 100, 100);
         transition: all 0.2s ease;
         background-color: white;
-        height: 14px;
+        height: 15px;
     }
 }
 
@@ -171,7 +171,7 @@
     top: 45%;
     transform: translateY(-50%);
     font-size: 21px;
-    color: rgb(109, 109, 109);
+    color: rgb(160, 160, 160);
     cursor: pointer;
     height: 100%;
     width: 10px;
@@ -187,7 +187,7 @@
     top: 60%;
     transform: translateY(-50%);
     font-size: 18px;
-    color: rgb(109, 109, 109);
+    color: rgb(160, 160, 160);
     cursor: pointer;
     height: 100%;
     width: 13px;
@@ -223,6 +223,7 @@
     transition: color 0.2s ease;
     z-index: 10;
     margin-left: 5px;
+    margin-right: 23px;
 }
 
 .tdSymbolAndName span::before,
@@ -259,6 +260,12 @@
 }
 .tdSymbolAndName img:hover {
     cursor: pointer;
+}
+
+.tdSymbolAndName {
+    position: relative;
+    min-width: 160px;
+
 }
 
 .fundingMainDiv td,

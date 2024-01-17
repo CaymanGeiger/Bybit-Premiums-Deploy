@@ -127,7 +127,7 @@ const CoinFundingRates = ({ coinFundingRates }) => {
                 <ScrollArea.Viewport className="ScrollAreaViewport">
                         <table className={`${styles.fundingTable} ${isStickyNameClicked}`}>
                             <colgroup>
-                                <col style={{ width: "16%", minWidth: "180px" }} />
+                                <col style={{ width: "16%", minWidth: "160px" }} />
                                 <col style={{ width: "14%", minWidth: "120px" }} />
                                 <col style={{ width: "14%", minWidth: "80px" }} />
                                 <col style={{ width: "14%", minWidth: "80px" }} />
