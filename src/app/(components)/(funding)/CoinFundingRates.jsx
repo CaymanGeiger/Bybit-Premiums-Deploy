@@ -25,6 +25,7 @@ const CoinFundingRates = ({ coinFundingRates }) => {
     };
 
 
+    
     const requestSort = (key) => {
         let direction = 'ascending';
         if (lastClickedData === key) {
