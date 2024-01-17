@@ -112,10 +112,26 @@ const CoinFundingRates = ({ coinFundingRates }) => {
     const finalItemsToDisplay = [...watchlistItems, ...nonWatchlistItems].slice(0, visibleItemsCount);
 
 
+
+    // This is a simplified example. Your actual implementation may vary.
+    document.querySelectorAll('.coin').forEach(coin => {
+        coin.addEventListener('click', function () {
+            // Assuming 'coin' has a data attribute like 'data-coin-name' holding the coin's name
+            const coinName = this.getAttribute('data-coin-name');
+
+            // Send the event to Google Analytics
+            gtag('event', 'select_content', {
+                'content_type': 'coin',
+                'item_id': coinName
+            });
+        });
+    });
+
+
+
     if (!isClientSide) {
         return <div></div>;
     }
-
 
     return (
         <div className={styles.fundingMainDiv}>
@@ -174,6 +190,16 @@ const CoinFundingRates = ({ coinFundingRates }) => {
                             <tbody>
                                 <AnimatePresence>
                                     {finalItemsToDisplay.map((coinFundingRate) => {
+                                    const handleCoinClick = (coinName) => {
+                                        event({
+                                            action: 'coin_click',
+                                            params: {
+                                                'event_category': 'Coin',
+                                                'event_label': coinName
+                                            }
+                                        });
+                                        window.open(`https://www.bybit.com/trade/usdt/${coinName}?affiliate_id=62489`);
+                                    };
                                     const isInWatchlist = watchlist.includes(coinFundingRate.id);
                                     let isSymbol = coinFundingRate.symbolUrl ? coinFundingRate.symbolUrl : "/noImage.png";
                                     let coinName = coinFundingRate.name.trim();
@@ -197,9 +223,9 @@ const CoinFundingRates = ({ coinFundingRates }) => {
                                                 height={18}
                                                 src={isSymbol}
                                                 alt='coin symbol'
-                                                    onClick={() => window.open(`https://www.bybit.com/trade/usdt/${coinName}?affiliate_id=62489`)}
+                                                    onClick={() => handleCoinClick(coinFundingRate.name)}
                                                 />
-                                                <span onClick={() => window.open(`https://www.bybit.com/trade/usdt/${coinName}?affiliate_id=62489`)}>
+                                                <span onClick={() => handleCoinClick(coinFundingRate.name)}>
                                                     {coinFundingRate.name}
                                                 </span>
                                                 {isInWatchlist ?
