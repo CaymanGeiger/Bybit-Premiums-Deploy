@@ -13,8 +13,17 @@ const CoinFundingRates = ({ coinFundingRates }) => {
     const [visibleItemsCount, setVisibleItemsCount] = useState(100);
     const incrementalLoadCount = 100;
     const [stickyNamesClicked, setStickyNamesClicked] = useState(false);
+    const [isClientSide, setIsClientSide] = useState(false);
     const isStickyNameClicked = stickyNamesClicked ? styles.active : "";
     const [lastClickedData, setLastClickedData] = useState(null);
+    const [watchlist, setWatchlist] = useState([]);
+
+
+    useEffect(() => {
+        setIsClientSide(true);
+        const savedWatchlist = JSON.parse(localStorage.getItem('watchlist')) || [];
+        setWatchlist(savedWatchlist);
+    }, []);
 
 
     const getSortIndicator = (columnName) => {
@@ -23,7 +32,6 @@ const CoinFundingRates = ({ coinFundingRates }) => {
         }
         return '';
     };
-
 
 
     const requestSort = (key) => {
@@ -37,7 +45,6 @@ const CoinFundingRates = ({ coinFundingRates }) => {
             setSortConfig({ key, direction });
         }
     }
-
 
 
     const sortedItems = React.useMemo(() => {
@@ -61,10 +68,6 @@ const CoinFundingRates = ({ coinFundingRates }) => {
     }, [data, sortConfig]);
 
 
-
-
-
-
     useEffect(() => {
         if (visibleItemsCount < sortedItems.length) {
             const timer = setTimeout(() => {
@@ -74,6 +77,43 @@ const CoinFundingRates = ({ coinFundingRates }) => {
             return () => clearTimeout(timer);
         }
     }, [visibleItemsCount, sortedItems]);
+
+
+
+
+    const handleWatchlistChange = (coin) => {
+        let updatedWatchlist = [...watchlist];
+        if (watchlist.includes(coin.id)) {
+            // Remove from watchlist
+            updatedWatchlist = updatedWatchlist.filter(watchlistId => watchlistId !== coin.id);
+        } else {
+            // Add to watchlist
+            updatedWatchlist.push(coin.id);
+        }
+        setWatchlist(updatedWatchlist);
+        localStorage.setItem('watchlist', JSON.stringify(updatedWatchlist));
+    };
+
+
+    const sortedAndFilteredItems = sortedItems.filter((coinFundingRate) => {
+        return coinFundingRate.name ||
+            coinFundingRate.twentyFourHourVolume ||
+            coinFundingRate.oneDayAverage ||
+            coinFundingRate.threeDayAverage ||
+            coinFundingRate.sevenDayAverage ||
+            coinFundingRate.thirtyDayAverage ||
+            coinFundingRate.ninetyDayAverage;
+    });
+
+    const watchlistItems = sortedAndFilteredItems.filter(item => watchlist.includes(item.id));
+    const nonWatchlistItems = sortedAndFilteredItems.filter(item => !watchlist.includes(item.id));
+    const finalItemsToDisplay = [...watchlistItems, ...nonWatchlistItems].slice(0, visibleItemsCount);
+
+
+    if (!isClientSide) {
+        return <div>Loading...</div>;
+    }
+
 
     return (
         <div className={styles.fundingMainDiv}>
@@ -119,15 +159,8 @@ const CoinFundingRates = ({ coinFundingRates }) => {
                             </thead>
                             <tbody>
                                 <AnimatePresence>
-                                    {sortedItems.slice(0, visibleItemsCount).filter((coinFundingRate) => {
-                                        return coinFundingRate.name ||
-                                            coinFundingRate.twentyFourHourVolume ||
-                                            coinFundingRate.oneDayAverage ||
-                                            coinFundingRate.threeDayAverage ||
-                                            coinFundingRate.sevenDayAverage ||
-                                            coinFundingRate.thirtyDayAverage ||
-                                            coinFundingRate.ninetyDayAverage;
-                                    }).map((coinFundingRate) => {
+                                    {finalItemsToDisplay.map((coinFundingRate) => {
+                                    const isInWatchlist = watchlist.includes(coinFundingRate.id);
                                     let isSymbol = coinFundingRate.symbolUrl ? coinFundingRate.symbolUrl : "/noImage.png";
                                     let coinName = coinFundingRate.name.trim();
                                     const volume = coinFundingRate.twentyFourHourVolume;
@@ -155,6 +188,10 @@ const CoinFundingRates = ({ coinFundingRates }) => {
                                                 <span onClick={() => window.open(`https://www.bybit.com/trade/usdt/${coinName}?affiliate_id=62489`)}>
                                                     {coinFundingRate.name}
                                                 </span>
+                                                {isInWatchlist ?
+                                                    <h5 className={styles.watchListMinus} onClick={() => handleWatchlistChange(coinFundingRate)}>-</h5> :
+                                                    <h5 className={styles.watchListPlus} onClick={() => handleWatchlistChange(coinFundingRate)}>+</h5>
+                                                }
                                             </td>
                                             <td>{formattedVolume ? `$${formattedVolume}` : ""}</td>
                                             <td>{coinFundingRate.oneDayAverage ? `${coinFundingRate.oneDayAverage}%` : ""}</td>
