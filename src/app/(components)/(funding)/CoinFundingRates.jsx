@@ -112,23 +112,6 @@ const CoinFundingRates = ({ coinFundingRates }) => {
     const finalItemsToDisplay = [...watchlistItems, ...nonWatchlistItems].slice(0, visibleItemsCount);
 
 
-
-    // This is a simplified example. Your actual implementation may vary.
-    document.querySelectorAll('.coin').forEach(coin => {
-        coin.addEventListener('click', function () {
-            // Assuming 'coin' has a data attribute like 'data-coin-name' holding the coin's name
-            const coinName = this.getAttribute('data-coin-name');
-
-            // Send the event to Google Analytics
-            gtag('event', 'select_content', {
-                'content_type': 'coin',
-                'item_id': coinName
-            });
-        });
-    });
-
-
-
     if (!isClientSide) {
         return <div></div>;
     }
@@ -138,7 +121,7 @@ const CoinFundingRates = ({ coinFundingRates }) => {
             <h1 className={styles.fundingMainHeader}>
                 BYBIT Funding Rates
             </h1>
-            <button
+            {/* <button
             onClick={() => (
                 event({
                     action: "click",
@@ -149,7 +132,7 @@ const CoinFundingRates = ({ coinFundingRates }) => {
             )}
             >
                 Click Me
-            </button>
+            </button> */}
             <div className={styles.scrollDiv}>
             <ScrollArea.Root className="ScrollAreaRoot">
                 <ScrollArea.Viewport className="ScrollAreaViewport">
