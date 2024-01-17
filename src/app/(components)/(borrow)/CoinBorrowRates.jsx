@@ -115,7 +115,6 @@ const CoinBorrowRates = ({ coinBorrowRates }) => {
         return <div></div>;
     }
 
-
     return (
         <div className={styles.borrowMainDiv}>
             <h1 className={styles.borrowMainHeader}>
