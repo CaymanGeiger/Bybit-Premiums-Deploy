@@ -25,7 +25,7 @@ const CoinFundingRates = ({ coinFundingRates }) => {
     };
 
 
-    
+
     const requestSort = (key) => {
         let direction = 'ascending';
         if (lastClickedData === key) {
@@ -128,15 +128,9 @@ const CoinFundingRates = ({ coinFundingRates }) => {
                                             coinFundingRate.thirtyDayAverage ||
                                             coinFundingRate.ninetyDayAverage;
                                     }).map((coinFundingRate) => {
-                                    // console.log(coinFundingRate)
                                     let isSymbol = coinFundingRate.symbolUrl ? coinFundingRate.symbolUrl : "/noImage.png";
                                     let coinName = coinFundingRate.name.trim();
                                     const volume = coinFundingRate.twentyFourHourVolume;
-                                    // const newOneDay = Number((coinFundingRate.oneDayAverage * 100).toFixed(3))
-                                    // const newThreeDay = Number((coinFundingRate.threeDayAverage * 100).toFixed(3))
-                                    // const newSevenDay = Number((coinFundingRate.sevenDayAverage * 100).toFixed(3))
-                                    // const newThirtyDay = Number((coinFundingRate.thirtyDayAverage * 100).toFixed(3))
-                                    // const newNinetyDay = Number((coinFundingRate.ninetyDayAverage * 100).toFixed(3))
                                     const formattedVolume = volume >= 1000 ? Math.floor(volume)?.toLocaleString() : volume?.toString();
                                     return (
                                         <motion.tr

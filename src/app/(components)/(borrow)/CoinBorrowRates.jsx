@@ -125,11 +125,6 @@ const CoinBorrowRates = ({ coinBorrowRates }) => {
                                         let isSymbol = coinBorrowRate.symbolUrl ? coinBorrowRate.symbolUrl : "/noImage.png";
                                         let coinName = coinBorrowRate.name.trim();
                                         const volume = coinBorrowRate.spotVolume;
-                                        // const newOneDay = Number((coinBorrowRate.oneDayAverage * 100).toFixed(3))
-                                        // const newThreeDay = Number((coinBorrowRate.threeDayAverage * 100).toFixed(3))
-                                        // const newSevenDay = Number((coinBorrowRate.sevenDayAverage * 100).toFixed(3))
-                                        // const newThirtyDay = Number((coinBorrowRate.thirtyDayAverage * 100).toFixed(3))
-                                        // const newNinetyDay = Number((coinBorrowRate.ninetyDayAverage * 100).toFixed(3))
                                         const formattedVolume = volume >= 1000 ? Math.floor(volume)?.toLocaleString() : volume?.toString();
                                         return (
                                             <motion.tr
