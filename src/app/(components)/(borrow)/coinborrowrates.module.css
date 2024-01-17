@@ -27,6 +27,11 @@
     color: #7b7d7d;
     font-weight: 600;
     white-space: nowrap;
+    transition: background-color .2s ease-in;
+}
+
+.borrowMainDiv th:hover {
+    background-color: rgb(236, 236, 236);
 }
 
 .borrowMainDiv thead tr th {
@@ -136,9 +141,9 @@
         border-radius: 2px;
         border: 1px solid rgb(162, 162, 162);
         padding: 1px;
+        margin: 0;
         color: rgb(100, 100, 100);
         background-color: transparent;
-        margin: 0;
         visibility: hidden;
     }
 }

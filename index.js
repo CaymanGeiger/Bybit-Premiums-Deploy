@@ -894,17 +894,7 @@ const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
 app.get('/api/test', async (req, res) => {
     try {
         // await createOrUpdateBorrowData(testData);
-        await wait(10000);
-        console.log("First 10 seconds passed");
 
-        // Repeat the process as needed
-        await wait(10000);
-        console.log("Second 10 seconds passed");
-
-        await wait(10000);
-        console.log("Third 10 seconds passed");
-
-        res.send("TESTING completed");
     } catch(error) {
         res.send("Issue Found", error)
     }

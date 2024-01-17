@@ -17,9 +17,21 @@ async function getCoinBorrowRates() {
 }
 
 
+async function getCoinBorrowRatesApi() {
+  const response = await fetch('https://bybit-premiums-backend-4ade2ef52ba5.herokuapp.com/borrowrates');
+  const data = await response.json()
+  return data;
+}
+
+async function getCoinFundingRatesApi() {
+  const response = await fetch('https://bybit-premiums-backend-4ade2ef52ba5.herokuapp.com/fundingrates');
+  const data = await response.json()
+  return data;
+}
+
 export default async function Home() {
-  const coinFundingRates = await getCoinFundingRates();
-  const coinBorrowRates = await getCoinBorrowRates();
+  const coinFundingRates = await getCoinFundingRatesApi();
+  const coinBorrowRates = await getCoinBorrowRatesApi();
 
 
   // console.log(coinFundingRates);

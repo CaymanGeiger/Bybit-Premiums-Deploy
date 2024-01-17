@@ -8,7 +8,7 @@ import Image from 'next/image'
 
 
 const CoinBorrowRates = ({ coinBorrowRates }) => {
-    const [sortConfig, setSortConfig] = useState({ key: 'spotVolume', direction: 'ascending' });
+    const [sortConfig, setSortConfig] = useState({ key: 'spotVolume', direction: 'descending' });
     const [data, setData] = useState(coinBorrowRates);
     const [visibleItemsCount, setVisibleItemsCount] = useState(100);
     const incrementalLoadCount = 100;
@@ -24,6 +24,7 @@ const CoinBorrowRates = ({ coinBorrowRates }) => {
         return '';
     };
 
+
     const requestSort = (key) => {
         let direction = 'ascending';
         if (lastClickedData === key) {
@@ -36,13 +37,12 @@ const CoinBorrowRates = ({ coinBorrowRates }) => {
         }
     }
 
-
     const sortedItems = React.useMemo(() => {
         if (sortConfig.key === null) {
             return data;
         }
 
-        let sortableItems = [...data];
+        let sortableItems = data ? [...data] : [];
         sortableItems.sort((a, b) => {
             const valueA = a[sortConfig.key];
             const valueB = b[sortConfig.key];
@@ -111,6 +111,7 @@ const CoinBorrowRates = ({ coinBorrowRates }) => {
                                 </tr>
                             </thead>
                             <tbody>
+                                {data && data.length > 0 && (
                                 <AnimatePresence>
                                     {sortedItems.slice(0, visibleItemsCount).filter((coinBorrowRate) => {
                                         return coinBorrowRate.name ||
@@ -164,6 +165,7 @@ const CoinBorrowRates = ({ coinBorrowRates }) => {
                                         )
                                     })}
                                 </AnimatePresence>
+                                )}
                             </tbody>
                         </table>
                     </ScrollArea.Viewport>

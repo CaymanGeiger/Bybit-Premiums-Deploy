@@ -8,7 +8,7 @@ import Image from 'next/image'
 
 
 const CoinFundingRates = ({ coinFundingRates }) => {
-    const [sortConfig, setSortConfig] = useState({ key: "twentyFourHourVolume", direction: 'ascending' });
+    const [sortConfig, setSortConfig] = useState({ key: "twentyFourHourVolume", direction: 'descending' });
     const [data, setData] = useState(coinFundingRates);
     const [visibleItemsCount, setVisibleItemsCount] = useState(100);
     const incrementalLoadCount = 100;
@@ -127,6 +127,7 @@ const CoinFundingRates = ({ coinFundingRates }) => {
                                             coinFundingRate.thirtyDayAverage ||
                                             coinFundingRate.ninetyDayAverage;
                                     }).map((coinFundingRate) => {
+                                    // console.log(coinFundingRate)
                                     let isSymbol = coinFundingRate.symbolUrl ? coinFundingRate.symbolUrl : "/noImage.png";
                                     let coinName = coinFundingRate.name.trim();
                                     const volume = coinFundingRate.twentyFourHourVolume;
