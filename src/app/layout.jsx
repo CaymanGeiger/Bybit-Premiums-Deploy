@@ -18,6 +18,13 @@ export default function RootLayout({children}) {
         <meta charSet="UTF-8" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <link rel="shortcut icon" sizes='16x16' href="/favicon.png"/>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-CYB3Q9FQQ9"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments)}
+          gtag('js', new Date());
+          gtag('config', 'G-CYB3Q9FQQ9');
+        </script>
       </Head>
       <body className={inter.className}>
         {children}
