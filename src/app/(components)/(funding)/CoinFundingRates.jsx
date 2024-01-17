@@ -6,7 +6,7 @@ import * as ScrollArea from '@radix-ui/react-scroll-area';
 import "../(reusable)/radixscroll.css";
 import Image from 'next/image'
 import { toast } from "sonner";
-import {event} from "../../../../lib/ga"
+// import {event} from "../../../../lib/ga"
 
 
 const CoinFundingRates = ({ coinFundingRates }) => {
