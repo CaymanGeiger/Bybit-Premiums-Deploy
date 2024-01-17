@@ -209,10 +209,12 @@
 }
 
 .watchListPlus:active,
-.watchListPlus:focus .watchListMinus:active,
+.watchListPlus:focus
+.watchListMinus:active,
 .watchListMinus:focus {
     outline: none;
     background-color: transparent;
+    -webkit-tap-highlight-color: transparent;
 }
 
 

@@ -211,6 +211,7 @@
 .watchListMinus:focus {
     outline: none;
     background-color: transparent;
+    -webkit-tap-highlight-color: transparent;
 }
 
 
