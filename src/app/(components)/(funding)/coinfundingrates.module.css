@@ -176,6 +176,9 @@
     height: 100%;
     width: 10px;
     user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
 .watchListPlus {
@@ -189,6 +192,9 @@
     height: 100%;
     width: 13px;
     user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
 .watchListMinus:hover {
@@ -199,6 +205,13 @@
     color: rgb(255, 190, 70);
 }
 
+.watchListPlus:active,
+.watchListPlus:focus
+.watchListMinus:active,
+.watchListMinus:focus {
+    outline: none;
+    background-color: transparent;
+}
 
 
 .tdSymbolAndName span {
