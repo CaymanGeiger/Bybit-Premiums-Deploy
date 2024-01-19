@@ -21,7 +21,7 @@ export default async function Home() {
   const coinBorrowRates = await getCoinBorrowRatesApi();
 
 
-  // console.log(coinFundingRates);
+
   return (
     <main className={styles.main}>
       <Nav/>
