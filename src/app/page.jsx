@@ -5,13 +5,13 @@ import Nav from './(components)/(nav)/Nav'
 
 
 async function getCoinBorrowRatesApi() {
-  const response = await fetch('https://bybit-premiums-back-end-dd9a566bba8e.herokuapp.com/borrowrates');
+  const response = await fetch(`${process.env.BACKEND_URL}/borrowrates`);
   const data = await response.json()
   return data;
 }
 
 async function getCoinFundingRatesApi() {
-  const response = await fetch('https://bybit-premiums-back-end-dd9a566bba8e.herokuapp.com/fundingrates');
+  const response = await fetch(`${process.env.BACKEND_URL}/fundingrates`);
   const data = await response.json()
   return data;
 }
