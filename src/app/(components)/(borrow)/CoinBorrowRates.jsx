@@ -162,8 +162,8 @@ const CoinBorrowRates = ({ coinBorrowRates }) => {
                                     {finalItemsToDisplay.map((coinBorrowRate) => {
                                         const isInWatchlist = watchlist.includes(coinBorrowRate.id);
                                         let isSymbol = coinBorrowRate.symbolUrl ? coinBorrowRate.symbolUrl : "/noImage.png";
-                                        let coinName = coinBorrowRate.name.trim();
                                         const volume = coinBorrowRate.spotVolume;
+                                        const coinName = coinBorrowRate.name.trim().includes("USDC") ? "USDT" : coinBorrowRate.name.trim();
                                         const formattedVolume = volume >= 1000 ? Math.floor(volume)?.toLocaleString() : volume?.toString();
                                         return (
                                             <motion.tr
@@ -186,7 +186,7 @@ const CoinBorrowRates = ({ coinBorrowRates }) => {
                                                         onClick={() => window.open(`https://www.bybit.com/trade/usdt/${coinName}?affiliate_id=62489`)}
                                                     />
                                                     <span onClick={() => window.open(`https://www.bybit.com/trade/usdt/${coinName}?affiliate_id=62489`)}>
-                                                        {coinBorrowRate.name}
+                                                        {coinName}
                                                     </span>
                                                     {isInWatchlist ?
                                                         <h5 className={styles.watchListMinus} onClick={() => handleWatchlistChange(coinBorrowRate)}>-</h5> :
