@@ -10,16 +10,18 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata = {
   title: 'Bybit Premiums',
   description: 'All Your Stats In One Place',
+  url: 'https://bybitpremiums.com',
+  icons: {
+    icon: '/icon.png',
+  }
 }
 
 export default function RootLayout({children}) {
   return (
     <html lang="en">
       <Head>
-
         <meta charSet="UTF-8" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-        <link rel="shortcut icon" sizes='16x16' href="/favicon.png" />
       </Head>
       <Script
         id='google_script1'
