@@ -240,4 +240,5 @@ const CoinBorrowRates = ({ coinBorrowRates }) => {
         </div>
     );
 }
+
 export default CoinBorrowRates;
