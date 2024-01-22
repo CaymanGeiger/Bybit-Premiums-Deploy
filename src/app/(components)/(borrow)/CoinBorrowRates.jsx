@@ -162,7 +162,7 @@ const CoinBorrowRates = ({ coinBorrowRates }) => {
                                             </button>
                                         </div>
                                     </th>
-                                    <th onClick={() => requestSort('spotVolume')}>24h Volume <strong className={styles.arrows}>{getSortIndicator('spotVolume')}</strong></th>
+                                    <th onClick={() => requestSort('spotVolume')}>Spot Volume <strong className={styles.arrows}>{getSortIndicator('spotVolume')}</strong></th>
                                     <th onClick={() => requestSort('oneDayAverage')}>1d <strong className={styles.arrows}>{getSortIndicator('oneDayAverage')}</strong></th>
                                     <th onClick={() => requestSort('threeDayAverage')}>3d <strong className={styles.arrows}>{getSortIndicator('threeDayAverage')}</strong></th>
                                     <th onClick={() => requestSort('sevenDayAverage')}>7d <strong className={styles.arrows}>{getSortIndicator('sevenDayAverage')}</strong></th>
@@ -170,6 +170,7 @@ const CoinBorrowRates = ({ coinBorrowRates }) => {
                                     <th onClick={() => requestSort('ninetyDayAverage')}>3m <strong className={styles.arrows}>{getSortIndicator('ninetyDayAverage')}</strong></th>
                                 </tr>
                             </thead>
+                            
                             <tbody>
                                 <AnimatePresence>
                                     {finalItemsToDisplay.map((coinBorrowRate) => {
