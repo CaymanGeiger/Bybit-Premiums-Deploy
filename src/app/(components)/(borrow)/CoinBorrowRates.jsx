@@ -170,7 +170,6 @@ const CoinBorrowRates = ({ coinBorrowRates }) => {
                                     <th onClick={() => requestSort('ninetyDayAverage')}>3m <strong className={styles.arrows}>{getSortIndicator('ninetyDayAverage')}</strong></th>
                                 </tr>
                             </thead>
-                            
                             <tbody>
                                 <AnimatePresence>
                                     {finalItemsToDisplay.map((coinBorrowRate) => {
