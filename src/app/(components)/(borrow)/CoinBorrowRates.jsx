@@ -1,7 +1,7 @@
 "use client"
 import { motion, AnimatePresence } from 'framer-motion';
 import React, { useState, useEffect } from 'react';
-import styles from './coinBorrowrates.module.css'
+import styles from './coinborrowrates.module.css'
 import * as ScrollArea from '@radix-ui/react-scroll-area';
 import "../(reusable)/radixscroll.css";
 import Image from 'next/image'
