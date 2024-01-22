@@ -26,7 +26,7 @@ export default function RootLayout({children}) {
       <Script
         id='google_script1'
         async
-        src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_ANALYTICS_KEY}`}
+        src={`https://www.googletagmanager.com/gtag/js?id=${process.env.ANALYTICS_KEY}`}
       />
       <Script
         id='google_script2'
@@ -35,7 +35,7 @@ export default function RootLayout({children}) {
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
-              gtag('config', '${process.env.NEXT_PUBLIC_ANALYTICS_KEY}', {
+              gtag('config', '${process.env.ANALYTICS_KEY}', {
               page_path: window.location.pathname,
               });
             `,
