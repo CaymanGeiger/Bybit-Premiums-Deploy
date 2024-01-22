@@ -1,15 +1,16 @@
 "use client"
 import { motion, AnimatePresence } from 'framer-motion';
 import React, { useState, useEffect } from 'react';
-import styles from './coinborrowrates.module.css'
+import styles from './coinBorrowrates.module.css'
 import * as ScrollArea from '@radix-ui/react-scroll-area';
 import "../(reusable)/radixscroll.css";
 import Image from 'next/image'
 import { toast } from "sonner";
+// import {event} from "../../../../lib/ga"
 
 
 const CoinBorrowRates = ({ coinBorrowRates }) => {
-    const [sortConfig, setSortConfig] = useState({ key: "twentyFourHourVolume", direction: 'descending' });
+    const [sortConfig, setSortConfig] = useState({ key: "spotVolume", direction: 'descending' });
     const [data, setData] = useState(coinBorrowRates);
     const [visibleItemsCount, setVisibleItemsCount] = useState(100);
     const incrementalLoadCount = 100;
@@ -22,7 +23,7 @@ const CoinBorrowRates = ({ coinBorrowRates }) => {
 
     useEffect(() => {
         setIsClientSide(true);
-        const savedWatchlist = JSON.parse(localStorage.getItem('borrow_watchlist')) || [];
+        const savedWatchlist = JSON.parse(localStorage.getItem('Borrow_watchlist')) || [];
         setWatchlist(savedWatchlist);
     }, []);
 
@@ -85,20 +86,20 @@ const CoinBorrowRates = ({ coinBorrowRates }) => {
     const handleWatchlistChange = (coin) => {
         let updatedWatchlist = [...watchlist];
         if (watchlist.includes(coin.id)) {
-            toast.error("Removed From Watchlist.");
             updatedWatchlist = updatedWatchlist.filter(watchlistId => watchlistId !== coin.id);
+            toast.error(`Removed ${coin.name} From Watchlist.`);
         } else {
-            toast.success("Added To Watchlist.");
             updatedWatchlist.push(coin.id);
+            toast.success(`Added ${coin.name} To Watchlist.`);
         }
         setWatchlist(updatedWatchlist);
-        localStorage.setItem('borrow_watchlist', JSON.stringify(updatedWatchlist));
+        localStorage.setItem('Borrow_watchlist', JSON.stringify(updatedWatchlist));
     };
 
 
     const sortedAndFilteredItems = sortedItems.filter((coinBorrowRate) => {
         return coinBorrowRate.name ||
-            coinBorrowRate.twentyFourHourVolume ||
+            coinBorrowRate.spotVolume ||
             coinBorrowRate.oneDayAverage ||
             coinBorrowRate.threeDayAverage ||
             coinBorrowRate.sevenDayAverage ||
@@ -120,6 +121,18 @@ const CoinBorrowRates = ({ coinBorrowRates }) => {
             <h1 className={styles.borrowMainHeader}>
                 BYBIT Borrow Rates
             </h1>
+            {/* <button
+            onClick={() => (
+                event({
+                    action: "click",
+                    params: {
+                        click_name: "test",
+                    },
+                })
+            )}
+            >
+                Click Me
+            </button> */}
             <div className={styles.scrollDiv}>
                 <ScrollArea.Root className="ScrollAreaRoot">
                     <ScrollArea.Viewport className="ScrollAreaViewport">
@@ -149,7 +162,7 @@ const CoinBorrowRates = ({ coinBorrowRates }) => {
                                             </button>
                                         </div>
                                     </th>
-                                    <th onClick={() => requestSort('spotVolume')}>Spot Volume <strong className={styles.arrows}>{getSortIndicator('spotVolume')}</strong></th>
+                                    <th onClick={() => requestSort('spotVolume')}>24h Volume <strong className={styles.arrows}>{getSortIndicator('spotVolume')}</strong></th>
                                     <th onClick={() => requestSort('oneDayAverage')}>1d <strong className={styles.arrows}>{getSortIndicator('oneDayAverage')}</strong></th>
                                     <th onClick={() => requestSort('threeDayAverage')}>3d <strong className={styles.arrows}>{getSortIndicator('threeDayAverage')}</strong></th>
                                     <th onClick={() => requestSort('sevenDayAverage')}>7d <strong className={styles.arrows}>{getSortIndicator('sevenDayAverage')}</strong></th>
@@ -160,10 +173,19 @@ const CoinBorrowRates = ({ coinBorrowRates }) => {
                             <tbody>
                                 <AnimatePresence>
                                     {finalItemsToDisplay.map((coinBorrowRate) => {
+                                        const handleCoinClick = (coinName) => {
+                                            if (typeof gtag === 'function') {
+                                                gtag('event', 'select_content', {
+                                                    'content_type': 'coin',
+                                                    'item_id': coinName
+                                                });
+                                            }
+                                            window.open(`https://www.bybit.com/trade/usdt/${coinName}?affiliate_id=62489`);
+                                        };
                                         const isInWatchlist = watchlist.includes(coinBorrowRate.id);
                                         let isSymbol = coinBorrowRate.symbolUrl ? coinBorrowRate.symbolUrl : "/noImage.png";
+                                        let coinName = coinBorrowRate.name.trim();
                                         const volume = coinBorrowRate.spotVolume;
-                                        const coinName = coinBorrowRate.name.trim().includes("USDC") ? "USDT" : coinBorrowRate.name.trim();
                                         const formattedVolume = volume >= 1000 ? Math.floor(volume)?.toLocaleString() : volume?.toString();
                                         return (
                                             <motion.tr
@@ -183,10 +205,10 @@ const CoinBorrowRates = ({ coinBorrowRates }) => {
                                                         height={18}
                                                         src={isSymbol}
                                                         alt='coin symbol'
-                                                        onClick={() => window.open(`https://www.bybit.com/trade/usdt/${coinName}?affiliate_id=62489`)}
+                                                        onClick={() => handleCoinClick(coinBorrowRate.name)}
                                                     />
-                                                    <span onClick={() => window.open(`https://www.bybit.com/trade/usdt/${coinName}?affiliate_id=62489`)}>
-                                                        {coinName}
+                                                    <span onClick={() => handleCoinClick(coinBorrowRate.name)}>
+                                                        {coinBorrowRate.name}
                                                     </span>
                                                     {isInWatchlist ?
                                                         <h5 className={styles.watchListMinus} onClick={() => handleWatchlistChange(coinBorrowRate)}>-</h5> :

@@ -174,7 +174,6 @@ const CoinFundingRates = ({ coinFundingRates }) => {
                                 <AnimatePresence>
                                     {finalItemsToDisplay.map((coinFundingRate) => {
                                     const handleCoinClick = (coinName) => {
-                                        // Send the event to Google Analytics
                                         if (typeof gtag === 'function') {
                                             gtag('event', 'select_content', {
                                                 'content_type': 'coin',
