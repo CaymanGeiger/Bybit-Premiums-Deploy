@@ -7,7 +7,7 @@ import "../(reusable)/radixscroll.css";
 import Image from 'next/image'
 import { toast } from "sonner";
 import { getCoinBorrowRatesApi } from './getBorrowRates';
-// import {event} from "../../../../lib/ga"
+import LoadingTable from '../(reusable)/LoadingTable'
 
 
 const CoinBorrowRates = () => {
@@ -16,6 +16,7 @@ const CoinBorrowRates = () => {
     const [visibleItemsCount, setVisibleItemsCount] = useState(100);
     const incrementalLoadCount = 100;
     const [stickyNamesClicked, setStickyNamesClicked] = useState(false);
+    const [gettingData, setGettingData] = useState(true);
     const [isClientSide, setIsClientSide] = useState(false);
     const isStickyNameClicked = stickyNamesClicked ? styles.active : "";
     const [lastClickedData, setLastClickedData] = useState(null);
@@ -31,6 +32,7 @@ const CoinBorrowRates = () => {
             try {
                 const data = await getCoinBorrowRatesApi();
                 setData(data);
+                setGettingData(false);
             } catch (error) {
                 console.error("Error fetching borrow rates:", error);
             }
@@ -145,6 +147,7 @@ const CoinBorrowRates = () => {
             >
                 Click Me
             </button> */}
+            {gettingData ? <LoadingTable /> :
             <div className={styles.scrollDiv}>
                 <ScrollArea.Root className="ScrollAreaRoot">
                     <ScrollArea.Viewport className="ScrollAreaViewport">
@@ -249,6 +252,7 @@ const CoinBorrowRates = () => {
                     <ScrollArea.Corner className="ScrollAreaCorner" />
                 </ScrollArea.Root>
             </div>
+            }
         </div>
     );
 }

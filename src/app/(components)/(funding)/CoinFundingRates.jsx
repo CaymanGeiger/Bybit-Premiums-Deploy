@@ -7,8 +7,8 @@ import "../(reusable)/radixscroll.css";
 import Image from 'next/image'
 import { toast } from "sonner";
 import { getCoinFundingRatesApi }  from "./getFundingRates"
-// import {event} from "../../../../lib/ga"
-
+import LoadingTable from '../(reusable)/LoadingTable'
+import './loading.css'
 
 const CoinFundingRates = () => {
     const [sortConfig, setSortConfig] = useState({ key: "twentyFourHourVolume", direction: 'descending' });
@@ -16,6 +16,7 @@ const CoinFundingRates = () => {
     const [visibleItemsCount, setVisibleItemsCount] = useState(100);
     const incrementalLoadCount = 100;
     const [stickyNamesClicked, setStickyNamesClicked] = useState(false);
+    const [gettingData, setGettingData] = useState(true);
     const [isClientSide, setIsClientSide] = useState(false);
     const isStickyNameClicked = stickyNamesClicked ? styles.active : "";
     const [lastClickedData, setLastClickedData] = useState(null);
@@ -30,6 +31,7 @@ const CoinFundingRates = () => {
             try {
                 const data = await getCoinFundingRatesApi();
                 setData(data);
+                setGettingData(false);
             } catch (error) {
                 console.error("Error fetching funding rates:", error);
             }
@@ -125,7 +127,22 @@ const CoinFundingRates = () => {
 
 
     if (!isClientSide) {
-        return <div></div>;
+        return <div class="load-wrapp">
+            <div class="load-6">
+                <div class="letter-holder">
+                    <div class="l-1 letter">L</div>
+                    <div class="l-2 letter">o</div>
+                    <div class="l-3 letter">a</div>
+                    <div class="l-4 letter">d</div>
+                    <div class="l-5 letter">i</div>
+                    <div class="l-6 letter">n</div>
+                    <div class="l-7 letter">g</div>
+                    <div class="l-8 letter">.</div>
+                    <div class="l-9 letter">.</div>
+                    <div class="l-10 letter">.</div>
+                </div>
+            </div>
+        </div>;
     }
 
     return (
@@ -145,6 +162,7 @@ const CoinFundingRates = () => {
             >
                 Click Me
             </button> */}
+            {gettingData ? <LoadingTable /> :
             <div className={styles.scrollDiv}>
             <ScrollArea.Root className="ScrollAreaRoot">
                 <ScrollArea.Viewport className="ScrollAreaViewport">
@@ -249,6 +267,7 @@ const CoinFundingRates = () => {
                 <ScrollArea.Corner className="ScrollAreaCorner" />
             </ScrollArea.Root>
             </div>
+            }
         </div>
     );
 }

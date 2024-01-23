@@ -4,6 +4,7 @@ import CoinFundingRates from './(components)/(funding)/CoinFundingRates'
 import CoinBorrowRates from './(components)/(borrow)/CoinBorrowRates'
 import Nav from './(components)/(nav)/Nav'
 
+
 export default function Home() {
 
   return (
