@@ -98,13 +98,13 @@ const CoinBorrowRates = ({ coinBorrowRates }) => {
 
 
     const sortedAndFilteredItems = sortedItems.filter((coinBorrowRate) => {
-        return coinBorrowRate.name ||
-            coinBorrowRate.spotVolume ||
-            coinBorrowRate.oneDayAverage ||
-            coinBorrowRate.threeDayAverage ||
-            coinBorrowRate.sevenDayAverage ||
-            coinBorrowRate.thirtyDayAverage ||
-            coinBorrowRate.ninetyDayAverage;
+        return coinBorrowRate.name !== undefined && coinBorrowRate.name !== null &&
+            coinBorrowRate.spotVolume !== undefined && coinBorrowRate.spotVolume !== null &&
+            coinBorrowRate.oneDayAverage !== undefined && coinBorrowRate.oneDayAverage !== null &&
+            coinBorrowRate.threeDayAverage !== undefined && coinBorrowRate.threeDayAverage !== null &&
+            coinBorrowRate.sevenDayAverage !== undefined && coinBorrowRate.sevenDayAverage !== null &&
+            coinBorrowRate.thirtyDayAverage !== undefined && coinBorrowRate.thirtyDayAverage !== null &&
+            coinBorrowRate.ninetyDayAverage !== undefined && coinBorrowRate.ninetyDayAverage !== null;
     });
 
     const watchlistItems = sortedAndFilteredItems.filter(item => watchlist.includes(item.id));

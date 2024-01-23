@@ -98,14 +98,15 @@ const CoinFundingRates = ({ coinFundingRates }) => {
 
 
     const sortedAndFilteredItems = sortedItems.filter((coinFundingRate) => {
-        return coinFundingRate.name ||
-            coinFundingRate.twentyFourHourVolume ||
-            coinFundingRate.oneDayAverage ||
-            coinFundingRate.threeDayAverage ||
-            coinFundingRate.sevenDayAverage ||
-            coinFundingRate.thirtyDayAverage ||
-            coinFundingRate.ninetyDayAverage;
+    return coinFundingRate.name !== undefined && coinFundingRate.name !== null &&
+            coinFundingRate.twentyFourHourVolume !== undefined && coinFundingRate.twentyFourHourVolume !== null &&
+            coinFundingRate.oneDayAverage !== undefined && coinFundingRate.oneDayAverage !== null &&
+            coinFundingRate.threeDayAverage !== undefined && coinFundingRate.threeDayAverage !== null &&
+            coinFundingRate.sevenDayAverage !== undefined && coinFundingRate.sevenDayAverage !== null &&
+            coinFundingRate.thirtyDayAverage !== undefined && coinFundingRate.thirtyDayAverage !== null &&
+            coinFundingRate.ninetyDayAverage !== undefined && coinFundingRate.ninetyDayAverage !== null;
     });
+
 
     const watchlistItems = sortedAndFilteredItems.filter(item => watchlist.includes(item.id));
     const nonWatchlistItems = sortedAndFilteredItems.filter(item => !watchlist.includes(item.id));
