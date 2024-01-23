@@ -195,7 +195,7 @@ const CoinBorrowRates = () => {
                                                     'item_id': coinName
                                                 });
                                             }
-                                            window.open(`https://www.bybit.com/trade/usdt/${coinName}?affiliate_id=62489`);
+                                            window.open(`https://www.bybit.com/en/trade/spot/${coinName}/USDT?affiliate_id=62489`);
                                         };
                                         const isInWatchlist = watchlist.includes(coinBorrowRate.id);
                                         let isSymbol = coinBorrowRate.symbolUrl ? coinBorrowRate.symbolUrl : "/noImage.png";
