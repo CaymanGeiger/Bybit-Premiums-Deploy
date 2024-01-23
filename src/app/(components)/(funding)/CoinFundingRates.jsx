@@ -6,12 +6,13 @@ import * as ScrollArea from '@radix-ui/react-scroll-area';
 import "../(reusable)/radixscroll.css";
 import Image from 'next/image'
 import { toast } from "sonner";
+import { getCoinFundingRatesApi }  from "./getFundingRates"
 // import {event} from "../../../../lib/ga"
 
 
-const CoinFundingRates = ({ coinFundingRates }) => {
+const CoinFundingRates = () => {
     const [sortConfig, setSortConfig] = useState({ key: "twentyFourHourVolume", direction: 'descending' });
-    const [data, setData] = useState(coinFundingRates);
+    const [data, setData] = useState([]);
     const [visibleItemsCount, setVisibleItemsCount] = useState(100);
     const incrementalLoadCount = 100;
     const [stickyNamesClicked, setStickyNamesClicked] = useState(false);
@@ -20,11 +21,21 @@ const CoinFundingRates = ({ coinFundingRates }) => {
     const [lastClickedData, setLastClickedData] = useState(null);
     const [watchlist, setWatchlist] = useState([]);
 
-
     useEffect(() => {
         setIsClientSide(true);
         const savedWatchlist = JSON.parse(localStorage.getItem('funding_watchlist')) || [];
         setWatchlist(savedWatchlist);
+
+        const fetchData = async () => {
+            try {
+                const data = await getCoinFundingRatesApi();
+                setData(data);
+            } catch (error) {
+                console.error("Error fetching funding rates:", error);
+            }
+        };
+        fetchData();
+
     }, []);
 
 
@@ -50,7 +61,7 @@ const CoinFundingRates = ({ coinFundingRates }) => {
 
 
     const sortedItems = React.useMemo(() => {
-        if (sortConfig.key === null) {
+        if (!Array.isArray(data) || sortConfig.key === null) {
             return data;
         }
 

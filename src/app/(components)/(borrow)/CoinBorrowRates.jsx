@@ -6,12 +6,13 @@ import * as ScrollArea from '@radix-ui/react-scroll-area';
 import "../(reusable)/radixscroll.css";
 import Image from 'next/image'
 import { toast } from "sonner";
+import { getCoinBorrowRatesApi } from './getBorrowRates';
 // import {event} from "../../../../lib/ga"
 
 
-const CoinBorrowRates = ({ coinBorrowRates }) => {
+const CoinBorrowRates = () => {
     const [sortConfig, setSortConfig] = useState({ key: "spotVolume", direction: 'descending' });
-    const [data, setData] = useState(coinBorrowRates);
+    const [data, setData] = useState([]);
     const [visibleItemsCount, setVisibleItemsCount] = useState(100);
     const incrementalLoadCount = 100;
     const [stickyNamesClicked, setStickyNamesClicked] = useState(false);
@@ -25,6 +26,17 @@ const CoinBorrowRates = ({ coinBorrowRates }) => {
         setIsClientSide(true);
         const savedWatchlist = JSON.parse(localStorage.getItem('Borrow_watchlist')) || [];
         setWatchlist(savedWatchlist);
+
+        const fetchData = async () => {
+            try {
+                const data = await getCoinBorrowRatesApi();
+                setData(data);
+            } catch (error) {
+                console.error("Error fetching borrow rates:", error);
+            }
+        };
+        fetchData();
+
     }, []);
 
 
@@ -50,7 +62,7 @@ const CoinBorrowRates = ({ coinBorrowRates }) => {
 
 
     const sortedItems = React.useMemo(() => {
-        if (sortConfig.key === null) {
+        if (!Array.isArray(data) || sortConfig.key === null) {
             return data;
         }
 
