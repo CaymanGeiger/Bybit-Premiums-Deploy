@@ -1,11 +1,11 @@
 .skeleton {
-    animation: skeleton-loading 1s linear infinite alternate;
+    animation: skeleton-loading .7s linear infinite alternate;
     width: 600px;
 }
 
 @keyframes skeleton-loading {
     0% {
-        background-color: hsl(199, 22%, 86%);
+        background-color: hsl(195, 12%, 94%);
     }
 
     100% {
