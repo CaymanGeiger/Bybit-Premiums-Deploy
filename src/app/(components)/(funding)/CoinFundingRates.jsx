@@ -37,7 +37,6 @@ const CoinFundingRates = () => {
             }
         };
         fetchData();
-
     }, []);
 
 
@@ -127,41 +126,28 @@ const CoinFundingRates = () => {
 
 
     if (!isClientSide) {
-        return <div class="load-wrapp">
-            <div class="load-6">
-                <div class="letter-holder">
-                    <div class="l-1 letter">L</div>
-                    <div class="l-2 letter">o</div>
-                    <div class="l-3 letter">a</div>
-                    <div class="l-4 letter">d</div>
-                    <div class="l-5 letter">i</div>
-                    <div class="l-6 letter">n</div>
-                    <div class="l-7 letter">g</div>
-                    <div class="l-8 letter">.</div>
-                    <div class="l-9 letter">.</div>
-                    <div class="l-10 letter">.</div>
+        return <div className="load-wrapp">
+            <div className="load-6">
+                <div className="letter-holder">
+                    <div className="l-1 letter">L</div>
+                    <div className="l-2 letter">o</div>
+                    <div className="l-3 letter">a</div>
+                    <div className="l-4 letter">d</div>
+                    <div className="l-5 letter">i</div>
+                    <div className="l-6 letter">n</div>
+                    <div className="l-7 letter">g</div>
+                    <div className="l-8 letter">.</div>
+                    <div className="l-9 letter">.</div>
+                    <div className="l-10 letter">.</div>
                 </div>
             </div>
         </div>;
     }
-
     return (
         <div className={styles.fundingMainDiv}>
             <h1 className={styles.fundingMainHeader}>
                 BYBIT Funding Rates
             </h1>
-            {/* <button
-            onClick={() => (
-                event({
-                    action: "click",
-                    params: {
-                        click_name: "test",
-                    },
-                })
-            )}
-            >
-                Click Me
-            </button> */}
             {gettingData ? <LoadingTable /> :
             <div className={styles.scrollDiv}>
             <ScrollArea.Root className="ScrollAreaRoot">

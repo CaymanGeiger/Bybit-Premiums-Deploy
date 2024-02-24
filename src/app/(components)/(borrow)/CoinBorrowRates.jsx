@@ -135,18 +135,6 @@ const CoinBorrowRates = () => {
             <h1 className={styles.borrowMainHeader}>
                 BYBIT Borrow Rates
             </h1>
-            {/* <button
-            onClick={() => (
-                event({
-                    action: "click",
-                    params: {
-                        click_name: "test",
-                    },
-                })
-            )}
-            >
-                Click Me
-            </button> */}
             {gettingData ? <LoadingTable /> :
             <div className={styles.scrollDiv}>
                 <ScrollArea.Root className="ScrollAreaRoot">
