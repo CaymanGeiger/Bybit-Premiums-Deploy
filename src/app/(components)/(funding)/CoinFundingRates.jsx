@@ -11,9 +11,10 @@ import LoadingTable from '../(reusable)/LoadingTable'
 import './loading.css'
 
 const formatRate = (rate) => {
+    if (rate === 'NaN' || rate === null) return "";
     if (!isNaN(rate)) {
         const number = parseFloat(rate);
-        return number.toFixed(3);
+        return `${number.toFixed(3)}%`;
     }
     return "";
 };
@@ -40,7 +41,6 @@ const CoinFundingRates = () => {
         const fetchData = async () => {
             try {
                 const data = await getCoinFundingRatesApi();
-                console.log(data)
                 setData(data);
                 setGettingData(false);
             } catch (error) {
@@ -246,14 +246,14 @@ const CoinFundingRates = () => {
                                                     <h5 className={styles.watchListPlus} onClick={() => handleWatchlistChange(coinFundingRate)}>+</h5>
                                                 }
                                             </td>
-                                            <td>{formatRate(coinFundingRate.currentRate)}%</td>
+                                            <td>{formatRate(coinFundingRate.currentRate)}</td>
                                             <td>{formattedVolume ? `$${formattedVolume}` : ""}</td>
-                                            <td>{formatRate(coinFundingRate.oneDayAverage)}%</td>
-                                            <td>{formatRate(coinFundingRate.threeDayAverage)}%</td>
-                                            <td>{formatRate(coinFundingRate.sevenDayAverage)}%</td>
-                                            <td>{formatRate(coinFundingRate.thirtyDayAverage)}%</td>
-                                            <td>{formatRate(coinFundingRate.ninetyDayAverage)}%</td>
-                                            <td>{formatRate(coinFundingRate.yearAverage)}%</td>
+                                            <td>{formatRate(coinFundingRate.oneDayAverage)}</td>
+                                            <td>{formatRate(coinFundingRate.threeDayAverage)}</td>
+                                            <td>{formatRate(coinFundingRate.sevenDayAverage)}</td>
+                                            <td>{formatRate(coinFundingRate.thirtyDayAverage)}</td>
+                                            <td>{formatRate(coinFundingRate.ninetyDayAverage)}</td>
+                                            <td>{formatRate(coinFundingRate.yearAverage)}</td>
                                         </motion.tr>
                                     )
                                 })}

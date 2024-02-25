@@ -11,9 +11,10 @@ import LoadingTable from '../(reusable)/LoadingTable'
 
 
 const formatRate = (rate) => {
+    if (rate === "NaN" || rate === null) return "";
     if (!isNaN(rate)) {
         const number = parseFloat(rate);
-        return number.toFixed(3);
+        return `${number.toFixed(3)}%`;
     }
     return "";
 };
@@ -230,12 +231,12 @@ const CoinBorrowRates = () => {
                                                     }
                                                 </td>
                                                 <td>{formattedVolume ? `$${formattedVolume}` : ""}</td>
-                                                <td>{formatRate(coinBorrowRate.oneDayAverage)}%</td>
-                                                <td>{formatRate(coinBorrowRate.threeDayAverage)}%</td>
-                                                <td>{formatRate(coinBorrowRate.sevenDayAverage)}%</td>
-                                                <td>{formatRate(coinBorrowRate.thirtyDayAverage)}%</td>
-                                                <td>{formatRate(coinBorrowRate.ninetyDayAverage)}%</td>
-                                                <td>{formatRate(coinBorrowRate.yearAverage)}%</td>
+                                                <td>{formatRate(coinBorrowRate.oneDayAverage)}</td>
+                                                <td>{formatRate(coinBorrowRate.threeDayAverage)}</td>
+                                                <td>{formatRate(coinBorrowRate.sevenDayAverage)}</td>
+                                                <td>{formatRate(coinBorrowRate.thirtyDayAverage)}</td>
+                                                <td>{formatRate(coinBorrowRate.ninetyDayAverage)}</td>
+                                                <td>{formatRate(coinBorrowRate.yearAverage)}</td>
                                             </motion.tr>
                                         )
                                     })}
