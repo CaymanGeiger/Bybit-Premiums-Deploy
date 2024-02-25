@@ -154,13 +154,14 @@ const CoinFundingRates = () => {
                 <ScrollArea.Viewport className="ScrollAreaViewport">
                         <table className={`${styles.fundingTable} ${isStickyNameClicked}`}>
                             <colgroup>
-                                <col style={{ width: "16%", minWidth: "160px" }} />
-                                <col style={{ width: "14%", minWidth: "120px" }} />
-                                <col style={{ width: "14%", minWidth: "80px" }} />
-                                <col style={{ width: "14%", minWidth: "80px" }} />
-                                <col style={{ width: "14%", minWidth: "80px" }} />
-                                <col style={{ width: "14%", minWidth: "80px" }} />
-                                <col style={{ width: "14%", minWidth: "80px" }} />
+                                <col style={{ width: "15%", minWidth: "160px" }} />
+                                <col style={{ width: "12.14%", minWidth: "120px" }} />
+                                <col style={{ width: "12.14%", minWidth: "90px" }} />
+                                <col style={{ width: "12.14%", minWidth: "90px" }} />
+                                <col style={{ width: "12.14%", minWidth: "90px" }} />
+                                <col style={{ width: "12.14%", minWidth: "90px" }} />
+                                <col style={{ width: "12.14%", minWidth: "90px" }} />
+                                <col style={{ width: "12.14%", minWidth: "90px" }} />
                             </colgroup>
                             <thead>
                                 <tr>
@@ -184,6 +185,7 @@ const CoinFundingRates = () => {
                                     <th onClick={() => requestSort('sevenDayAverage')}>7d <strong className={styles.arrows}>{getSortIndicator('sevenDayAverage')}</strong></th>
                                     <th onClick={() => requestSort('thirtyDayAverage')}>1m <strong className={styles.arrows}>{getSortIndicator('thirtyDayAverage')}</strong></th>
                                     <th onClick={() => requestSort('ninetyDayAverage')}>3m <strong className={styles.arrows}>{getSortIndicator('ninetyDayAverage')}</strong></th>
+                                    <th onClick={() => requestSort('yearAverage')}>1y <strong className={styles.arrows}>{getSortIndicator('yearAverage')}</strong></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -237,6 +239,7 @@ const CoinFundingRates = () => {
                                             <td>{coinFundingRate.sevenDayAverage ? `${coinFundingRate.sevenDayAverage}%` : ""}</td>
                                             <td>{coinFundingRate.thirtyDayAverage ? `${coinFundingRate.thirtyDayAverage}%` : ""}</td>
                                             <td>{coinFundingRate.ninetyDayAverage ? `${coinFundingRate.ninetyDayAverage}%` : ""}</td>
+                                            <td>{coinFundingRate.yearAverage ? `${coinFundingRate.yearAverage}%` : ""}</td>
                                         </motion.tr>
                                     )
                                 })}
