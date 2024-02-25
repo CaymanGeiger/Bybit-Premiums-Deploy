@@ -15,10 +15,10 @@
 
 .skeleton-text {
     width: calc(100vw / 1.1);
-        min-width: 100px;
-        max-width: 1400px;
+    min-width: 100px;
+    max-width: 1400px;
     height: 1rem;
-    margin-bottom: 1rem;
+    margin-bottom: 1.02rem;
     border-radius: 0.25rem;
 }
 

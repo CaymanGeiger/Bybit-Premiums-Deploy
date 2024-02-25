@@ -167,13 +167,13 @@ const CoinFundingRates = () => {
                             <colgroup>
                                 <col style={{ width: "15%", minWidth: "160px" }} />
                                 <col style={{ width: "12.14%", minWidth: "120px" }} />
-                                <col style={{ width: "12.14%", minWidth: "120px" }} />
-                                <col style={{ width: "12.14%", minWidth: "90px" }} />
-                                <col style={{ width: "12.14%", minWidth: "90px" }} />
-                                <col style={{ width: "12.14%", minWidth: "90px" }} />
-                                <col style={{ width: "12.14%", minWidth: "90px" }} />
-                                <col style={{ width: "12.14%", minWidth: "90px" }} />
-                                <col style={{ width: "12.14%", minWidth: "90px" }} />
+                                <col style={{ width: "12.14%", minWidth: "70px" }} />
+                                <col style={{ width: "12.14%", minWidth: "70px" }} />
+                                <col style={{ width: "12.14%", minWidth: "70px" }} />
+                                <col style={{ width: "12.14%", minWidth: "70px" }} />
+                                <col style={{ width: "12.14%", minWidth: "70px" }} />
+                                <col style={{ width: "12.14%", minWidth: "70px" }} />
+                                <col style={{ width: "12.14%", minWidth: "70px" }} />
                             </colgroup>
                             <thead>
                                 <tr>
@@ -191,8 +191,8 @@ const CoinFundingRates = () => {
                                             </button>
                                         </div>
                                     </th>
-                                    <th onClick={() => requestSort('currentRate')}>CURRENT <strong className={styles.arrows}>{getSortIndicator('currentRate')}</strong></th>
                                     <th onClick={() => requestSort('twentyFourHourVolume')}>24h Volume <strong className={styles.arrows}>{getSortIndicator('twentyFourHourVolume')}</strong></th>
+                                    <th onClick={() => requestSort('currentRate')}>CURRENT <strong className={styles.arrows}>{getSortIndicator('currentRate')}</strong></th>
                                     <th onClick={() => requestSort('oneDayAverage')}>1d <strong className={styles.arrows}>{getSortIndicator('oneDayAverage')}</strong></th>
                                     <th onClick={() => requestSort('threeDayAverage')}>3d <strong className={styles.arrows}>{getSortIndicator('threeDayAverage')}</strong></th>
                                     <th onClick={() => requestSort('sevenDayAverage')}>7d <strong className={styles.arrows}>{getSortIndicator('sevenDayAverage')}</strong></th>
@@ -246,8 +246,8 @@ const CoinFundingRates = () => {
                                                     <h5 className={styles.watchListPlus} onClick={() => handleWatchlistChange(coinFundingRate)}>+</h5>
                                                 }
                                             </td>
-                                            <td>{formatRate(coinFundingRate.currentRate)}</td>
                                             <td>{formattedVolume ? `$${formattedVolume}` : ""}</td>
+                                            <td>{formatRate(coinFundingRate.currentRate)}</td>
                                             <td>{formatRate(coinFundingRate.oneDayAverage)}</td>
                                             <td>{formatRate(coinFundingRate.threeDayAverage)}</td>
                                             <td>{formatRate(coinFundingRate.sevenDayAverage)}</td>

@@ -153,12 +153,12 @@ const CoinBorrowRates = () => {
                             <colgroup>
                                 <col style={{ width: "15%", minWidth: "160px" }} />
                                 <col style={{ width: "12.14%", minWidth: "120px" }} />
-                                <col style={{ width: "12.14%", minWidth: "80px" }} />
-                                <col style={{ width: "12.14%", minWidth: "80px" }} />
-                                <col style={{ width: "12.14%", minWidth: "80px" }} />
-                                <col style={{ width: "12.14%", minWidth: "80px" }} />
-                                <col style={{ width: "12.14%", minWidth: "80px" }} />
-                                <col style={{ width: "12.14%", minWidth: "80px" }} />
+                                <col style={{ width: "12.14%", minWidth: "70px" }} />
+                                <col style={{ width: "12.14%", minWidth: "70px" }} />
+                                <col style={{ width: "12.14%", minWidth: "70px" }} />
+                                <col style={{ width: "12.14%", minWidth: "70px" }} />
+                                <col style={{ width: "12.14%", minWidth: "70px" }} />
+                                <col style={{ width: "12.14%", minWidth: "70px" }} />
                             </colgroup>
                             <thead>
                                 <tr>

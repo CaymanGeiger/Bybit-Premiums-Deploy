@@ -14,6 +14,12 @@ export default function LoadingTable() {
             <div className="skeleton skeleton-text"></div>
             <div className="skeleton skeleton-text"></div>
             <div className="skeleton skeleton-text"></div>
+            <div className="skeleton skeleton-text"></div>
+            <div className="skeleton skeleton-text"></div>
+            <div className="skeleton skeleton-text"></div>
+            <div className="skeleton skeleton-text"></div>
+            <div className="skeleton skeleton-text"></div>
+            <div className="skeleton skeleton-text"></div>
         </div>
-    )
+    );
 }
