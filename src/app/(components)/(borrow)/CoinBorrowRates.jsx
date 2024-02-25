@@ -13,7 +13,7 @@ import LoadingTable from '../(reusable)/LoadingTable'
 const formatRate = (rate) => {
     if (!isNaN(rate)) {
         const number = parseFloat(rate);
-        return number.toFixed(2);
+        return number.toFixed(3);
     }
     return "";
 };
