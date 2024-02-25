@@ -10,6 +10,16 @@ import { getCoinFundingRatesApi }  from "./getFundingRates"
 import LoadingTable from '../(reusable)/LoadingTable'
 import './loading.css'
 
+const formatRate = (rate) => {
+    if (!isNaN(rate)) {
+        const number = parseFloat(rate);
+        return number.toFixed(2);
+    }
+    return "";
+};
+
+
+
 const CoinFundingRates = () => {
     const [sortConfig, setSortConfig] = useState({ key: "twentyFourHourVolume", direction: 'descending' });
     const [data, setData] = useState([]);
@@ -234,12 +244,12 @@ const CoinFundingRates = () => {
                                                 }
                                             </td>
                                             <td>{formattedVolume ? `$${formattedVolume}` : ""}</td>
-                                            <td>{coinFundingRate.oneDayAverage ? `${coinFundingRate.oneDayAverage}%` : ""}</td>
-                                            <td>{coinFundingRate.threeDayAverage ? `${coinFundingRate.threeDayAverage}%` : ""}</td>
-                                            <td>{coinFundingRate.sevenDayAverage ? `${coinFundingRate.sevenDayAverage}%` : ""}</td>
-                                            <td>{coinFundingRate.thirtyDayAverage ? `${coinFundingRate.thirtyDayAverage}%` : ""}</td>
-                                            <td>{coinFundingRate.ninetyDayAverage ? `${coinFundingRate.ninetyDayAverage}%` : ""}</td>
-                                            <td>{coinFundingRate.yearAverage ? `${coinFundingRate.yearAverage}%` : ""}</td>
+                                            <td>{formatRate(coinFundingRate.oneDayAverage)}%</td>
+                                            <td>{formatRate(coinFundingRate.threeDayAverage)}%</td>
+                                            <td>{formatRate(coinFundingRate.sevenDayAverage)}%</td>
+                                            <td>{formatRate(coinFundingRate.thirtyDayAverage)}%</td>
+                                            <td>{formatRate(coinFundingRate.ninetyDayAverage)}%</td>
+                                            <td>{formatRate(coinFundingRate.yearAverage)}%</td>
                                         </motion.tr>
                                     )
                                 })}

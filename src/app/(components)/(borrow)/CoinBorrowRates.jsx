@@ -10,6 +10,15 @@ import { getCoinBorrowRatesApi } from './getBorrowRates';
 import LoadingTable from '../(reusable)/LoadingTable'
 
 
+const formatRate = (rate) => {
+    if (!isNaN(rate)) {
+        const number = parseFloat(rate);
+        return number.toFixed(2);
+    }
+    return "";
+};
+
+
 const CoinBorrowRates = () => {
     const [sortConfig, setSortConfig] = useState({ key: "spotVolume", direction: 'descending' });
     const [data, setData] = useState([]);
@@ -221,12 +230,12 @@ const CoinBorrowRates = () => {
                                                     }
                                                 </td>
                                                 <td>{formattedVolume ? `$${formattedVolume}` : ""}</td>
-                                                <td>{coinBorrowRate.oneDayAverage ? `${coinBorrowRate.oneDayAverage}%` : ""}</td>
-                                                <td>{coinBorrowRate.threeDayAverage ? `${coinBorrowRate.threeDayAverage}%` : ""}</td>
-                                                <td>{coinBorrowRate.sevenDayAverage ? `${coinBorrowRate.sevenDayAverage}%` : ""}</td>
-                                                <td>{coinBorrowRate.thirtyDayAverage ? `${coinBorrowRate.thirtyDayAverage}%` : ""}</td>
-                                                <td>{coinBorrowRate.ninetyDayAverage ? `${coinBorrowRate.ninetyDayAverage}%` : ""}</td>
-                                                <td>{coinBorrowRate.yearAverage ? `${coinBorrowRate.yearAverage}%` : ""}</td>
+                                                <td>{formatRate(coinBorrowRate.oneDayAverage)}%</td>
+                                                <td>{formatRate(coinBorrowRate.threeDayAverage)}%</td>
+                                                <td>{formatRate(coinBorrowRate.sevenDayAverage)}%</td>
+                                                <td>{formatRate(coinBorrowRate.thirtyDayAverage)}%</td>
+                                                <td>{formatRate(coinBorrowRate.ninetyDayAverage)}%</td>
+                                                <td>{formatRate(coinBorrowRate.yearAverage)}%</td>
                                             </motion.tr>
                                         )
                                     })}
