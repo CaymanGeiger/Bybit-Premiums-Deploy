@@ -14,12 +14,30 @@ const formatRate = (rate) => {
     if (rate === 'NaN' || rate === null) return "";
     if (!isNaN(rate)) {
         const number = parseFloat(rate);
-        return `${number.toFixed(3)}%`;
+        return `${number.toFixed(2)}%`;
     }
     return "";
 };
 
+function formatVolume(volume) {
+    volume = Number(volume);
 
+    if (volume >= 1e9) {
+    return (volume / 1e9).toFixed(2) + 'b';
+    }
+
+    else if (volume >= 1e6) {
+    return (volume / 1e6).toFixed(2) + 'm';
+    }
+
+    else if (volume >= 1e3) {
+    return (volume / 1e3).toFixed(2) + 'k';
+    }
+
+    else {
+    return volume.toString();
+    }
+}
 
 const CoinFundingRates = () => {
     const [sortConfig, setSortConfig] = useState({ key: "twentyFourHourVolume", direction: 'descending' });
@@ -166,7 +184,7 @@ const CoinFundingRates = () => {
                         <table className={`${styles.fundingTable} ${isStickyNameClicked}`}>
                             <colgroup>
                                 <col style={{ width: "15%", minWidth: "160px" }} />
-                                <col style={{ width: "12.14%", minWidth: "120px" }} />
+                                <col style={{ width: "12.14%", minWidth: "80px" }} />
                                 <col style={{ width: "12.14%", minWidth: "70px" }} />
                                 <col style={{ width: "12.14%", minWidth: "70px" }} />
                                 <col style={{ width: "12.14%", minWidth: "70px" }} />
@@ -217,7 +235,7 @@ const CoinFundingRates = () => {
                                     let isSymbol = coinFundingRate.symbolUrl ? coinFundingRate.symbolUrl : "/noImage.png";
                                     let coinName = coinFundingRate.name.trim();
                                     const volume = coinFundingRate.twentyFourHourVolume;
-                                    const formattedVolume = volume >= 1000 ? Math.floor(volume)?.toLocaleString() : volume?.toString();
+                                    const formattedVolume = formatVolume(volume);
                                     return (
                                         <motion.tr
                                             key={coinFundingRate.id}

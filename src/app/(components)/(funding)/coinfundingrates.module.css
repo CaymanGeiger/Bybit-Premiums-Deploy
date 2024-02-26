@@ -64,7 +64,7 @@
     left: 0;
     bottom: 0;
     width: 100%;
-    border: 1px solid #dcdcdc;
+    border: .05rem solid #dcdcdc;
 }
 
 .fundingMainDiv table {
@@ -82,7 +82,7 @@
 }
 
 .fundingMainDiv td {
-    border-bottom: 1px solid #cdcdcd;
+    border-bottom: 1px solid #e2e2e2;
     padding: 3px 6px;
     white-space: nowrap;
     font-size: 13px;
@@ -171,7 +171,7 @@
     top: 46%;
     transform: translateY(-50%);
     font-size: 21px;
-    color: rgb(160, 160, 160);
+    color: rgb(189, 189, 189);
     cursor: pointer;
     height: 90%;
     width: 10px;
@@ -190,7 +190,7 @@
     top: 50%;
     transform: translateY(-50%);
     font-size: 18px;
-    color: rgb(160, 160, 160);
+    color: rgb(189, 189, 189);
     cursor: pointer;
     height: 95%;
     width: 13px;
@@ -289,6 +289,12 @@
     background-color: #fcfcfc;
 }
 
+
+
+.fundingMainDiv td{
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
 
 /* TABLE BORDER*/
 .scrollDiv {

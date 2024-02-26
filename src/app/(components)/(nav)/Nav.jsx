@@ -8,5 +8,5 @@ export default function Nav() {
         <div className={styles.navMain}>
             <Logo />
         </div>
-    )
+    );
 }
