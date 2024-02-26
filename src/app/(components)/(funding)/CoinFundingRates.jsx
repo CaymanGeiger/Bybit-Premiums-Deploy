@@ -206,15 +206,15 @@ const CoinFundingRates = () => {
                 <ScrollArea.Viewport className="ScrollAreaViewport">
                         <table className={`${styles.fundingTable} ${isStickyNameClicked}`}>
                             <colgroup>
-                                <col style={{ width: "15%", minWidth: "160px" }} />
-                                <col style={{ width: "12.14%", minWidth: "80px" }} />
-                                <col style={{ width: "12.14%", minWidth: "70px" }} />
-                                <col style={{ width: "12.14%", minWidth: "70px" }} />
-                                <col style={{ width: "12.14%", minWidth: "70px" }} />
-                                <col style={{ width: "12.14%", minWidth: "70px" }} />
-                                <col style={{ width: "12.14%", minWidth: "70px" }} />
-                                <col style={{ width: "12.14%", minWidth: "70px" }} />
-                                <col style={{ width: "12.14%", minWidth: "70px" }} />
+                                <col style={{ width: "14%", minWidth: "160px" }} />
+                                <col style={{ width: "10.75%", minWidth: "80px" }} />
+                                <col style={{ width: "10.75%", minWidth: "70px" }} />
+                                <col style={{ width: "10.75%", minWidth: "70px" }} />
+                                <col style={{ width: "10.75%", minWidth: "70px" }} />
+                                <col style={{ width: "10.75%", minWidth: "70px" }} />
+                                <col style={{ width: "10.75%", minWidth: "70px" }} />
+                                <col style={{ width: "10.75%", minWidth: "70px" }} />
+                                <col style={{ width: "10.75%", minWidth: "70px" }} />
                             </colgroup>
                             <thead>
                                 <tr>
