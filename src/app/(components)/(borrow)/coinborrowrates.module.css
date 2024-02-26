@@ -318,25 +318,50 @@
     font-size: 18px;
 }
 
-.modalContent {
-    position: absolute;
-    top: 15px;
-    left: 270px;
-    transform: translateX(50%);
-    display: none;
-    background-color: black;
-    width: 120px;
-    border-radius: 10px;
-    z-index: 1000000;
-    font-size: 10px;
-    color: white;
-    padding: 8px;
-    word-spacing: 1px;
-    line-height: 11px;
-    gap: 8px;
+@media (min-width: 601px) {
+    .modalContent {
+        position: absolute;
+        top: 15px;
+        left: 270px;
+        transform: translateX(50%);
+        display: none;
+        background-color: black;
+        width: 120px;
+        border-radius: 10px;
+        z-index: 1000000;
+        font-size: 10px;
+        color: white;
+        padding: 8px;
+        word-spacing: 1px;
+        line-height: 11px;
+        gap: 8px;
+    }
 }
 
-.infoIcon:hover + .modalContent {
+
+@media (max-width: 600px) {
+    .modalContent {
+        position: absolute;
+        top: 55px;
+        left: 195px;
+        transform: translateX(50%);
+        display: none;
+        background-color: black;
+        width: 120px;
+        border-radius: 10px;
+        z-index: 1000000;
+        font-size: 10px;
+        color: white;
+        padding: 8px;
+        word-spacing: 1px;
+        line-height: 11px;
+        gap: 8px;
+    }
+}
+
+.infoIcon:hover + .modalContent,
+.infoIcon:focus + .modalContent,
+.infoIcon:active + .modalContent {
     display: flex;
     flex-direction: column;
 }
