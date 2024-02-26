@@ -1,4 +1,3 @@
-import { Metadata } from 'next'
 import { Toaster } from "./(components)/(reusable)/Toaster";
 import { Inter } from 'next/font/google'
 import './globals.css'
@@ -38,7 +37,6 @@ export default function RootLayout({children}) {
       <Head>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-        <meta name="google-site-verification" content="I7mpX2R0_CKuBbuz_ubYa55_NPn29xGeCMeZu1qvJAU" />
       </Head>
       <Script
         id="google_script1"
