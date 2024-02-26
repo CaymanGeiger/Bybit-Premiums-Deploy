@@ -8,7 +8,8 @@ import Image from 'next/image'
 import { toast } from "sonner";
 import { getCoinBorrowRatesApi } from './getBorrowRates';
 import LoadingTable from '../(reusable)/LoadingTable'
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCircleInfo } from '@fortawesome/free-solid-svg-icons'
 
 const formatRate = (rate) => {
     if (rate === "NaN" || rate === null) return "";
@@ -162,9 +163,23 @@ const CoinBorrowRates = () => {
 
     return (
         <div className={styles.borrowMainDiv}>
-            <h1 className={styles.borrowMainHeader}>
-                BYBIT Borrow Rates
-            </h1>
+            <div className={styles.headerDiv}>
+                <h1 className={styles.borrowMainHeader}>
+                    BYBIT Borrow Rates
+                </h1>
+                <FontAwesomeIcon icon={faCircleInfo} className={styles.infoIcon}/>
+                <div className={styles.modalContent}>
+                    <p>
+                        The borrow rates are the interest rates that you pay when you borrow a cryptocurrency on Bybit.
+                    </p>
+                    <p>
+                        The rates are calculated based on the supply and demand of the cryptocurrency.
+                    </p>
+                    <p>
+                        The rates are updated every 2 hours.
+                    </p>
+                </div>
+            </div>
             {gettingData ? <LoadingTable /> :
             <div className={styles.scrollDiv}>
                 <ScrollArea.Root className="ScrollAreaRoot">

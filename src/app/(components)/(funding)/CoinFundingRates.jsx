@@ -9,6 +9,9 @@ import { toast } from "sonner";
 import { getCoinFundingRatesApi }  from "./getFundingRates"
 import LoadingTable from '../(reusable)/LoadingTable'
 import './loading.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCircleInfo } from '@fortawesome/free-solid-svg-icons'
+
 
 const formatRate = (rate) => {
     if (rate === 'NaN' || rate === null) return "";
@@ -174,9 +177,29 @@ const CoinFundingRates = () => {
     }
     return (
         <div className={styles.fundingMainDiv}>
-            <h1 className={styles.fundingMainHeader}>
-                BYBIT Funding Rates
-            </h1>
+            <div className={styles.headerDiv}>
+                <h1 className={styles.fundingMainHeader}>
+                    BYBIT Funding Rates
+                </h1>
+                <FontAwesomeIcon icon={faCircleInfo} className={styles.infoIcon}/>
+                <div className={styles.modalContent}>
+                    <p>
+                        Funding rates are the fees that traders pay to hold their positions in perpetual contracts.
+                    </p>
+                    <p>
+                        The funding rate is paid every 8 hours and is used to keep the price of the perpetual contract close to the spot price.
+                    </p>
+                    <p>
+                        When the funding rate is positive, longs pay shorts.
+                    </p>
+                    <p>
+                        When the funding rate is negative, shorts pay longs.
+                    </p>
+                    <p>
+                        The funding rate is determined by the difference between the perpetual contract price and the spot price.
+                    </p>
+                </div>
+            </div>
             {gettingData ? <LoadingTable /> :
             <div className={styles.scrollDiv}>
             <ScrollArea.Root className="ScrollAreaRoot">
