@@ -322,7 +322,7 @@
     .modalContent {
         position: absolute;
         top: 15px;
-        left: 270px;
+        left: 283px;
         transform: translateX(50%);
         display: none;
         background-color: black;
