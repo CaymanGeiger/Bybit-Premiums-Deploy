@@ -6,7 +6,6 @@ import * as ScrollArea from '@radix-ui/react-scroll-area';
 import "../(reusable)/radixscroll.css";
 import Image from 'next/image'
 import { toast } from "sonner";
-import { getCoinBorrowRatesApi } from './getBorrowRates';
 import LoadingTable from '../(reusable)/LoadingTable'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleInfo } from '@fortawesome/free-solid-svg-icons'
@@ -41,9 +40,9 @@ function formatVolume(volume) {
 }
 
 
-const CoinBorrowRates = () => {
+const CoinBorrowRates = ({ coinBorrowRates }) => {
     const [sortConfig, setSortConfig] = useState({ key: "spotVolume", direction: 'descending' });
-    const [data, setData] = useState([]);
+    const [data, setData] = useState(coinBorrowRates);
     const [visibleItemsCount, setVisibleItemsCount] = useState(100);
     const incrementalLoadCount = 100;
     const [stickyNamesClicked, setStickyNamesClicked] = useState(false);
@@ -56,20 +55,7 @@ const CoinBorrowRates = () => {
 
     useEffect(() => {
         setIsClientSide(true);
-        const savedWatchlist = JSON.parse(localStorage.getItem('Borrow_watchlist')) || [];
-        setWatchlist(savedWatchlist);
-
-        const fetchData = async () => {
-            try {
-                const data = await getCoinBorrowRatesApi();
-                setData(data);
-                setGettingData(false);
-            } catch (error) {
-                console.error("Error fetching borrow rates:", error);
-            }
-        };
-        fetchData();
-
+        setGettingData(false);
     }, []);
 
 

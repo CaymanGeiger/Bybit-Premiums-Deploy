@@ -1,18 +1,41 @@
-"use client"
+"use server";
 import styles from './page.module.css'
 import CoinFundingRates from './(components)/(funding)/CoinFundingRates'
 import CoinBorrowRates from './(components)/(borrow)/CoinBorrowRates'
 import Nav from './(components)/(nav)/Nav'
 
 
-export default function Home() {
+const url = process.env.BACKEND_URL ? process.env.BACKEND_URL : process.env.NEXT_PUBLIC_BACKEND_URL;
+export async function getCoinFundingRates() {
+    const response = await fetch(`${url}/fundingrates?timestamp=${new Date().getTime()}`);
+    return response.json();
+}
+
+
+export async function getCoinBorrowRates() {
+  const response = await fetch(`${url}/borrowrates?timestamp=${new Date().getTime()}`);
+  return response.json();
+}
+
+
+export default async function Home() {
+  const coinFundingRates = await getCoinFundingRates();
+  const coinBorrowRates = await getCoinBorrowRates();
+  console.log(coinFundingRates);
+
 
   return (
     <main className={styles.main}>
-      <Nav/>
+      <div className={styles.mainDivOne}>
+        <Nav />
+      </div>
       <div className={styles.mainDivTwo}>
-            <CoinFundingRates/>
-            <CoinBorrowRates/>
+            <CoinFundingRates
+              coinFundingRates={coinFundingRates}
+            />
+            <CoinBorrowRates
+              coinBorrowRates={coinBorrowRates}
+            />
       </div>
     </main>
   )

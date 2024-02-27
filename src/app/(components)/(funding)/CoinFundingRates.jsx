@@ -6,7 +6,6 @@ import * as ScrollArea from '@radix-ui/react-scroll-area';
 import "../(reusable)/radixscroll.css";
 import Image from 'next/image'
 import { toast } from "sonner";
-import { getCoinFundingRatesApi }  from "./getFundingRates"
 import LoadingTable from '../(reusable)/LoadingTable'
 import './loading.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -42,9 +41,9 @@ function formatVolume(volume) {
     }
 }
 
-const CoinFundingRates = () => {
+const CoinFundingRates = ({ coinFundingRates }) => {
     const [sortConfig, setSortConfig] = useState({ key: "twentyFourHourVolume", direction: 'descending' });
-    const [data, setData] = useState([]);
+    const [data, setData] = useState(coinFundingRates);
     const [visibleItemsCount, setVisibleItemsCount] = useState(100);
     const incrementalLoadCount = 100;
     const [stickyNamesClicked, setStickyNamesClicked] = useState(false);
@@ -54,21 +53,10 @@ const CoinFundingRates = () => {
     const [lastClickedData, setLastClickedData] = useState(null);
     const [watchlist, setWatchlist] = useState([]);
 
+
     useEffect(() => {
         setIsClientSide(true);
-        const savedWatchlist = JSON.parse(localStorage.getItem('funding_watchlist')) || [];
-        setWatchlist(savedWatchlist);
-
-        const fetchData = async () => {
-            try {
-                const data = await getCoinFundingRatesApi();
-                setData(data);
-                setGettingData(false);
-            } catch (error) {
-                console.error("Error fetching funding rates:", error);
-            }
-        };
-        fetchData();
+        setGettingData(false);
     }, []);
 
 
