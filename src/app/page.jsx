@@ -7,14 +7,17 @@ import Nav from './(components)/(nav)/Nav'
 
 const url = process.env.BACKEND_URL ? process.env.BACKEND_URL : process.env.NEXT_PUBLIC_BACKEND_URL;
 async function getCoinFundingRates() {
-    const response = await fetch(`${url}/fundingrates?timestamp=${new Date().getTime()}`);
-    return response.json();
+  const response = await fetch(`${url}/fundingrates?timestamp=${new Date().getTime()}`, {
+      cache: 'no-cache',
+  });
+  return response.json();
 }
 
-
 async function getCoinBorrowRates() {
-  const response = await fetch(`${url}/borrowrates?timestamp=${new Date().getTime()}`);
-  return response.json();
+const response = await fetch(`${url}/borrowrates?timestamp=${new Date().getTime()}`, {
+    cache: 'no-cache',
+});
+return response.json();
 }
 
 
