@@ -110,6 +110,10 @@ const CoinFundingRates = ({ coinFundingRates }) => {
 
             return () => clearTimeout(timer);
         }
+        const storageWatchlist = JSON.parse(localStorage.getItem('funding_watchlist'));
+        if (storageWatchlist) {
+            setWatchlist(storageWatchlist);
+        }
     }, [visibleItemsCount, sortedItems]);
 
 

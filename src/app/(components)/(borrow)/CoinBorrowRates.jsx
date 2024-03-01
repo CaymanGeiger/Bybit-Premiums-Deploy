@@ -109,6 +109,10 @@ const CoinBorrowRates = ({ coinBorrowRates }) => {
 
             return () => clearTimeout(timer);
         }
+        const storageWatchlist = JSON.parse(localStorage.getItem('borrow_watchlist'));
+        if (storageWatchlist) {
+            setWatchlist(storageWatchlist);
+        }
     }, [visibleItemsCount, sortedItems]);
 
 
@@ -124,7 +128,7 @@ const CoinBorrowRates = ({ coinBorrowRates }) => {
             toast.success(`Added ${coin.name} To Watchlist.`);
         }
         setWatchlist(updatedWatchlist);
-        localStorage.setItem('Borrow_watchlist', JSON.stringify(updatedWatchlist));
+        localStorage.setItem('borrow_watchlist', JSON.stringify(updatedWatchlist));
     };
 
 
