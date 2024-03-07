@@ -18,10 +18,10 @@
     pointer-events: none;
 }
 
-:global(video::-webkit-media-controls) {
+.logoVideovideo::-webkit-media-controls {
     display: none !important;
 }
 
-:global(video::-webkit-media-controls-start-playback-button) {
+.logoVideo::-webkit-media-controls-start-playback-button {
     display: none !important;
 }
