@@ -31,7 +31,7 @@ const Logo = () => {
                 preload="auto"
                 webkit-playsinline="true"
                 playsinline="true"
-                poster='https://w0.peakpx.com/wallpaper/410/412/HD-wallpaper-plain-black-black.jpg'
+                poster='/black.jpg'
             >
                 <source src="/Logo.mp4" type="video/mp4" />
             </video>
