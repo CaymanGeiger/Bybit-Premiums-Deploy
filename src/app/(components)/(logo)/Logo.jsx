@@ -6,15 +6,12 @@ const Logo = () => {
     const videoRef = useRef(null);
 
     useEffect(() => {
-        const attemptAutoplay = () => {
-            if (videoRef.current) {
-            videoRef.current.play().catch(err => console.log('Autoplay was prevented', err));
-            }
-            document.removeEventListener('touchstart', attemptAutoplay);
-        };
-
-        document.addEventListener('touchstart', attemptAutoplay);
-        }, []);
+        if (videoRef.current) {
+            videoRef.current.play().catch((err) => {
+                console.log('Autoplay was prevented', err);
+            });
+        }
+    }, []);
 
     return (
         <div className={styles.logoVideoDiv}>
@@ -25,7 +22,6 @@ const Logo = () => {
                 muted
                 playsInline
                 preload="auto"
-                webkit-playsinline="true"
             >
                 <source src="/Logo.mp4" type="video/mp4" />
             </video>
