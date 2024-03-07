@@ -40,7 +40,7 @@ export default async function Home() {
               coinBorrowRates={coinBorrowRates}
             />
       </div>
-      <Link href="/about" className='aboutLink'>
+      <Link href="/about" className={styles.aboutLink}>
           About Bybit Premiums
       </Link>
     </main>

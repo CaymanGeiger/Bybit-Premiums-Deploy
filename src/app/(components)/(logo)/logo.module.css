@@ -17,3 +17,7 @@
     background-color: black;
     pointer-events: none;
 }
+
+video::-webkit-media-controls {
+    display: none !important;
+}
