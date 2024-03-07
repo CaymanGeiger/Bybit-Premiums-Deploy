@@ -15,4 +15,6 @@
     left:  -30px;
     top: -70px;
     background-color: none;
+    pointer-events: none;
+
 }

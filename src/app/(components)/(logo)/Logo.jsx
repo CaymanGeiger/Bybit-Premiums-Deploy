@@ -20,7 +20,7 @@ const Logo = () => {
                 className={styles.logoVideo}
                 autoPlay
                 muted
-                playsInline
+                playsInline={true}
                 preload="auto"
             >
                 <source src="/Logo.mp4" type="video/mp4" />
