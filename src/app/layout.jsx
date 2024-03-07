@@ -35,17 +35,17 @@ const structuredData = {
   "og:type": "website",
 };
 
-// const AboutUsStructuredData = {
-//     "@context": "http://schema.org",
-//     "@type": "Organization",
-//     "name": "Bybit Premiums",
-//     "url": "http://www.example.com/about-us",
-//     "description": "Leading platform for real-time borrow rates and funding rates for Bybit traders.",
-//     "logo": "http://www.example.com/logo.png"
-// }
+const AboutUsStructuredData = {
+    "@context": "http://schema.org",
+    "@type": "Organization",
+    "name": "Bybit Premiums",
+    "url": "http://www.example.com/about-us",
+    "description": "Leading platform for real-time borrow rates and funding rates for Bybit traders.",
+    "logo": "http://www.example.com/logo.png"
+}
 
 const structuredDataString = JSON.stringify(structuredData);
-// const aboutUsStructuredDataString = JSON.stringify(AboutUsStructuredData);
+const aboutUsStructuredDataString = JSON.stringify(AboutUsStructuredData);
 
 export default function RootLayout({children}) {
   return (
@@ -77,11 +77,11 @@ export default function RootLayout({children}) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: structuredDataString }}
       ></Script>
-      {/* <Script
+      <Script
         id='about-us-structured-data'
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: aboutUsStructuredDataString }}
-      ></Script> */}
+      ></Script>
       <body className={inter.className}>
         {children}
         <Toaster position="top-center" />

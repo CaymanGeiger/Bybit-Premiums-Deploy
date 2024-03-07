@@ -6,21 +6,21 @@ import Head from 'next/head';
 export default function AboutUs() {
     return (
             <>
-                    {/* <Head>
-                        <title>About Bybit Premiums - Trade Smarter</title>
-                        <script type="application/ld+json">
-                            {`
-                                {
-                                    "@context": "http://schema.org",
-                                    "@type": "Organization",
-                                    "name": "Bybit Premiums",
-                                    "url": "http://www.example.com/about-us",
-                                    "description": "Leading platform for real-time borrow rates and funding rates for Bybit traders.",
-                                    "logo": "http://www.example.com/logo.png"
-                                }
-                            `}
-                        </script>
-                    </Head> */}
+                <Head>
+                    <title>About Bybit Premiums - Trade Smarter</title>
+                    <script type="application/ld+json">
+                        {`
+                            {
+                                "@context": "http://schema.org",
+                                "@type": "Organization",
+                                "name": "Bybit Premiums",
+                                "url": "http://www.example.com/about-us",
+                                "description": "Leading platform for real-time borrow rates and funding rates for Bybit traders.",
+                                "logo": "http://www.example.com/logo.png"
+                            }
+                        `}
+                    </script>
+                </Head>
                 <div className="about-us">
                     <header>
                         <h1>About Bybit Premiums</h1>
