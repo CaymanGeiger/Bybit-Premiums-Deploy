@@ -3,6 +3,7 @@ import styles from './page.module.css'
 import CoinFundingRates from './(components)/(funding)/CoinFundingRates'
 import CoinBorrowRates from './(components)/(borrow)/CoinBorrowRates'
 import Link from 'next/link';
+import Nav from './(components)/(nav)/Nav';
 
 
 const url = process.env.BACKEND_URL ? process.env.BACKEND_URL : process.env.NEXT_PUBLIC_BACKEND_URL;
@@ -29,6 +30,7 @@ export default async function Home() {
   return (
     <main className={styles.main}>
       <div className={styles.mainDivOne}>
+        <Nav />
       </div>
       <div className={styles.mainDivTwo}>
             <CoinFundingRates

@@ -84,7 +84,6 @@ export default function RootLayout({children}) {
         dangerouslySetInnerHTML={{ __html: aboutUsStructuredDataString }}
       ></Script>
       <body className={inter.className}>
-        <Nav />
         {children}
         <Toaster position="top-center" />
       </body>

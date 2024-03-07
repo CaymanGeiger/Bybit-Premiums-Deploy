@@ -14,8 +14,6 @@ const Logo = () => {
         };
 
         document.addEventListener('touchstart', attemptAutoplay);
-
-        attemptAutoplay();
         }, []);
 
     return (
