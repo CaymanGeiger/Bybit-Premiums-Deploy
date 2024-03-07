@@ -15,13 +15,7 @@ const Logo = () => {
 
         document.addEventListener('touchstart', attemptAutoplay);
 
-        const playVideo = () => {
-            if (videoRef.current) {
-                videoRef.current.play().catch(err => console.log('Autoplay was prevented', err));
-                }
-            };
-
-            playVideo();
+        attemptAutoplay();
         }, []);
 
     return (
