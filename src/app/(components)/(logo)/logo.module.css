@@ -18,6 +18,10 @@
     pointer-events: none;
 }
 
-video::-webkit-media-controls {
+:global(video::-webkit-media-controls) {
+    display: none !important;
+}
+
+:global(video::-webkit-media-controls-start-playback-button) {
     display: none !important;
 }
