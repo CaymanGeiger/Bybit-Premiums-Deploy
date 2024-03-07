@@ -1,5 +1,4 @@
 import React from 'react';
-import Nav from '../(components)/(nav)/Nav'
 import './AboutUs.css';
 import Link from 'next/link';
 import Head from 'next/head';
@@ -22,7 +21,6 @@ export default function AboutUs() {
                             `}
                         </script>
                     </Head>
-                <Nav />
                 <div className="about-us">
                     <header>
                         <h1>About Bybit Premiums</h1>

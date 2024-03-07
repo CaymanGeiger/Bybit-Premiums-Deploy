@@ -30,7 +30,6 @@ const Logo = () => {
                 playsInline={true}
                 webkit-playsinline="true"
                 preload="auto"
-                poster="/icon.png"
             >
                 <source src="/Logo.mp4" type="video/mp4" />
             </video>
