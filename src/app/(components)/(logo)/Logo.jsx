@@ -15,9 +15,13 @@ const Logo = () => {
 
         document.addEventListener('touchstart', attemptAutoplay);
 
-        return () => {
-            document.removeEventListener('touchstart', attemptAutoplay);
-        };
+        const playVideo = () => {
+            if (videoRef.current) {
+                videoRef.current.play().catch(err => console.log('Autoplay was prevented', err));
+                }
+            };
+
+            playVideo();
         }, []);
 
     return (
@@ -29,7 +33,7 @@ const Logo = () => {
                 muted
                 playsInline
                 preload="auto"
-                poster='none'
+                webkit-playsinline="true"
             >
                 <source src="/Logo.mp4" type="video/mp4" />
             </video>
