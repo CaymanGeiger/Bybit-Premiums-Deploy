@@ -5,7 +5,7 @@
     overflow: hidden;
     z-index: 100000;
     border-radius: 10px;
-
+    background-color: #000017;
 }
 .logoVideo {
     width: 340px;
@@ -14,7 +14,6 @@
     z-index: -1;
     left:  -30px;
     top: -70px;
-    background-color: none;
+    background-color: black;
     pointer-events: none;
-
 }
