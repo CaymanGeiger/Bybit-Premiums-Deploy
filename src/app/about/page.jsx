@@ -42,7 +42,7 @@ export default function AboutUs() {
                             Our commitment to updates and precision sets us apart. You can trust <strong>Bybit Premiums</strong> to provide the latest and most accurate rates, helping you make informed trading decisions.
                         </p>
                         <p>
-                            We're <strong>constantly innovating</strong>, with new features on the horizon designed to enhance your trading experience. Stay tuned for what's coming next at Bybit Premiums!
+                            We&apos;re <strong>constantly innovating</strong>, with new features on the horizon designed to enhance your trading experience. Stay tuned for what&apos;s coming next at Bybit Premiums!
                         </p>
                     </section>
                     <section className="bybit-exchange-overview">
@@ -54,7 +54,7 @@ export default function AboutUs() {
                 <section className="funding-rates">
                     <h2>Understanding Funding Rates in Bybit</h2>
                     <p>
-                        Funding rates in <strong>Bybit's perpetual contracts</strong> are essential for market stability. These periodic payments between buyers and sellers of perpetual contracts ensure prices remain close to the underlying spot price. Our platform helps users understand these rates to maintain effective trading strategies.
+                        Funding rates in <strong>Bybit&apos;s perpetual contracts</strong> are essential for market stability. These periodic payments between buyers and sellers of perpetual contracts ensure prices remain close to the underlying spot price. Our platform helps users understand these rates to maintain effective trading strategies.
                     </p>
                 </section>
                 <section className="borrow-rates">
