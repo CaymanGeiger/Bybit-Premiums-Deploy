@@ -2,8 +2,8 @@
 import styles from './page.module.css'
 import CoinFundingRates from './(components)/(funding)/CoinFundingRates'
 import CoinBorrowRates from './(components)/(borrow)/CoinBorrowRates'
+import Nav from './(components)/(nav)/Nav'
 import Link from 'next/link';
-import Nav from './(components)/(nav)/Nav';
 
 
 const url = process.env.BACKEND_URL ? process.env.BACKEND_URL : process.env.NEXT_PUBLIC_BACKEND_URL;
@@ -20,7 +20,6 @@ const response = await fetch(`${url}/borrowrates?timestamp=${new Date().getTime(
 });
 return response.json();
 }
-
 
 
 export default async function Home() {
@@ -41,9 +40,9 @@ export default async function Home() {
               coinBorrowRates={coinBorrowRates}
             />
       </div>
-      <Link href="/about" className={styles.aboutLink}>
+      {/* <Link href="/about" >
           About Bybit Premiums
-      </Link>
+      </Link> */}
     </main>
   )
 }

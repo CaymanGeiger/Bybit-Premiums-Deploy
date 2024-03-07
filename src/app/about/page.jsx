@@ -6,7 +6,7 @@ import Head from 'next/head';
 export default function AboutUs() {
     return (
             <>
-                    <Head>
+                    {/* <Head>
                         <title>About Bybit Premiums - Trade Smarter</title>
                         <script type="application/ld+json">
                             {`
@@ -20,7 +20,7 @@ export default function AboutUs() {
                                 }
                             `}
                         </script>
-                    </Head>
+                    </Head> */}
                 <div className="about-us">
                     <header>
                         <h1>About Bybit Premiums</h1>
