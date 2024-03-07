@@ -8,16 +8,31 @@ const Logo = () => {
     const [videoHasStarted, setVideoHasStarted] = useState(false);
 
     useEffect(() => {
-        if (videoRef.current) {
-            videoRef.current.play().then(() => {
-                // When playback successfully starts, update state
-                setVideoHasStarted(true);
-            }).catch(err => {
-                console.log('Autoplay was prevented', err);
-                // Here, you might want to handle the failure of autoplay,
-                // For example, by showing a play button to start the video manually.
-            });
-        }
+        const playVideo = () => {
+            if (videoRef.current) {
+                videoRef.current.play().then(() => {
+                    setVideoHasStarted(true);
+                    // Remove event listeners once the video starts playing
+                    document.removeEventListener('touchstart', playVideo);
+                    document.removeEventListener('mousemove', playVideo);
+                }).catch(err => {
+                    console.log('Autoplay was prevented', err);
+                });
+            }
+        };
+
+        // Attempt to play the video on mount
+        playVideo();
+
+        // Add event listeners for touch and mousemove events as a failsafe
+        document.addEventListener('touchstart', playVideo, { once: true });
+        document.addEventListener('mousemove', playVideo, { once: true });
+
+        return () => {
+            // Cleanup event listeners when the component unmounts
+            document.removeEventListener('touchstart', playVideo);
+            document.removeEventListener('mousemove', playVideo);
+        };
     }, []);
 
     return (

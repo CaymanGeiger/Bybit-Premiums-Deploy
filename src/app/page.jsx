@@ -30,7 +30,7 @@ export default async function Home() {
   return (
     <main className={styles.main}>
       <div className={styles.mainDivOne}>
-        <Nav />
+
       </div>
       <div className={styles.mainDivTwo}>
             <CoinFundingRates
@@ -46,5 +46,3 @@ export default async function Home() {
     </main>
   )
 }
-
-
