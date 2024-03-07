@@ -26,10 +26,26 @@ const structuredData = {
     "@type": "Organization",
     "name": "Bybit Premiums",
     "url": "https://bybitpremiums.com"
-  }
+  },
+  "keywords": "Bybit Premiums, borrow rates, funding rates, margin trading, trade borrow rates Bybit",
+  "og:title": "About Bybit Premiums - Trade Smarter",
+  "og:description": "Discover Bybit Premiums for real-time borrow and funding rates to enhance your trading decisions.",
+  "og:image": "/icon.png",
+  "og:url": "http://www.bybitpremiums.com",
+  "og:type": "website",
 };
 
+const AboutUsStructuredData = {
+    "@context": "http://schema.org",
+    "@type": "Organization",
+    "name": "Bybit Premiums",
+    "url": "http://www.example.com/about-us",
+    "description": "Leading platform for real-time borrow rates and funding rates for Bybit traders.",
+    "logo": "http://www.example.com/logo.png"
+}
+
 const structuredDataString = JSON.stringify(structuredData);
+const aboutUsStructuredDataString = JSON.stringify(AboutUsStructuredData);
 
 export default function RootLayout({children}) {
   return (
@@ -60,6 +76,11 @@ export default function RootLayout({children}) {
         id='structured-data'
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: structuredDataString }}
+      ></Script>
+      <Script
+        id='about-us-structured-data'
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: aboutUsStructuredDataString }}
       ></Script>
       <body className={inter.className}>
         {children}

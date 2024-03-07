@@ -3,6 +3,7 @@ import styles from './page.module.css'
 import CoinFundingRates from './(components)/(funding)/CoinFundingRates'
 import CoinBorrowRates from './(components)/(borrow)/CoinBorrowRates'
 import Nav from './(components)/(nav)/Nav'
+import Link from 'next/link';
 
 
 const url = process.env.BACKEND_URL ? process.env.BACKEND_URL : process.env.NEXT_PUBLIC_BACKEND_URL;
@@ -24,7 +25,6 @@ return response.json();
 export default async function Home() {
   const coinFundingRates = await getCoinFundingRates();
   const coinBorrowRates = await getCoinBorrowRates();
-  console.log(coinFundingRates);
 
 
   return (
@@ -40,6 +40,9 @@ export default async function Home() {
               coinBorrowRates={coinBorrowRates}
             />
       </div>
+      <Link href="/about" className={styles.aboutLink}>
+          About Bybit Premiums
+      </Link>
     </main>
   )
 }
