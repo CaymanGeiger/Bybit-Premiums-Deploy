@@ -25,3 +25,11 @@
 .logoVideo::-webkit-media-controls-start-playback-button {
     display: none !important;
 }
+
+.logoVideo.hide {
+    display: none; /* Hide video initially or when not playing */
+  }
+
+  .logoVideo.show {
+    display: block; /* Show video when it starts playing */
+  }
