@@ -22,6 +22,9 @@ export default function AboutUs() {
                     </script>
                 </Head>
                 <div className="about-us">
+                    <Link href="/" className='back'>
+                    back
+                    </Link>
                     <header>
                         <h1>About Bybit Premiums</h1>
                     </header>
