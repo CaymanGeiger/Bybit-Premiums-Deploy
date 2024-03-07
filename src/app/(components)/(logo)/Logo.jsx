@@ -27,9 +27,9 @@ const Logo = () => {
                 className={styles.logoVideo}
                 autoPlay
                 muted
-                playsInline={true}
-                webkit-playsinline="true"
+                playsInline
                 preload="auto"
+                poster='none'
             >
                 <source src="/Logo.mp4" type="video/mp4" />
             </video>
