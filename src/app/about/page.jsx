@@ -22,9 +22,7 @@ export default function AboutUs() {
                     </script>
                 </Head>
                 <div className="about-us">
-                    <header>
-                        <h1>About Bybit Premiums</h1>
-                    </header>
+
                     <section className="our-services">
                         <h2>Our Services</h2>
                         <p>

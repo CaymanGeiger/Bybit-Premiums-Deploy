@@ -26,7 +26,6 @@ export default async function Home() {
   const coinFundingRates = await getCoinFundingRates();
   const coinBorrowRates = await getCoinBorrowRates();
 
-
   return (
     <main className={styles.main}>
       <div className={styles.mainDivOne}>
