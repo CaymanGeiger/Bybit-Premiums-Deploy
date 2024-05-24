@@ -91,8 +91,14 @@ const CoinBorrowRates = ({ coinBorrowRates }) => {
             const valueB = b[sortConfig.key];
 
             if (typeof valueA === 'string' && typeof valueB === 'string') {
+                if (valueA === valueB) {
+                    return b['twentyFourHourVolume'].replace(/[$,]/g, '') - a['twentyFourHourVolume'].replace(/[$,]/g, '');
+                }
                 return sortConfig.direction === 'ascending' ? valueA.localeCompare(valueB) : valueB.localeCompare(valueA);
             } else {
+                if (valueA === valueB) {
+                    return b['twentyFourHourVolume'] - a['twentyFourHourVolume'];
+                }
                 return sortConfig.direction === 'ascending' ? (valueA || 0) - (valueB || 0) : (valueB || 0) - (valueA || 0);
             }
         });
@@ -151,7 +157,7 @@ const CoinBorrowRates = ({ coinBorrowRates }) => {
         return <div></div>;
     }
 
-    
+
     return (
         <div className={styles.borrowMainDiv}>
             <div className={styles.headerDiv}>

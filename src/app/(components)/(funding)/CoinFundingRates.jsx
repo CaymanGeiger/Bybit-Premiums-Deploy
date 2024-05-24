@@ -80,7 +80,6 @@ const CoinFundingRates = ({ coinFundingRates }) => {
         }
     }
 
-
     const sortedItems = React.useMemo(() => {
         if (!Array.isArray(data) || sortConfig.key === null) {
             return data;
@@ -92,15 +91,22 @@ const CoinFundingRates = ({ coinFundingRates }) => {
             const valueB = b[sortConfig.key];
 
             if (typeof valueA === 'string' && typeof valueB === 'string') {
+                if (valueA === valueB) {
+                    // Sort by twentyFourHourVolume in descending order when values are the same
+                    return b['twentyFourHourVolume'].replace(/[$,]/g, '') - a['twentyFourHourVolume'].replace(/[$,]/g, '');
+                }
                 return sortConfig.direction === 'ascending' ? valueA.localeCompare(valueB) : valueB.localeCompare(valueA);
             } else {
+                if (valueA === valueB) {
+                    // Sort by twentyFourHourVolume in descending order when values are the same
+                    return b['twentyFourHourVolume'] - a['twentyFourHourVolume'];
+                }
                 return sortConfig.direction === 'ascending' ? (valueA || 0) - (valueB || 0) : (valueB || 0) - (valueA || 0);
             }
         });
 
         return sortableItems;
     }, [data, sortConfig]);
-
 
     useEffect(() => {
         if (visibleItemsCount < sortedItems.length) {
