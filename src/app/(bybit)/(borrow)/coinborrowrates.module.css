@@ -274,7 +274,6 @@
 .tdSymbolAndName {
     position: relative;
     min-width: 120px;
-
 }
 
 .borrowMainDiv td,
@@ -308,6 +307,7 @@
 
 .arrows {
     font-size: 11px;
+    color: rgba(255, 194, 28, 0.678);
 }
 
 .headerDiv {

@@ -1,6 +1,6 @@
 "use client"
 import React, { useRef, useEffect, useState } from 'react';
-import styles from './logo.module.css';
+import styles from '../logo.module.css';
 
 const Logo = () => {
     const videoRef = useRef(null);
@@ -48,7 +48,7 @@ const Logo = () => {
                 playsinline="true"
                 poster='/black.jpg'
             >
-                <source src="/Logo.mp4" type="video/mp4" />
+                <source src="/LogoCoinbase.mp4" type="video/mp4" />
             </video>
         </div>
     );
