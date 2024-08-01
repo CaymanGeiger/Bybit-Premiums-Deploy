@@ -315,6 +315,7 @@ const CoinFundingRates = ({ coinFundingRates }) => {
                   <AnimatePresence>
                     {finalItemsToDisplay.map((coinFundingRate) => {
                       const handleCoinClick = (coinName) => {
+                        console.log("coinName", coinName);
                         if (typeof gtag === "function") {
                           gtag("event", "select_content", {
                             content_type: "coin",
@@ -361,7 +362,13 @@ const CoinFundingRates = ({ coinFundingRates }) => {
                                 handleCoinClick(coinFundingRate.name)
                               }
                             >
-                              {coinFundingRate.name}
+                              {coinFundingRate.name
+                                .replace("GUSDPERP", "")
+                                .replace("1000000", "")
+                                .replace("100000", "")
+                                .replace("10000", "")
+                                .replace("1000", "")
+                                .replace("100", "")}
                             </span>
                             {isInWatchlist ? (
                               <h5

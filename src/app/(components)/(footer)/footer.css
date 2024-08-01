@@ -1,5 +1,7 @@
 /* General Footer Styles */
 .footer {
+  position: relative;
+  bottom: 0;
   background-color: #000017;
   padding: 15px;
   padding-bottom: 10px;
@@ -8,6 +10,8 @@
   color: #bdc3c7;
   margin-top: 20px;
   z-index: 2000;
+  margin-top: 5rem;
+  width: 100%;
 }
 
 .footer-container {

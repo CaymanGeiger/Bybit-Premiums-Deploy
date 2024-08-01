@@ -14,14 +14,6 @@ const Footer = () => {
   return (
     <footer className="footer">
       <div className="footer-container">
-        <div className="footer-links">
-          <a className="links" href="/about">
-            About
-          </a>
-          {/* <a href="/">Bybit</a>
-          <a href="/gemini">Gemini</a>
-          <a href="/coinbase">Coinbase</a> */}
-        </div>
         <div className="social-icons">
           <a
             href="https://x.com/bybitpremiums"

@@ -13,7 +13,7 @@ const url = process.env.BACKEND_URL
 async function getCoinFundingRates() {
   loadingData = true;
   const response = await fetch(
-    `${url}/fundingrates?timestamp=${new Date().getTime()}`,
+    `${url}/bybit-funding-rates?timestamp=${new Date().getTime()}`,
     {
       cache: "no-cache",
     }
@@ -23,7 +23,7 @@ async function getCoinFundingRates() {
 
 async function getCoinBorrowRates() {
   const response = await fetch(
-    `${url}/borrowrates?timestamp=${new Date().getTime()}`,
+    `${url}/bybit-borrow-rates?timestamp=${new Date().getTime()}`,
     {
       cache: "no-cache",
     }
@@ -45,6 +45,7 @@ export default async function Home() {
           <CoinBorrowRates coinBorrowRates={coinBorrowRates} />
         </div>
       </main>
+      <Footer />
     </>
   );
 }

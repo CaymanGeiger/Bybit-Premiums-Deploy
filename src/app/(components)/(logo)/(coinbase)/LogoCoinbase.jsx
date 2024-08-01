@@ -42,10 +42,9 @@ const Logo = () => {
                 className={`${styles.logoVideo} ${videoHasStarted ? styles.show : styles.hide}`}
                 autoPlay
                 muted
-                playsInline
                 preload="auto"
                 webkit-playsinline="true"
-                playsinline="true"
+                playsInline="true"
                 poster='/black.jpg'
             >
                 <source src="/LogoCoinbase.mp4" type="video/mp4" />

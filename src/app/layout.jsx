@@ -89,7 +89,6 @@ export default function RootLayout({ children }) {
       ></Script>
       <body className={inter.className}>
         {children}
-        <Footer />
         <Toaster position="top-center" />
       </body>
     </html>

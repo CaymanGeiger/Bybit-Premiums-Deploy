@@ -363,7 +363,13 @@ const CoinFundingRates = ({ coinFundingRates }) => {
                                 handleCoinClick(coinFundingRate.name)
                               }
                             >
-                              {coinFundingRate.name}
+                              {coinFundingRate.name
+                                .replace("USDT", "")
+                                .replace("1000000", "")
+                                .replace("100000", "")
+                                .replace("10000", "")
+                                .replace("1000", "")
+                                .replace("100", "")}
                             </span>
                             {isInWatchlist ? (
                               <h5

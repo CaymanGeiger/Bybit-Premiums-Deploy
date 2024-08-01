@@ -1,15 +1,17 @@
 "use server";
-import styles from "../page.module.css";
+import styles from "./page.module.css";
 import CoinFundingRates from "./(funding)/CoinFundingRates";
 import Nav from "../(components)/(nav)/(coinbase)/NavCoinbase";
-import Link from "next/link";
+import Footer from "../(components)/(footer)/Footer";
 
+let loadingData = true;
 const url = process.env.BACKEND_URL
   ? process.env.BACKEND_URL
   : process.env.NEXT_PUBLIC_BACKEND_URL;
 async function getCoinFundingRates() {
+  loadingData = true;
   const response = await fetch(
-    `${url}/fundingrates?timestamp=${new Date().getTime()}`,
+    `${url}/coinbase-funding-rates?timestamp=${new Date().getTime()}`,
     {
       cache: "no-cache",
     }
@@ -21,11 +23,18 @@ export default async function Home() {
   const coinFundingRates = await getCoinFundingRates();
 
   return (
-    <main className={styles.main}>
-      <Nav />
-      <div className={styles.mainDivTwo}>
-        <CoinFundingRates coinFundingRates={coinFundingRates} />
+    <>
+      <main className={styles.main}>
+        <Nav />
+        <div className={styles.mainDivTwo}>
+          <CoinFundingRates coinFundingRates={coinFundingRates} />
+        </div>
+      </main>
+      <div
+        style={{ display: "flex", alignItems: "flex-end", minWidth: "1000px" }}
+      >
+        <Footer />
       </div>
-    </main>
+    </>
   );
 }
