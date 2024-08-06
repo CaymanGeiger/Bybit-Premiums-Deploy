@@ -109,6 +109,7 @@ const BaseNav = () => {
           <JobStatus
             getCircleColor={getCircleColor}
             formatDate={formatDate}
+            jobStatusIsOpen={jobStatusIsOpen}
             setJobStatusIsOpen={setJobStatusIsOpen}
           />
         </Suspense>

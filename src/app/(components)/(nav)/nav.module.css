@@ -48,6 +48,21 @@
   .navLinksDropDown {
     display: flex;
   }
+  .jobStatus {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 13px;
+    height: 300px;
+    width: 475px;
+    position: absolute;
+    background-color: rgb(0, 0, 0);
+    border-radius: 10px;
+    padding: 16px;
+    padding-top: 25px;
+    left: 1.1%;
+    top: 400%;
+  }
 }
 
 @media only screen and (min-width: 801px) {
@@ -59,6 +74,21 @@
   }
   .exchangesDiv {
     background-color: blue;
+  }
+  .jobStatus {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 13px;
+    height: 300px;
+    width: 475px;
+    position: absolute;
+    background-color: rgb(0, 0, 0);
+    border-radius: 10px;
+    padding: 16px;
+    padding-top: 25px;
+    left: 35%;
+    top: 480%;
   }
 }
 
@@ -150,22 +180,6 @@
   top: 25px;
   width: 0%;
   left: 50%;
-}
-
-.jobStatus {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  gap: 13px;
-  height: 300px;
-  width: 500px;
-  position: absolute;
-  top: 480%;
-  left: 35%;
-  background-color: rgb(0, 0, 0);
-  border-radius: 10px;
-  padding: 16px;
-  padding-top: 25px;
 }
 
 .statusItem {

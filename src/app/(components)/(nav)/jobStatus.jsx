@@ -2,7 +2,12 @@
 import React, { useEffect, useState } from "react";
 import styles from "./nav.module.css";
 
-const JobStatus = ({ getCircleColor, formatDate, setJobStatusIsOpen }) => {
+const JobStatus = ({
+  getCircleColor,
+  formatDate,
+  jobStatusIsOpen,
+  setJobStatusIsOpen,
+}) => {
   const [statuses, setStatuses] = useState({
     bybitBorrowRates: { status: "Unknown", timestamp: "" },
     bybitFundingRates: { status: "Unknown", timestamp: "" },
@@ -114,10 +119,12 @@ const JobStatus = ({ getCircleColor, formatDate, setJobStatusIsOpen }) => {
             className={styles.statusCircle}
             style={{ backgroundColor: getCircleColor(status) }}
           ></span>
-          <h4 style={{ minWidth: "255px" }}>
+          <h5 style={{ minWidth: "255px" }}>
             {capitalizeWords(key.replace(/([A-Z])/g, " $1"))}
-          </h4>
-          <span>{formatDate(timestamp) || "No Date"}</span>
+          </h5>
+          <span>
+            <h5>{formatDate(timestamp) || "No Date"}</h5>
+          </span>
         </div>
       ))}
     </div>
