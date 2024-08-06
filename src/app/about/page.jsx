@@ -55,7 +55,8 @@ export default function AboutUs() {
             comprehensive range of{" "}
             <strong>trading services and products</strong>, from spot trading to
             derivatives and margin trading. We cater to traders of all
-            experience levels, providing data that&apos;s essential for your
+            experience levels, providing data that&apos;
+            s essential for your
             trading success.
           </p>
         </section>

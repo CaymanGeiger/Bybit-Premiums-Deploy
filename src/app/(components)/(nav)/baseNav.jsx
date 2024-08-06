@@ -1,12 +1,40 @@
+// BaseNav.js
 "use client";
-import React, { useState } from "react";
+import React, { useState, Suspense, lazy } from "react";
+import { usePathname } from "next/navigation";
 import styles from "./nav.module.css";
+import { format } from "date-fns";
+
+const JobStatus = lazy(() => import("./jobStatus"));
 
 const BaseNav = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [jobStatusIsOpen, setJobStatusIsOpen] = useState(false);
+  const pathname = usePathname(); // Get the current pathname
 
   const handleToggle = () => {
     setIsOpen(!isOpen);
+  };
+
+  // Use pathname to check for "/admin" in the URL
+  const isAdminRoute = pathname ? pathname.includes("/admin") : false;
+
+  const getCircleColor = (status) => {
+    switch (status) {
+      case "Completed":
+        return "green";
+      case "Failed":
+        return "red";
+      case "Processing":
+        return "yellow";
+      default:
+        return "gray"; // Default color if status is unknown
+    }
+  };
+
+  const formatDate = (timestamp) => {
+    if (!timestamp) return "";
+    return format(new Date(timestamp), "MM/dd/yyyy h:mm a");
   };
 
   return (
@@ -53,6 +81,23 @@ const BaseNav = () => {
         <a className={styles.links} href="/gemini">
           Gemini
         </a>
+        {isAdminRoute && (
+          <a
+            className={styles.links}
+            style={{ cursor: "pointer" }}
+            onClick={() => setJobStatusIsOpen(!jobStatusIsOpen)}
+          >
+            Job Status
+          </a>
+        )}
+        {jobStatusIsOpen && (
+          <Suspense fallback={<div>Loading...</div>}>
+            <JobStatus
+              getCircleColor={getCircleColor}
+              formatDate={formatDate}
+            />
+          </Suspense>
+        )}
       </div>
     </>
   );

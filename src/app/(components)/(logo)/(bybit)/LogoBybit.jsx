@@ -48,8 +48,8 @@ const Logo = () => {
         autoPlay
         muted
         preload="auto"
-        webkit-playsInline="true"
-        playsInline="true"
+        webkit-playsInline={true}
+        playsInline={true}
         poster="/black.jpg"
       >
         <source src="/Logo.mp4" type="video/mp4" />
