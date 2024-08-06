@@ -52,7 +52,11 @@ const BaseNav = () => {
         </div>
         <div
           className={styles.exchangesDiv}
-          style={{ display: isOpen ? "flex" : "none" }}
+          style={{
+            display: isOpen ? "flex" : "none",
+            bottom: isAdminRoute ? "-14.7em" : "-10.6em",
+            right: "-0.8em",
+          }}
         >
           <a className={styles.links} href="/about">
             About
@@ -66,6 +70,15 @@ const BaseNav = () => {
           <a className={styles.links} href="/gemini">
             Gemini
           </a>
+          {isAdminRoute && (
+            <a
+              className={styles.links}
+              style={{ cursor: "pointer" }}
+              onClick={() => setJobStatusIsOpen(!jobStatusIsOpen)}
+            >
+              Job Status
+            </a>
+          )}
         </div>
       </div>
       <div className={styles.navLinks}>
