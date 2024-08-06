@@ -1,7 +1,6 @@
-// JobStatus.js
+"use client";
 import React, { useEffect, useState } from "react";
 import styles from "./nav.module.css";
-import { format } from "date-fns";
 
 const JobStatus = ({ getCircleColor, formatDate, setJobStatusIsOpen }) => {
   const [statuses, setStatuses] = useState({
@@ -9,6 +8,10 @@ const JobStatus = ({ getCircleColor, formatDate, setJobStatusIsOpen }) => {
     bybitFundingRates: { status: "Unknown", timestamp: "" },
     coinbaseFundingRates: { status: "Unknown", timestamp: "" },
     geminiFundingRates: { status: "Unknown", timestamp: "" },
+    bybitBorrowRateVolumes: { status: "Unknown", timestamp: "" },
+    bybitFundingRateVolumes: { status: "Unknown", timestamp: "" },
+    coinbaseFundingRateVolumes: { status: "Unknown", timestamp: "" },
+    geminiFundingRateVolumes: { status: "Unknown", timestamp: "" },
   });
 
   const fetchStatuses = async () => {
@@ -21,26 +24,58 @@ const JobStatus = ({ getCircleColor, formatDate, setJobStatusIsOpen }) => {
         fetch(`${url}/bybit-funding-rates-status`).then((res) => res.json()),
         fetch(`${url}/coinbase-funding-rates-status`).then((res) => res.json()),
         fetch(`${url}/gemini-funding-rates-status`).then((res) => res.json()),
+        fetch(`${url}/bybit-borrow-rate-volumes-status`).then((res) =>
+          res.json()
+        ),
+        fetch(`${url}/bybit-funding-rate-volumes-status`).then((res) =>
+          res.json()
+        ),
+        fetch(`${url}/coinbase-funding-rate-volumes-status`).then((res) =>
+          res.json()
+        ),
+        fetch(`${url}/gemini-funding-rate-volumes-status`).then((res) =>
+          res.json()
+        ),
       ]);
 
-      setStatuses({
+      const newStatuses = {
         bybitBorrowRates: {
-          status: responses[0].updateStatus || "Unknown",
-          timestamp: responses[0].timestamp || "",
+          status: responses[0]?.updateStatus || "Unknown",
+          timestamp: responses[0]?.timestamp || "",
         },
         bybitFundingRates: {
-          status: responses[1].updateStatus || "Unknown",
-          timestamp: responses[1].timestamp || "",
+          status: responses[1]?.updateStatus || "Unknown",
+          timestamp: responses[1]?.timestamp || "",
         },
         coinbaseFundingRates: {
-          status: responses[2].updateStatus || "Unknown",
-          timestamp: responses[2].timestamp || "",
+          status: responses[2]?.updateStatus || "Unknown",
+          timestamp: responses[2]?.timestamp || "",
         },
         geminiFundingRates: {
-          status: responses[3].updateStatus || "Unknown",
-          timestamp: responses[3].timestamp || "",
+          status: responses[3]?.updateStatus || "Unknown",
+          timestamp: responses[3]?.timestamp || "",
         },
-      });
+        bybitBorrowRateVolumes: {
+          status: responses[4]?.updateStatus || "Unknown",
+          timestamp: responses[4]?.timestamp || "",
+        },
+        bybitFundingRateVolumes: {
+          status: responses[5]?.updateStatus || "Unknown",
+          timestamp: responses[5]?.timestamp || "",
+        },
+        coinbaseFundingRateVolumes: {
+          status: responses[6]?.updateStatus || "Unknown",
+          timestamp: responses[6]?.timestamp || "",
+        },
+        geminiFundingRateVolumes: {
+          status: responses[7]?.updateStatus || "Unknown",
+          timestamp: responses[7]?.timestamp || "",
+        },
+      };
+
+      console.log("New statuses:", newStatuses);
+
+      setStatuses(newStatuses);
     } catch (error) {
       console.error("Error fetching statuses:", error);
     }
