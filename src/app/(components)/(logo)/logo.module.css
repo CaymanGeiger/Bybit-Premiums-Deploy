@@ -1,35 +1,36 @@
 .logoVideoDiv {
-    position: relative;
-    width: 340px;
-    height: 51px;
-    overflow: hidden;
-    z-index: 100000;
-    border-radius: 10px;
-    background-color: #000017;
+  position: relative;
+  width: 270px;
+  height: 51px;
+  overflow: hidden;
+  z-index: 100000;
+  border-radius: 10px;
+  background-color: #000017;
 }
+
 .logoVideo {
-    width: 340px;
-    height: 200px;
-    position: relative;
-    z-index: -1;
-    left:  -30px;
-    top: -70px;
-    background-color: black;
-    pointer-events: none;
+  width: 340px;
+  height: 200px;
+  position: relative;
+  z-index: -1;
+  left: -30px;
+  top: -70px;
+  background-color: black;
+  pointer-events: none;
 }
 
 .logoVideovideo::-webkit-media-controls {
-    display: none !important;
+  display: none !important;
 }
 
 .logoVideo::-webkit-media-controls-start-playback-button {
-    display: none !important;
+  display: none !important;
 }
 
 .logoVideo.hide {
-    display: none; /* Hide video initially or when not playing */
-  }
+  display: none; /* Hide video initially or when not playing */
+}
 
-  .logoVideo.show {
-    display: block; /* Show video when it starts playing */
-  }
+.logoVideo.show {
+  display: block; /* Show video when it starts playing */
+}
