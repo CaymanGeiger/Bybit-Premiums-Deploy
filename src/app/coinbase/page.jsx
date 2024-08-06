@@ -5,10 +5,9 @@ import Nav from "../(components)/(nav)/(coinbase)/NavCoinbase";
 import Footer from "../(components)/(footer)/Footer";
 
 let loadingData = true;
-// const url = process.env.BACKEND_URL
-//   ? process.env.BACKEND_URL
-//   : process.env.NEXT_PUBLIC_BACKEND_URL;
-const url = "http://localhost:3001";
+const url = process.env.BACKEND_URL
+  ? process.env.BACKEND_URL
+  : process.env.NEXT_PUBLIC_BACKEND_URL;
 async function getCoinFundingRates() {
   loadingData = true;
   const response = await fetch(
