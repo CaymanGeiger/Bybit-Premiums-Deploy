@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import styles from "./nav.module.css";
 import { format } from "date-fns";
 
-const JobStatus = ({ getCircleColor, formatDate }) => {
+const JobStatus = ({ getCircleColor, formatDate, setJobStatusIsOpen }) => {
   const [statuses, setStatuses] = useState({
     bybitBorrowRates: { status: "Unknown", timestamp: "" },
     bybitFundingRates: { status: "Unknown", timestamp: "" },
@@ -61,6 +61,18 @@ const JobStatus = ({ getCircleColor, formatDate }) => {
 
   return (
     <div className={styles.jobStatus}>
+      <h2
+        onClick={() => setJobStatusIsOpen(false)}
+        style={{
+          cursor: "pointer",
+          textAlign: "right",
+          position: "absolute",
+          top: "2px",
+          right: "8px",
+        }}
+      >
+        x
+      </h2>
       {Object.entries(statuses).map(([key, { status, timestamp }]) => (
         <div className={styles.statusItem} key={key}>
           <span
