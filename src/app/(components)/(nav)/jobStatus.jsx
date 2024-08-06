@@ -114,7 +114,7 @@ const JobStatus = ({ getCircleColor, formatDate, setJobStatusIsOpen }) => {
             className={styles.statusCircle}
             style={{ backgroundColor: getCircleColor(status) }}
           ></span>
-          <h4 style={{ minWidth: "200px" }}>
+          <h4 style={{ minWidth: "255px" }}>
             {capitalizeWords(key.replace(/([A-Z])/g, " $1"))}
           </h4>
           <span>{formatDate(timestamp) || "No Date"}</span>

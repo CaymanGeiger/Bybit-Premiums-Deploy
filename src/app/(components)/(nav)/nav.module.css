@@ -158,8 +158,8 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
-  gap: 10px;
-  height: 280px;
+  gap: 13px;
+  height: 300px;
   width: 500px;
   position: absolute;
   top: 1400%;
@@ -186,7 +186,7 @@
 
 .statusItem h4 {
   flex-shrink: 0; /* Prevent the heading from shrinking */
-  min-width: 200px; /* Ensure the heading has a minimum width */
+  min-width: 350px; /* Ensure the heading has a minimum width */
 }
 
 .statusItem span {
