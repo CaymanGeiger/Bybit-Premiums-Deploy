@@ -1,374 +1,364 @@
 /* FUNDING CSS MAIN DIV */
 .borrowMainDiv {
-    padding: 0;
-    height: fit-content;
+  padding: 0;
+  height: fit-content;
 }
 
 .borrowMainHeader {
-    text-align: start;
-    margin: 12px 12px 12px 0;
-    padding: 0;
-    color: #363636;
-    border-bottom: 3px solid rgba(255, 194, 28, 0.678);
-    width: fit-content;
-    border-radius: 2px;
-    font-size: 30px;
+  text-align: start;
+  margin: 12px 12px 12px 0;
+  padding: 0;
+  color: #363636;
+  border-bottom: 3px solid rgba(255, 194, 28, 0.678);
+  width: fit-content;
+  border-radius: 2px;
+  font-size: 30px;
 }
-
-
 
 /* BORROW TABLE */
 
 .borrowMainDiv th {
-    background: #f5f7f7;
-    text-align: start;
-    padding: 6px;
-    color: #7b7d7d;
-    font-weight: 600;
-    white-space: nowrap;
-    transition: background-color .2s ease-in;
+  background: #f5f7f7;
+  text-align: start;
+  padding: 6px;
+  color: #7b7d7d;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: background-color 0.2s ease-in;
 }
 
 .borrowMainDiv th:hover {
-    background-color: rgb(236, 236, 236);
+  background-color: rgb(236, 236, 236);
 }
 
 .borrowMainDiv thead tr th {
-    position: sticky;
-    top: 0px;
-    height: 30px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    z-index: 12;
+  position: sticky;
+  top: 0px;
+  height: 30px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  z-index: 12;
 }
 
-
 .borrowMainDiv th:nth-child(7)::after {
-    background: none;
+  background: none;
 }
 
 .borrowMainDiv th::after {
-    content: '';
-    position: absolute;
-    right: 0;
-    top: 25%;
-    bottom: 25%;
-    width: 1px;
-    background: #dcdcdc;
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 25%;
+  bottom: 25%;
+  width: 1px;
+  background: #dcdcdc;
 }
 
 .borrowMainDiv th::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    border: .05rem solid #dcdcdc;
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  border: 0.05rem solid #dcdcdc;
 }
 
 .borrowMainDiv table {
-    border-collapse: collapse;
-    font: normal 12px arial;
-    width: calc(100vw / 1.1);
-    min-width: 100px;
-    max-width: 1400px;
-    position: relative;
-    table-layout: auto;
+  border-collapse: collapse;
+  font: normal 12px arial;
+  width: calc(100vw / 1.1);
+  min-width: 100px;
+  max-width: 1400px;
+  position: relative;
+  table-layout: auto;
 }
 
 .borrowMainDiv td:nth-child(7)::after {
-    background: none;
+  background: none;
 }
 
 .borrowMainDiv td {
-    border-bottom: 1px solid #e2e2e2;
-    padding: 3px 6px;
-    white-space: nowrap;
-    font-size: 13px;
-    position: relative;
+  border-bottom: 1px solid #e2e2e2;
+  padding: 3px 6px;
+  white-space: nowrap;
+  font-size: 13px;
+  position: relative;
 }
 
 .borrowTable.active td:first-child {
-    position: sticky;
-    left: 0;
-    z-index: 1;
-    width: 30px;
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  width: 30px;
 }
 
 .borrowTable.active td:first-child::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    width: 100%;
-    background: rgb(255, 255, 255);
-    z-index: -1;
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 100%;
+  background: rgb(255, 255, 255);
+  z-index: -1;
 }
 
 .borrowMainDiv td::after {
-    content: '';
-    position: absolute;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    width: 1px;
-    background: #f4f3f3;
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: #f4f3f3;
 }
 
 .tableThName {
-    position: relative;
-    width: 100%;
-    height: fit-content;
-    display: flex;
-    align-content: center;
+  position: relative;
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  align-content: center;
 }
 
 .tableThNameDiv {
-    position: relative;
-    display: flex;
-    justify-content: space-between;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
 }
 
 .tableThNameDiv strong {
-    margin-top: 1px;
-    margin-left: 3px;
+  margin-top: 1px;
+  margin-left: 3px;
 }
 
 @media (min-width: 600px) {
-    .stickyNamesButton {
-        font-size: 10px;
-        border-radius: 2px;
-        border: 1px solid rgb(162, 162, 162);
-        padding: 1px;
-        margin: 0;
-        color: rgb(100, 100, 100);
-        background-color: transparent;
-        visibility: hidden;
-    }
+  .stickyNamesButton {
+    font-size: 10px;
+    border-radius: 2px;
+    border: 1px solid rgb(162, 162, 162);
+    padding: 1px;
+    margin: 0;
+    color: rgb(100, 100, 100);
+    background-color: transparent;
+    visibility: hidden;
+  }
 }
 
 @media (max-width: 600px) {
-    .stickyNamesButton {
-        font-size: 9px;
-        border-radius: 2px;
-        border: 1px solid rgb(162, 162, 162);
-        padding: 1px;
-        margin: 0;
-        color: rgb(100, 100, 100);
-        transition: all 0.2s ease;
-        background-color: white;
-        height: 15px;
-    }
+  .stickyNamesButton {
+    font-size: 9px;
+    border-radius: 2px;
+    border: 1px solid rgb(162, 162, 162);
+    padding: 1px;
+    margin: 0;
+    color: rgb(100, 100, 100);
+    transition: all 0.2s ease;
+    background-color: white;
+    height: 15px;
+  }
 }
 
 .tdSymbolAndName {
-    position: relative;
+  position: relative;
 }
 
-
 .watchListMinus {
-    position: absolute;
-    right: 5px;
-    top: 46%;
-    transform: translateY(-50%);
-    font-size: 21px;
-    color: rgb(189, 189, 189);
-    cursor: pointer;
-    height: 90%;
-    width: 10px;
-    user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  position: absolute;
+  right: 5px;
+  top: 46%;
+  transform: translateY(-50%);
+  font-size: 21px;
+  color: rgb(189, 189, 189);
+  cursor: pointer;
+  height: 90%;
+  width: 10px;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .watchListPlus {
-    position: absolute;
-    right: 3px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 18px;
-    color: rgb(189, 189, 189);
-    cursor: pointer;
-    height: 95%;
-    width: 13px;
-    user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  position: absolute;
+  right: 3px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  color: rgb(189, 189, 189);
+  cursor: pointer;
+  height: 95%;
+  width: 13px;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .watchListMinus:hover {
-    color: rgb(255, 190, 70);
+  color: rgb(255, 190, 70);
 }
 
 .watchListPlus:hover {
-    color: rgb(255, 190, 70);
+  color: rgb(255, 190, 70);
 }
 
 .watchListPlus:active,
 .watchListPlus:focus,
 .watchListMinus:active,
 .watchListMinus:focus {
-    outline: none;
-    background-color: none;
-    -webkit-tap-highlight-color: none;
+  outline: none;
+  background-color: none;
+  -webkit-tap-highlight-color: none;
 }
 
-
 .tdSymbolAndName span {
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    color: rgb(68, 68, 255);
-    position: relative;
-    transition: color 0.2s ease;
-    z-index: 10;
-    margin-left: 5px;
-    margin-right: 23px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: rgb(68, 68, 255);
+  position: relative;
+  transition: color 0.2s ease;
+  z-index: 10;
+  margin-left: 5px;
+  margin-right: 23px;
 }
 
 .tdSymbolAndName span::before,
 .tdSymbolAndName span::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    width: 50%;
-    height: 1px;
-    background-color: rgb(68, 68, 255);
-    transition: width 0.2s ease;
+  content: "";
+  position: absolute;
+  bottom: 0;
+  width: 50%;
+  height: 1px;
+  background-color: rgb(68, 68, 255);
+  transition: width 0.2s ease;
 }
 
 .tdSymbolAndName span::before {
-    left: 0;
+  left: 0;
 }
 
 .tdSymbolAndName span::after {
-    right: 0;
+  right: 0;
 }
 
 .tdSymbolAndName span:hover::before,
 .tdSymbolAndName span:hover::after,
-.tdSymbolAndName img:hover+span::before,
-.tdSymbolAndName img:hover+span::after {
-    width: 0;
-    background-color: black;
+.tdSymbolAndName img:hover + span::before,
+.tdSymbolAndName img:hover + span::after {
+  width: 0;
+  background-color: black;
 }
 
 .tdSymbolAndName span:hover {
-    color: black;
-    cursor: pointer;
-
+  color: black;
+  cursor: pointer;
 }
 
 .tdSymbolAndName img:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .tdSymbolAndName {
-    position: relative;
-    min-width: 120px;
+  position: relative;
+  min-width: 120px;
 }
 
 .borrowMainDiv td,
 .borrowMainDiv td * {
-    vertical-align: middle;
-    white-space: nowrap;
+  vertical-align: middle;
+  white-space: nowrap;
 }
 
 .borrowMainDiv tr:nth-child(odd) {
-    background-color: #ffffff;
+  background-color: #ffffff;
 }
 
 .borrowMainDiv tr:nth-child(even) {
-    background-color: #fcfcfc;
+  background-color: #fcfcfc;
 }
 
-
-.borrowMainDiv td{
-    padding-top: 7px;
-    padding-bottom: 7px;
+.borrowMainDiv td {
+  padding-top: 7px;
+  padding-bottom: 7px;
 }
 
 /* TABLE BORDER*/
 .scrollDiv {
-    border: 1px solid rgb(195, 195, 195);
-    width: calc(100vw / 1.1);
-    min-width: 100px;
-    max-width: 1400px;
+  border: 1px solid rgb(195, 195, 195);
+  width: calc(100vw / 1.1);
+  min-width: 100px;
+  max-width: 1400px;
 }
 
-
 .arrows {
-    font-size: 11px;
-    color: rgba(255, 194, 28, 0.678);
+  font-size: 11px;
+  color: rgba(255, 194, 28, 0.678);
 }
 
 .headerDiv {
-    position: relative;
-    display: flex;
-    align-items: center;
-    color: rgb(78, 78, 78);
-    font-size: 18px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  color: rgb(78, 78, 78);
+  font-size: 18px;
 }
 
 @media (min-width: 601px) {
-    .modalContent {
-        position: absolute;
-        top: 15px;
-        left: 270px;
-        transform: translateX(50%);
-        display: none;
-        background-color: black;
-        width: 120px;
-        border-radius: 10px;
-        z-index: 1000000;
-        font-size: 10px;
-        color: white;
-        padding: 8px;
-        word-spacing: 1px;
-        line-height: 11px;
-        gap: 8px;
-    }
+  .modalContent {
+    position: absolute;
+    top: 15px;
+    left: 260px;
+    transform: translateX(50%);
+    display: none;
+    background-color: black;
+    width: 120px;
+    border-radius: 10px;
+    z-index: 1000000;
+    font-size: 10px;
+    color: white;
+    padding: 8px;
+    word-spacing: 1px;
+    line-height: 11px;
+    gap: 8px;
+  }
 }
 
-
 @media (max-width: 600px) {
-    .modalContent {
-        position: absolute;
-        top: 55px;
-        left: 195px;
-        transform: translateX(50%);
-        display: none;
-        background-color: black;
-        width: 120px;
-        border-radius: 10px;
-        z-index: 1000000;
-        font-size: 10px;
-        color: white;
-        padding: 8px;
-        word-spacing: 1px;
-        line-height: 11px;
-        gap: 8px;
-    }
+  .modalContent {
+    position: absolute;
+    top: 10px;
+    left: 215px;
+    transform: translateX(50%);
+    display: none;
+    background-color: black;
+    width: 120px;
+    border-radius: 10px;
+    z-index: 1000000;
+    font-size: 10px;
+    color: white;
+    padding: 8px;
+    word-spacing: 1px;
+    line-height: 11px;
+    gap: 8px;
+  }
 }
 
 .infoIcon:hover + .modalContent,
 .infoIcon:focus + .modalContent,
 .infoIcon:active + .modalContent {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
-
 @media (max-width: 500px) {
-    .borrowMainHeader {
-        font-size: 25px;
-    }
+  .borrowMainHeader {
+    font-size: 25px;
+  }
 }
