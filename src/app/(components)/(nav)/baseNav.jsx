@@ -103,16 +103,16 @@ const BaseNav = () => {
             Job Status
           </a>
         )}
-        {jobStatusIsOpen && (
-          <Suspense fallback={<div>Loading...</div>}>
-            <JobStatus
-              getCircleColor={getCircleColor}
-              formatDate={formatDate}
-              setJobStatusIsOpen={setJobStatusIsOpen}
-            />
-          </Suspense>
-        )}
       </div>
+      {jobStatusIsOpen && (
+        <Suspense fallback={<div>Loading...</div>}>
+          <JobStatus
+            getCircleColor={getCircleColor}
+            formatDate={formatDate}
+            setJobStatusIsOpen={setJobStatusIsOpen}
+          />
+        </Suspense>
+      )}
     </>
   );
 };
