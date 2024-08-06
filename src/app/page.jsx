@@ -7,9 +7,11 @@ import Footer from "./(components)/(footer)/Footer";
 import Link from "next/link";
 
 let loadingData = true;
-const url = process.env.BACKEND_URL
-  ? process.env.BACKEND_URL
-  : process.env.NEXT_PUBLIC_BACKEND_URL;
+// const url = process.env.BACKEND_URL
+//   ? process.env.BACKEND_URL
+//   : process.env.NEXT_PUBLIC_BACKEND_URL;
+
+const url = "https://bybit-premiums-back-end-dd9a566bba8e.herokuapp.com";
 async function getCoinFundingRates() {
   loadingData = true;
   const response = await fetch(
@@ -18,6 +20,7 @@ async function getCoinFundingRates() {
       cache: "no-cache",
     }
   );
+  console.log("response", response);
   return response.json();
 }
 

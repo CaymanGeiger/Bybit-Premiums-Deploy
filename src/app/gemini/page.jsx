@@ -6,16 +6,13 @@ import Link from "next/link";
 import Footer from "../(components)/(footer)/Footer";
 
 let loadingData = true;
-const url = process.env.BACKEND_URL
-  ? process.env.BACKEND_URL
-  : process.env.NEXT_PUBLIC_BACKEND_URL;
+// const url = process.env.BACKEND_URL
+//   ? process.env.BACKEND_URL
+//   : process.env.NEXT_PUBLIC_BACKEND_URL;
+const url = "http://localhost:3001";
 
 async function getCoinFundingRates() {
   loadingData = true;
-  console.log(
-    "url",
-    `${url}/gemini-funding-rates?timestamp=${new Date().getTime()}`
-  );
   const response = await fetch(
     `${url}/gemini-funding-rates?timestamp=${new Date().getTime()}`,
     {

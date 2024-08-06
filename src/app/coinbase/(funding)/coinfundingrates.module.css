@@ -310,7 +310,7 @@
   .modalContent {
     position: absolute;
     top: 15px;
-    left: 320px;
+    left: 330px;
     transform: translateX(50%);
     display: none;
     background-color: black;
@@ -330,7 +330,7 @@
   .modalContent {
     position: absolute;
     top: 10px;
-    left: 265px;
+    left: 275px;
     transform: translateX(50%);
     display: none;
     background-color: black;
