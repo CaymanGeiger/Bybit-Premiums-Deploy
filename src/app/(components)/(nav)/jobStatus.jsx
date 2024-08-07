@@ -119,7 +119,7 @@ const JobStatus = ({
             className={styles.statusCircle}
             style={{ backgroundColor: getCircleColor(status) }}
           ></span>
-          <h5 style={{ minWidth: "230px" }}>
+          <h5 className={styles.jobName}>
             {capitalizeWords(key.replace(/([A-Z])/g, " $1"))}
           </h5>
           <span>

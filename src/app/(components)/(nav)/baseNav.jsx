@@ -54,7 +54,7 @@ const BaseNav = () => {
           className={styles.exchangesDiv}
           style={{
             display: isOpen ? "flex" : "none",
-            bottom: isAdminRoute ? "-14.7em" : "-10.6em",
+            bottom: "-14.5em",
             right: "-0.8em",
           }}
         >
