@@ -54,13 +54,13 @@
     flex-direction: column;
     gap: 13px;
     height: 300px;
-    width: 475px;
+    width: 440px;
     position: absolute;
     background-color: rgb(0, 0, 0);
     border-radius: 10px;
     padding: 16px;
     padding-top: 25px;
-    left: 1.1%;
+    left: 4.5%;
     top: 400%;
   }
 }
