@@ -53,7 +53,6 @@
   min-width: 230px;
 }
 
-
 .exchangesDiv {
   background-color: #000017;
   display: flex;
@@ -69,7 +68,6 @@
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
 }
-
 
 @media only screen and (max-width: 500px) {
   .navLinks {
@@ -100,8 +98,9 @@
     border-radius: 10px;
     padding: 16px;
     padding-top: 16px;
-    left: -2%;
-    top: 110%;
+    top: 200%;
+    left: 50%;
+    transform: translateX(-50%);
   }
 }
 
@@ -124,8 +123,9 @@
     border-radius: 10px;
     padding: 16px;
     padding-top: 25px;
-    left: 4.5%;
+    left: 50%;
     top: 400%;
+    transform: translateX(-50%);
   }
 }
 
@@ -153,6 +153,8 @@
     padding-top: 25px;
     left: 35%;
     top: 480%;
+    left: 50%;
+    transform: translateX(-50%);
   }
 }
 
