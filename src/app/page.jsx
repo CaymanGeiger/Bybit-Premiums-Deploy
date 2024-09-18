@@ -6,7 +6,7 @@ import Nav from "./(components)/(nav)/(bybit)/NavBybit";
 import Footer from "./(components)/(footer)/Footer";
 import Link from "next/link";
 
-// test
+// test 123
 let loadingData = true;
 const url = process.env.BACKEND_URL
   ? process.env.BACKEND_URL
