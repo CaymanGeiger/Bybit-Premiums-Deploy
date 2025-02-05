@@ -30,11 +30,7 @@ export default async function Home() {
           <CoinFundingRates coinFundingRates={coinFundingRates} />
         </div>
       </main>
-      <div
-        style={{ display: "flex", alignItems: "flex-end", minWidth: "1000px" }}
-      >
-        <Footer />
-      </div>
+      <Footer />
     </>
   );
 }
